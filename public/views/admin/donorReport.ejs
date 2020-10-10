@@ -1,0 +1,290 @@
+<!-- donorReport -->
+<%- include('common/header.ejs') -%>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark"><img src="/img/icon/blood.png" style="width:60px;height:60px;"
+                            alt="">Donor Search</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Blood Group</li>
+                        <li class="breadcrumb-item active">Donor Search</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+
+
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="container-fluid">
+                    <div class="container-fluid">
+                        <div class="panel panel-default">
+                            <form name="bloodCamp">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Donor Search</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+
+
+                                            <!-- ng-model="$parent.distict" -->
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>District:</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="fromDistrictFilter"
+                                                    ng-model="fromDistrictFilter">
+                                                    <option value="">--District--</option>
+                                                    <option ng-repeat="option in districtList"
+                                                        value="{{option.name}}">{{option.name}}</option>
+                                                </select>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+
+                                            <div class="col-4">
+                                                <label for="Phone">Status<span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" ng-model="status"
+                                                        name="status">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Available">Available</option>
+                                                        <option value="Not Available">Not Available</option>
+                                                    </select>
+
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="Phone">Blood Group <span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+
+                                                        <select class="form-control" ng-model="bg" required
+                                                            id="bloodGroup">
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="O−">O−</option>
+                                                            <option value="O+">O+</option>
+                                                            <option value="A−">A−</option>
+                                                            <option value="A+">A+</option>
+                                                            <option value="B−">B−</option>
+                                                            <option value="B+">B+</option>
+                                                            <option value="AB−">AB−</option>
+                                                            <option value="AB+">AB+</option>
+                                                        </select>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+                                            <div class="col-12">
+                                                <label for="Phone"> </label>
+                                                <div class="col-md-12" style="text-align: right; margin-top: 0px;">
+                                                    <button type="button" class="btn btn-success" data-toggle="modal"
+                                                        data-target="#ModalCamp" ng-click="viewFilterData()">View
+                                                        Details</button>
+
+                                                </div>
+
+                                            </div>
+
+
+
+                                        </div>
+                                        <!-- <div class="row">
+                                            <div class="col-1">
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <label>Select Blood Group<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+
+                                                    <select class="form-control" ng-model="bg" required id="bloodGroup">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="O−">O−</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="A−">A−</option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="B−">B−</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="AB−">AB−</option>
+                                                        <option value="AB+">AB+</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCamp" ng-click="viewFilterData()">View Details</button>
+                                            </div>
+                                            <div class="col-3">
+
+                                            </div>
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div class="card card-danger" ng-show="showdonerDetails">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Donor Details</h3>
+                                    </div>
+
+                                    <div ng-show="alldata.length == 0"
+                                        style="text-align: center; padding-bottom: 30px;">
+                                        <br>
+                                        <label for="" style="color: red;"><b>No record found</b></label>
+                                    </div>
+
+                                    <div class="card-body" style="padding: 0;" ng-show="alldata.length != 0">
+                                        <div class="table-responsive" style="height: auto">
+                                            <table class="table table-head-fixed"  id="allListTable">
+                                                <thead>
+                                                    <tr>
+                                                        <th>slno.</th>
+                                                        <th>Doner id</th>
+                                                        <th>Name</th>
+                                                        <th>Gender</th>
+                                                        <th>Date of Birth</th>
+                                                        <th>Blood Group</th>
+                                                        <th ng-if="data.lastdonationdate != null">Last Donated</th>
+                                                        <th ng-if="data.lastdonationdate == null">Last Donated</th>
+                                                        <th>District</th>
+                                                        <th>Address</th>
+                                                        <th>Contact no</th>
+
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr ng-repeat="data in results =  (alldata | orderBy:'district' )">
+
+                                                        <div ng-show="results.length == 0" style="text-align: center;">
+                                                            <br>
+                                                            No record found
+                                                        </div>
+                                                        <div ng-show="results.length != 0" style="text-align: center;">
+                                                            <td> {{ $index+1 }}</td>
+                                                            <td> {{data.donerid}}</td>
+                                                            <td> {{ data.name }} </td>
+                                                            <td> {{ data.gender }}</td>
+                                                            <td> {{ data.dob | date:'dd-MM-yyyy'}}</td>
+                                                            <td> {{ data.bg }} </td>
+                                                            <td ng-if="data.lastdonationdate != null" >
+                                                                {{ data.lastdonationdate| date:'dd-MM-yyyy' || '--'}}
+                                                            </td>
+                                                            <td ng-if="data.lastdonationdate == null" >
+                                                                {{  '--'}}
+                                                            </td>
+                                                           
+                                                            <td> {{data.district}}</td>
+                                                            <td> {{data.address}}</td>
+                                                            <td> {{data.contactno}}</td>
+
+                                                        </div>
+
+
+                                                    </tr>
+
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <div style="text-align: right;margin: 10px;">
+                                            <button type="button" class="btn btn-success"  ng-click="exportToExcel('#allListTable')" ng-show="results.length != 0"> <i class="fas fa-download" aria-hidden="true"></i> Download</button>
+                                        </div>
+                                        <div id="edit" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal">×</button>
+                                                        <h4 class="modal-title">Update Data</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <input id="fn" type="text" class="form-control" name="fname"
+                                                            placeholder="First Name">
+                                                        <input id="ln" type="text" class="form-control" name="fname"
+                                                            placeholder="Last Name">
+                                                        <input id="mn" type="text" class="form-control" name="fname"
+                                                            placeholder="Middle Name">
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" id="up" class="btn btn-warning"
+                                                            data-dismiss="modal">Update</button>
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div id="delete" class="modal fade" role="dialog">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <button type="button" class="close"
+                                                            data-dismiss="modal">×</button>
+                                                        <h4 class="modal-title">Delete Data</h4>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <strong>Are you sure you want to delete this data?</strong>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" id="del" class="btn btn-danger"
+                                                            data-dismiss="modal">Delete</button>
+                                                        <button type="button" class="btn btn-default"
+                                                            data-dismiss="modal">Close</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0-pre
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- Controller -->
+<script src="/controller/admin/donorReport.js"></script>
+<!-- AdminLTE App -->
+<script src="/AdminLTE/adminlte.js"></script>
+<script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

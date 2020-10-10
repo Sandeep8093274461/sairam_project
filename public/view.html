@@ -1,0 +1,514 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ACTS - Contact</title>
+    <link rel="icon" href="img/icon/blood.png">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="AdminLTE/fontawesome/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="AdminLTE/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="AdminLTE/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <!-- jQuery -->
+    <script src="AdminLTE/jquery.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+    
+</head>
+<body class="hold-transition sidebar-mini layout-fixed" ng-app="myApp" ng-controller="myCtrl" onload="bindDropDownList()">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" aria-hidden="true"></i></a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-comments" aria-hidden="true"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                </li>
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">15</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-link">
+                <img src="img/icon/blood.png" alt="AdminLTE Logo" style="width:60px;height:60px;padding-left:8px" class="actLogo elevation-3"
+                     style="">
+                <!-- <span class="brand-text font-weight-light text-white"><strong>Covid19 - Surakshya</strong></span> -->
+                <br>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="images/adminLogo.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block text-white">ADMIN</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt" aria-hidden="true"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                       
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-th" aria-hidden="true"></i>
+                                <p>
+                                    Blood Group
+                                    <i class="right fas fa-angle-left" aria-hidden="true"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="addDonation.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donor Camp</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="detailsCamp.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Camp Details</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="detailsDonor.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donor Details</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="donorReport.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donor Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="campUpdate.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Add Camp</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="donorFilter.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donation Details</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark"><img src="img/icon/blood.png" style="width:60px;height:60px;" alt=""> Blood donation details</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Blood Group</li>
+                                <li class="breadcrumb-item active">Add Details</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+
+
+                <div class="container-fluid">
+                    <div class="container-fluid">
+                        <div class="panel panel-default">
+                            <form name="bloodCamp" id="bloodCamp">
+                                <!--<div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Camp Details</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-2">
+                                            </div>
+                                            <div class="col-2">
+                                                <div class="form-group">
+                                                    <label>Select Camp<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <select id="campToSelect" class="form-control" onchange="bindOrgCodeDonor()"></select>                                                   
+                                                </div>
+                                            </div>
+                                            <div class="col-2">
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#ModalCamp">Add Camp</button>
+                                            </div>
+                                            <div class="col-3">
+                                                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#">View Camp Details</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>-->
+                                <div class="card card-danger">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Blood Donor details</h3>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Name<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <input type="text" id="name" class="form-control" placeholder="Enter full name." maxlength="200" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Gender<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="gender" required id="gender">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Date of Birth<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <input type="date" class="form-control" placeholder="Enter full name." maxlength="200" id="dob" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Blood Group<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="bg" required id="bloodGroup">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="O−">O−</option>
+                                                        <option value="O+">O+</option>
+                                                        <option value="A−">A−</option>
+                                                        <option value="A+">A+</option>
+                                                        <option value="B−">B−</option>
+                                                        <option value="B+">B+</option>
+                                                        <option value="AB−">AB−</option>
+                                                        <option value="AB+">AB+</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Last Donation Date<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <input type="date" class="form-control" placeholder="Enter full name." maxlength="200" id="lastDonationDate" required>
+                                                </div>
+                                            </div>
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>District<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="district" required id="district">
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Address<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <textarea class="form-control" rows="2" id="Address" required></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Contact No.<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <input type="number" class="form-control" placeholder="Enter mobile no." maxlength="10"
+                                                           minlength="10" ng-model="mobileNo" required id="contactNo">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Contact Ref.<span class="star"></span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <input type="number" class="form-control" placeholder="Enter Contact Ref." maxlength="10"
+                                                           minlength="10" ng-model="mobileNo" id="contactRef">
+                                                </div>
+                                            </div>
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Org Code<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" placeholder="Enter Org Code" maxlength="10"
+                                                           minlength="10" ng-model="mobileNo" required id="orgCode" >
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row">
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Status<span class="star">*</span> :</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <select class="form-control" ng-model="status" required id="status">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Available">Available</option>
+                                                        <option value="NotAvailable">Not Available</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+
+                                                </div>
+                                            </div>
+                                            <div class="col-2" style="text-align:right">
+                                                <div class="form-group">
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addDonorDetails()" id="addDonor">Add Donor</button>
+                                                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="updateDonorDetails()" id="updateDonor">Update Donor</button>
+                                                    <input type="hidden" id="donorid" name="donorid" value="">
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                    <!-- Modal -->
+                                    <div id="ModalCamp" class="modal fade" role="dialog">
+                                        <div class="modal-dialog">
+
+                                            <!-- Modal content-->
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h3 class="modal-title btn btn-default">Add New Camp Details</h3>
+                                                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <p>
+                                                        <div class="card-body">
+                                                            <div class="row">
+                                                                <div class="col-6">
+                                                                    <label>Organisation Code<span class="star">*</span> :</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <input type="text" id="cmpOrgCode" class="form-control" placeholder="Enter Organisation Code." maxlength="200">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top:4px">
+                                                                <div class="col-6">
+                                                                    <label>Place<span class="star">*</span> :</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <input type="text" id="cmpPlace" class="form-control" placeholder="Enter Place" maxlength="200">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top:4px">
+                                                                <div class="col-6">
+                                                                    <label>District<span class="star">*</span> :</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <select class="form-control" id="cmpDistrict" ng-model="district" required>
+                                                                    </select>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top:4px">
+                                                                <div class="col-6">
+                                                                    <label>Address<span class="star">*</span> :</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <textarea class="form-control" rows="2" id="cmpAddress"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top:4px">
+                                                                <div class="col-6">
+                                                                    <label>Date<span class="star">*</span> :</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <input type="date" id="cmpDate" class="form-control" placeholder="Enter Date" maxlength="200">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top:4px">
+                                                                <div class="col-6">
+                                                                    <label>No of Doners<span class="star">*</span> :</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <input type="text" id="cmpNoDonors" class="form-control" placeholder="No of Doners" maxlength="200">
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top:4px">
+                                                                <div class="col-6">
+                                                                    <label>Remark<span class="star">*</span> :</label>
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <textarea class="form-control" rows="3" id="cmpRemark"></textarea>
+                                                                </div>
+                                                            </div>
+                                                            <div class="row" style="padding-top:4px">
+                                                                <div class="col-6">
+                                                                </div>
+                                                                <div class="col-6">
+                                                                    <button type="button" class="btn btn-success" data-dismiss="modal" onclick="addCampDetails()">Submit</button>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2020 <a href="http://nic.in">NIC.in</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0-pre
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- Controller -->
+    <script src="controller/admin/addCamp.js"></script>
+    <!-- AdminLTE App -->
+    <script src="AdminLTE/adminlte.js"></script>
+    <script type="text/javascript" src="AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

@@ -1,0 +1,26 @@
+var express = require('express');
+var app = express();
+var path = require('path');
+var bodyParser = require('body-parser');
+var session = require('express-session');
+var http = require('http');
+
+
+app.use(session({
+    secret: 'secret for blood donation',
+    resave: false,
+    saveUninitialized: true
+  }));
+
+const AdminRoute = require('./routes/Admin');
+const PublicRoute = require('./routes/Public');
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended:true}));
+
+app.use(express.static(path.join(__dirname, 'public')));
+
+app.use('/bloodDonation', PublicRoute);
+app.use('/bloodDonation/admin', AdminRoute);
+
+app.listen(7901);

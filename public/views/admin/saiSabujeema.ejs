@@ -1,0 +1,429 @@
+<%- include('common/header.ejs') -%>
+
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-1">
+                <div class="col-7">
+                    <h3 class="m-1 text-dark" style="width:100%;"><img src="/img/icon/logo.jpg"
+                            style="width:60px;height:60px;" alt=""> Sai Sabujeema(Plantation) </h3>
+                </div><!-- /.col -->
+                <div class="col-5">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active"> Sai Sabujeema</li>
+                        <li class="breadcrumb-item active">Entry</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+
+
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="panel panel-default">
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Sai Sabujeema detail </h3>
+                        </div>
+                        <form name="valid1" id="valid1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>District <span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" name="dist" ng-model="dist"
+                                                    ng-change="loadSamithiList()" required>
+                                                    <option value="" disabled>--District--</option>
+                                                    <option ng-repeat="option in districtList"
+                                                        value="{{option.district_id}}">{{option.name}}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="Phone">Samiti <span class="star">*</span>:</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" name="samiti" ng-model="samiti"
+                                                ng-change="bhajanMandaliList()" required>
+                                                <option value="" disabled>--Samiti--</option>
+                                                <option ng-repeat="option in samithiList" value="{{option.samithi_id}}">
+                                                    {{option.name}}</option>
+                                            </select>
+                                        </div>
+
+
+                                        </span>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label>Bhajan Mandali :</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" name="bhajanMandali" ng-model="bhajanMandali">
+                                                <option value="" disabled>--Bhajan Mandali--</option>
+                                                <option ng-repeat="option in bhajanMandaliListshow"
+                                                    value="{{option.bhajanmandali_id}}">{{option.bhajanmandali_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-4" style="margin-top: 25px;">
+
+                                        <div class="form-group">
+                                            <label>Date of report<span class="star">*</span>
+                                                :</label>
+                                            <div class="col-md-12">
+                                                <input type="date" name="monthEnded" ng-model="monthEnded"
+                                                    class="form-control" ng-required="true">
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4" style="margin-top: 25px;">
+
+                                        <div class="form-group">
+                                            <label>No.of plantation at Individual Household<span class="star">*</span>
+                                                :</label>
+                                            <div class="col-md-12">
+                                                <input type="number" id="noAtIndividualHousehold"
+                                                    name="noAtIndividualHousehold" ng-model="noAtIndividualHousehold"
+                                                    class="form-control" maxlength="200" ng-required="true">
+
+
+                                                <span style="color:red"
+                                                    ng-show="valid1.noAtIndividualHousehold.$dirty && valid1.noAtIndividualHousehold.$invalid">
+                                                    <span ng-show="valid1.noAtIndividualHousehold.$error.required">No.of
+                                                        plantation at Individual Household is Required .</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>No.of plantation at community places (school,temple, graveyard,other
+                                                places)
+                                                <span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <input type="number" id="noAtCommunityPlaces" name="noAtCommunityPlaces"
+                                                    ng-model="noAtCommunityPlaces" class="form-control" maxlength="200"
+                                                    ng-required="true">
+
+                                                <span style="color:red"
+                                                    ng-show="valid1.noAtCommunityPlaces.$dirty && valid1.noAtCommunityPlaces.$invalid">
+                                                    <span ng-show="valid1.noAtCommunityPlaces.$error.required">No.of
+                                                        plantation at community places is Required .</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>No.of plantation at SSSVIP / Housing Project / Adarsha Gram
+                                                villages<span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <input type="number" id="noAtSsvip" name="noAtSsvip"
+                                                    ng-model="noAtSsvip" class="form-control" maxlength="200"
+                                                    ng-required="true">
+                                                <span style="color:red"
+                                                    ng-show="valid1.noAtSsvip.$dirty && valid1.noAtSsvip.$invalid">
+                                                    <span ng-show="valid1.noAtSsvip.$error.required">No.of plantation at
+                                                        SSSVIP is Required .</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4" style="margin-top: 25px;">
+                                        <div class="form-group">
+                                            <label>No.of Tulshi Plant
+                                                <span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <input type="number" id="noTulshiPlant" name="noTulshiPlant"
+                                                    ng-model="noTulshiPlant" class="form-control" maxlength="200"
+                                                    ng-required="true">
+
+
+                                                <span style="color:red"
+                                                    ng-show="valid1.noTulshiPlant.$dirty && valid1.noTulshiPlant.$invalid">
+                                                    <span ng-show="valid1.noTulshiPlant.$error.required">No.of Tulshi
+                                                        Plant is Required .</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4" style="margin-top: 25px;">
+                                        <div class="form-group">
+                                            <label>No.of Neem Plant
+                                                <span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <input type="number" id="noNeemPlant" name="noNeemPlant"
+                                                    ng-model="noNeemPlant" class="form-control" maxlength="200"
+                                                    ng-required="true">
+
+                                                <span style="color:red"
+                                                    ng-show="valid1.noNeemPlant.$dirty && valid1.noNeemPlant.$invalid">
+                                                    <span ng-show="valid1.noNeemPlant.$error.required">No.of Neem Plant
+                                                        is Required .</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-4" style="margin-top: 25px;">
+                                        <div class="form-group">
+                                            <label>No.of Sajana(drumstick) Plant
+                                                <span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <input type="number" id="noSajanPlant" name="noSajanPlant"
+                                                    ng-model="noSajanPlant" class="form-control" maxlength="200"
+                                                    ng-required="true">
+                                                <span style="color:red"
+                                                    ng-show="valid1.noSajanPlant.$dirty && valid1.noSajanPlant.$invalid">
+                                                    <span ng-show="valid1.noSajanPlant.$error.required">No.of
+                                                        Sajana(drumstick) Plant is Required .</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4" style="margin-top: 25px;">
+                                        <div class="form-group">
+                                            <label>Others, if any:</label>
+                                            <div class="col-md-12">
+                                                <input type="number" id="noOthersPlant" name="noOthersPlant"
+                                                    ng-model="noOthersPlant" class="form-control" maxlength="200"
+                                                    ng-required="true">
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>No. of previous year plants Sustain/ maintain <span
+                                                    class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <input type="number" id="noPreviousYearPlant" name="noPreviousYearPlant"
+                                                    ng-model="noPreviousYearPlant" class="form-control" maxlength="200"
+                                                    ng-required="true">
+
+
+                                                <span style="color:red"
+                                                    ng-show="valid1.noPreviousYearPlant.$dirty && valid1.noPreviousYearPlant.$invalid">
+                                                    <span ng-show="valid1.noPreviousYearPlant.$error.required">No. of
+                                                        previous year plants is Required .</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Photo
+                                                <span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <input type="file" class="form-control" name="idp" id="idp"
+                                                    ng-model="idp" accept="image/*"
+                                                    onchange="angular.element(this).scope().userPhotoCheck()" />
+                                                <label for="" style="font-size: 10px;color:red">&nbsp;&nbsp; **File size
+                                                    should be less than 1MB</label><br>
+                                                <span style="color:red" ng-show="showIdpError">
+                                                    <span style="color: red;">{{idpFileGood}}</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Remark:</label>
+                                            <div class="col-md-12">
+                                                <div class="col-md-12">
+                                                    <textarea class="form-control" cols="40" rows="2" name="remarks"
+                                                        ng-model="remarks" placeholder="Remark"
+                                                        style="margin-left: -8px;"></textarea>
+                                                    <span style="color:red"
+                                                        ng-show="valid1.remarks.$dirty && valid1.remarks.$invalid">
+                                                        <span ng-show="valid1.remarks.$error.required">Enter Your
+                                                            Remarks</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <br>
+
+                                <div class="row">
+                                    <div class="col-md-6" style="text-align: left;">
+
+                                    </div>
+
+                                    <div class="col-md-6" style="text-align: right; " ng-show="sabujeema_id == '' ">
+                                        <button type="button" class="btn btn-success" ng-click="Submit();" onclick="this.disabled= true"
+                                            ng-disabled="valid1.$invalid">
+                                            &nbsp;Submit</button>
+                                        <!-- ng-disabled="valid1.$invalid" -->
+                                    </div>
+                                    <div class="col-md-6" style="text-align: right;" ng-hide="sabujeema_id == '' ">
+                                        <button type="button" class="btn btn-success" ng-click="update(); "
+                                            ng-disabled="valid1.$invalid">
+                                            &nbsp;Update</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                    </form>
+                </div>
+
+
+            </div>
+        </div>
+</div>
+
+</section>
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0-pre
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- Controller -->
+<script>
+    function nameNumber(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        // var regex = /[0-9]|\./;
+        var regex = /^[A-Za-z0-9 ]+$/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+    function nameFilter(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        // var regex = /[0-9]|\./;
+        var regex = /^[A-Za-z ]+$/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#userPhoto").change(function () {
+        readURL(this);
+    });
+    function pincode(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        // var regex = /^[A-Za-z0-9 ]+$/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+    function numberValidate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+    var sabujeema_id = "<%= sabujeema_id %>";
+</script>
+<script src="/controller/admin/saiSabujeema.js"></script>
+<!-- AdminLTE App -->
+<script src="/AdminLTE/adminlte.js"></script>
+<script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

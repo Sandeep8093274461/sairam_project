@@ -1,0 +1,250 @@
+<%- include('common/header.ejs') -%>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <style>
+        .table-responsive {
+            height: 600px;
+        }
+
+        .panel {
+            border: solid 1px #1579f6;
+            margin-bottom: 20px;
+            border-radius: 7px;
+        }
+    </style>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-1">
+                <div class="col-8">
+                    <h3 class="m-1 text-dark" style="width:100%;"><img src="/img/icon/logo.jpg"
+                            style="width:60px;height:60px;" alt=""> Resource persons / Committee members</h3>
+                </div><!-- /.col -->
+                <div class="col-4">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#"> Sai Swabalambi Program</a></li>
+                        <li class="breadcrumb-item active">Resource</li>
+                        <li class="breadcrumb-item active">All list</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="panel panel-success">
+                    <form name="bloodCamp">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Search data</h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <form name="myForm1">
+                                <div class="row">
+                                   
+                                    <div class="col-4" >
+                                                <div class="form-group">
+                                                    <label>District :</label>
+                                                    <div class="col-md-12">
+                                                      
+                                                        <input type="text" class="form-control" name="dist"
+                                                        ng-model="dist"  disabled
+                                                         required>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                    <div class="col-4">
+                                        <label>Resource type :</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" name="fromresourcetypeFilter" ng-model="fromresourcetypeFilter"
+                                                required>
+                                                <option value=""  selected>--select--</option>
+                                                    <option value="District Committee Member">District Committee Member</option>
+                                                    <option value="District In-Charge">District In-Charge</option>
+                                                    <option value="District Resource Person">District Resource Person</option>
+                                                    <option value="State Committee Member">State Committee Member</option>
+                                                    <option value="State In-Charge">State In-Charge</option>
+                                                    <option value="State Resource Person">State Resource Person</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="Phone">Profession is related to:</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" ng-model="fromprofessionFilter" name="fromprofessionFilter"
+                                                required>
+                                                <option value="" disabled selected>--select--</option>
+                                                <option value="Entrepreneur"> Entrepreneur</option>
+                                                <option value="Administrator"> Administrator</option>
+                                                <option value="Agriculture"> Agriculture</option>
+                                                <option value="Banker"> Banker</option>
+                                                <option value="Councillor"> Councillor</option>
+                                                <option value="Industry"> Industry</option>
+                                                <option value="MLA"> MLA</option>
+                                                <option value="Sarpanch"> Sarpanch</option>
+                                                <option value="Veterinary"> Veterinary</option>
+                                                <option value="Officer bearer">Officer bearer</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+
+                                </div>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+
+            <div class="container-fluid">
+                <div>
+                    <form name="bloodCamp">
+                        <div class="card card-primary" >
+                            <div class="card-header">
+                                <h3 class="card-title"> Resource persons details</h3>
+                            </div>
+                            <div ng-show="alldata.length == 0" style="text-align: center; padding-bottom: 30px;">
+                                <br>
+                                <label for="" style="color: red;"><b>No record found</b></label>
+                            </div>
+                            <div class="card-body" style="padding: 0;" ng-show="alldata.length != 0">
+                                <div class="table-responsive" style="height: auto">
+                                    <table class="table table-head-fixed" id="allListTable">
+
+                                        <thead>
+                                            <tr ng-hide="results.length == 0">
+                                                <th>Sl</th>
+                                                <th>Name</th>
+                                                <th>Mobile no.</th>
+                                                <th>District</th>
+                                                <th>Samiti</th>
+                                                <th>Resource type</th>
+                                                <th>Profession </th>
+                                                <th>Place of service</th>
+                                                <th>Area of expertise</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="data in results =  (alldata | orderBy:['dist_name' ,'-resourcetype'] | filter: { dist: fromDistrictFilter } |  filter :{ profession: fromprofessionFilter,resourcetype:fromresourcetypeFilter }) ">
+                                                <div ng-show="results.length == 0" style="text-align: center;">
+                                                    <br>
+                                                    No record found
+                                                </div>
+                                                <div ng-show="results.length != 0" style="text-align: center;">
+                                                    <td> {{ $index+1 }}</td>
+                                                    <td> {{ data.name }}</td>
+                                                    <td> {{ data.mobno}}</td>
+                                                    <td> {{ data.dist_name }} </td>
+                                                    <td> {{ data.samiti }} </td>
+                                                    <td> {{ data.resourcetype}}</td>
+                                                    <td> {{ data.profession }} </td>
+                                                    <td> {{ data.workshop }} </td>
+                                                    <td> {{ data.areaofexpertise  || '--'  }}  </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-success"
+                                                            ng-click="view(data.id);">
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary"
+                                                            ng-click="edit(data.id);">
+                                                            <i class="fas fa-edit" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-danger" data-toggle="modal"
+                                                            data-target="#exampleModal" ng-click="deleted(data);">
+                                                            <i class="fas fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+
+                                                </div>
+                                                
+
+                                              
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+                                <div style="text-align: right;margin: 10px;">
+                                    <button type="button" class="btn btn-primary"  ng-click="exportToExcel('#allListTable')" ng-show="results.length != 0"> <i class="fas fa-download" aria-hidden="true"></i> Download</button>
+                                </div>
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color: rgb(252, 61, 61);">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                Conformation</h5>
+                                            <button type="button" class="close" data-dismiss="modal"
+                                                aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            Are you sure you want to remove <strong>{{ allDetails.name }}</strong> ?
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">No</button>
+                                            <button type="button" class="btn btn-danger"
+                                                data-dismiss="modal"
+                                                ng-click="oneDataDeleted(allDetails.id);">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0-pre
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- Controller -->
+<script src="/controller/user/resourcePersonsAllData.js"></script>
+<!-- AdminLTE App -->
+<script src="/AdminLTE/adminlte.js"></script>
+<script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

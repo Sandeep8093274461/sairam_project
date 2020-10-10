@@ -1,0 +1,152 @@
+<%- include('common/header.ejs') -%>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <style>
+        .table-responsive {
+            height: 600px;
+        }
+
+        .panel {
+            border: solid 1px #1579f6;
+            margin-bottom: 20px;
+            border-radius: 7px;
+        }
+    </style>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-1">
+                <div class="col-7">
+                    <h3 class="m-1 text-dark" style="width:100%;"><img src="/img/icon/logo.jpg"
+                            style="width:60px;height:60px;" alt=""> Add to databse</h3>
+                </div><!-- /.col -->
+                <div class="col-5">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Add to databse</a></li>
+                        <li class="breadcrumb-item active"> Add Samiti</li>
+                        <li class="breadcrumb-item active">add</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+
+    <section class="content">
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="panel panel-success">
+                    <form name="valid1" id="valid1">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Add Samiti</h3>
+                            </div>
+                        </div>
+
+                        <div class="card-body">
+
+                            <div class="row">
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label>District <span class="star">*</span> :</label>
+                                        <div class="col-md-8">
+                                            <select class="form-control" ng-options="x.name for x in districtList"
+                                                name="districtId" ng-model="districtId" ng-change="loadSamithiList()"
+                                                required>
+                                                <option value="" disabled>--District--</option>
+                                            </select>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-5">
+                                    <div class="form-group">
+                                        <label>Samiti Name <span class="star">*</span> :</label>
+                                        <div class="col-md-8">
+                                            <!-- ng-change="validateSamiti()" -->
+                                            <input type="text" class="form-control" name="newSamitiName"
+                                                ng-model="newSamitiName" placeholder="Enter New Samiti Name"
+                                                ng-disabled="!districtId" required>
+                                            <span ng-show="samithiId" style="color:red">Samiti is already exist.</span>
+                                            <span style="color:red"
+                                                ng-show="valid1.newSamitiName.$dirty && valid1.newSamitiName.$invalid">
+                                                <span ng-show="valid1.newSamitiName.$error.required">New Samiti Name is
+                                                    Required .</span>
+                                            </span>
+
+                                        </div>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="col-2" style="text-align:right;">
+                                    <br>
+                                    <button class="btn btn-primary" data-toggle="modal" data-target="#exampleModal"
+                                        style="margin-top: 10px;margin-right: 50px; " ng-disabled="valid1.$invalid"><i
+                                            class="fas fa-plus" aria-hidden="true"></i> Add </button>
+                                </div>
+
+
+                            </div>
+                            <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header" style="background-color: rgb(252, 62, 62);">
+                                            <h5 class="modal-title" id="exampleModalLabel">
+                                                Are you sure add to database</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            District name is <b>{{districtId.name}} </b> and Samiti name is
+                                            <b>{{newSamitiName}}</b>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary"
+                                                data-dismiss="modal">No</button>
+                                            <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                                ng-click="addSamiti();">Yes</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0-pre
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- Controller -->
+<script src="/controller/admin/addSamiti.js"></script>
+<!-- AdminLTE App -->
+<script src="/AdminLTE/adminlte.js"></script>
+<script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

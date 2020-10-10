@@ -1,0 +1,266 @@
+<%- include('common/header.ejs') -%>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark"><img src="/img/icon/blood.png" style="width:60px;height:60px;" alt=""> Donor details entry</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Blood Group</li>
+                        <li class="breadcrumb-item active">Donor Details Entry</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+
+
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="panel panel-default">
+                  
+                        
+                        <div class="card card-danger">
+                            <div class="card-header">
+                                <h3 class="card-title">Donor details entry</h3>
+                            </div>
+                            <form name="valid1" id="valid1">
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Name<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" id="name" name="name" ng-model="name" class="form-control" placeholder="Enter full name." ng-required="true" >
+                                            <span style="color: red;" ng-show="showNameError">{{showNameErrorMsg}}</span>
+                                            <span style="color:red"
+                                            ng-show="valid1.name.$dirty && valid1.name.$invalid">
+                                            <span
+                                                ng-show="valid1.name.$error.required">Name is required .</span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Gender<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <select class="form-control" ng-model="gender" ng-required="true" id="gender">
+                                                <option value="" disabled selected>--select--</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                           
+                                            <span style="color: red;" ng-show="showGenderError">{{showGenderErrorMsg}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Date of Birth<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" ng-model="dob" placeholder="Enter full name." maxlength="200" id="dob" required>
+                                            <span style="color: red;" ng-show="showDobError">{{showDobErrorMsg}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Blood Group<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <select class="form-control" ng-model="bg" ng-required="true" id="bloodGroup">
+                                                <option value="" disabled selected>--select--</option>
+                                                <option value="O−">O−</option>
+                                                <option value="O+">O+</option>
+                                                <option value="A−">A−</option>
+                                                <option value="A+">A+</option>
+                                                <option value="B−">B−</option>
+                                                <option value="B+">B+</option>
+                                                <option value="AB−">AB−</option>
+                                                <option value="AB+">AB+</option>
+                                            </select>
+                                            <span style="color: red;" ng-show="showBgError">{{showBgErrorMsg}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Last Donation Date :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" ng-model="lastDonationDate" placeholder="Enter full name." maxlength="200" id="lastDonationDate">
+                                        </div>
+                                    </div>
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Contact No.<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Enter mobile no." maxlength="10"
+                                                   minlength="10" name="contactNo" ng-model="contactNo" required id="contactNo"ng-pattern="/^[1-9][0-9]{9}$/"
+                                                   allow-numbers-only onkeypress='numberValidate(event)'>
+                                            <span style="color: red;" ng-show="showcontactNoError">{{showcontactNoErrorMsg}}</span>
+                                            <span style="color:red"
+                                            ng-show="valid1.contactNo.$dirty && valid1.contactNo.$invalid">
+                                            <span
+                                                ng-show="valid1.contactNo.$error.required">Contact Number is required .</span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Contact person Ref.<span class="star"></span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Enter Contact person Ref."  name="contactRef" ng-model="contactRef" id="contactRef" 
+                                            >
+                                            <span style="color: red;" ng-show="showcontactRefError">{{showcontactRefErrorMsg}}</span>
+                                           
+                                        </div>
+                                    </div>
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>District<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <select name="dist" ng-model="dist" class="form-control" ng-required="true" id="dist">
+                                                <option value="">--Select District--</option>
+                                                <option ng-repeat="option in districtList" value="{{option.name}}">{{option.name}}</option>
+                                            </select>
+                                            <span style="color: red;" ng-show="showdistError">{{showdistErrorMsg}}</span>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Address<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <textarea class="form-control" rows="2" id="Address" name="Address" ng-model="Address" required></textarea>
+                                            <span style="color: red;" ng-show="showAddressError">{{showAddressErrorMsg}}</span>
+                                            <span style="color:red"
+                                            ng-show="valid1.Address.$dirty && valid1.Address.$invalid">
+                                            <span
+                                                ng-show="valid1.Address.$error.required">Address is required .</span>
+                                        </span>
+                                        </div>
+                                    </div>
+                                
+                                </div>
+                                
+                                <br>
+                              
+                                <div class="row">
+                                    
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-success"  ng-disabled="valid1.$invalid" data-dismiss="modal" ng-click="addData()" ng-show="donerid == '' " id="add" >Add Donor</button>
+                                            <button type="button" class="btn btn-success"  ng-disabled="valid1.$invalid" data-dismiss="modal" ng-click="updateData()" ng-hide="donerid == '' " id="update" >Update Donor</button>                                                  
+                                            <input type="text" id="donorid" ng-hide="true" class="form-control" placeholder="cmpid" maxlength="200" ng-model="donorid">
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                           </form>
+                            <!-- Modal -->
+                            
+
+                        </div>
+
+                   
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0-pre
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- Controller -->
+<script src="/controller/user/addDonation.js"></script>
+<!-- AdminLTE App -->
+<script src="/AdminLTE/adminlte.js"></script>
+<script>
+     function numberValidate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        var donerid = "<%= donerid %>";
+
+</script>
+<script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

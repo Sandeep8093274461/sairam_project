@@ -1,0 +1,43 @@
+/* MAP START */
+.pulse {
+    border-radius: 10;
+    opacity: 1.0;
+    animation: pulse 3s infinite;
+}    
+@keyframes pulse {
+    0% {
+        opacity: 0.0;
+        box-shadow: 0 0 0 0 ;
+    }    
+    50% {
+        opacity: 1.0;
+        box-shadow: 0 0 0 10px ;
+    }
+    100% {
+        opacity: 0.0;
+        box-shadow: 0 0 0 0 ;
+    }
+}
+.pulse1 {
+    border-radius: 10;
+    opacity: 0;
+    animation: pulse1 3s infinite;
+}
+
+@keyframes pulse1 {
+    0% {
+        opacity: 1.0;
+        box-shadow: 0 0 0 10px;
+    }
+
+    50% {
+        opacity: 0.0;
+        box-shadow: 0 0 0 0;
+    }
+
+    100% {
+        opacity: 1.0;
+        box-shadow: 0 0 0 10px;
+    }
+}
+/* MAP END */

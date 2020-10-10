@@ -1,0 +1,251 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>ACTS - Contact</title>
+    <link rel="icon" href="img/icon/blood.png">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="AdminLTE/fontawesome/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="AdminLTE/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="AdminLTE/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="css/myStyle.css">
+    <link rel="stylesheet" href="css/map.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+          integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+          crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+            integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+            crossorigin=""></script>
+    <!-- jQuery -->
+    <script src="AdminLTE/jquery.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+
+</head>
+<body class="hold-transition sidebar-mini layout-fixed" ng-app="myApp" ng-controller="myCtrl">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars" aria-hidden="true"></i></a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- Messages Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-comments" aria-hidden="true"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                </li>
+                <!-- Notifications Dropdown Menu -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-bell"></i>
+                        <span class="badge badge-warning navbar-badge">15</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <!--<a class="nav-link" href="#"  role="button">-->
+                    <button onclick="logout()"><img src='img/icon/logout.png' alt='' style='width:45px;height:25px'></button>
+                    <!--</a>-->
+                </li>
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-link">
+                <img src="img/icon/blood.png" alt="AdminLTE Logo" style="width:60px;height:60px;padding-left:8px" class="actLogo elevation-3"
+                     style="">
+                <!-- <span class="brand-text font-weight-light text-white"><strong>Covid19 - Surakshya</strong></span> -->
+                <br>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="images/adminLogo.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block text-white">ADMIN</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt" aria-hidden="true"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+                       
+                        
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-th" aria-hidden="true"></i>
+                                <p>
+                                    Blood Group
+                                    <i class="right fas fa-angle-left" aria-hidden="true"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="addDonation.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Camp</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="detailsCamp.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Camp Details</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="addDonor.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Add Donor</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="detailsDonor.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donor Details</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="donorReport.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donor Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="campUpdate.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Add Camp</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="donorFilter.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donation Details</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="detailsDonation.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>List of Donor</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="password.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>User Credential</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="addDistrict.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Add User</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="ConvenorDetails.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Add Convenor</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="ConvenorData.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Convenor Details</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark">Add new index case</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Index case</li>
+                                <li class="breadcrumb-item active">Add new</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+
+
+                <div class="container-fluid">
+                    <div class="container-fluid">
+
+                    </div>
+                </div>
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+            <strong>Copyright &copy; 2020 <a href="http://nic.in">NIC.in</a>.</strong>
+            All rights reserved.
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0-pre
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- Controller -->
+    <script src="controller/admin/addContactInfo.js"></script>
+    <!-- AdminLTE App -->
+    <script src="AdminLTE/adminlte.js"></script>
+    <script type="text/javascript" src="AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

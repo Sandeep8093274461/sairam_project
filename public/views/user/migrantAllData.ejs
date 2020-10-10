@@ -1,0 +1,311 @@
+<%- include('common/header.ejs') -%>
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <style>
+                .table-responsive {
+                    height: 600px;
+                }
+        
+                .panel {
+                    border: solid 1px #1579f6;
+                    margin-bottom: 20px;
+                    border-radius: 7px;
+                }
+            </style>
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-1">
+                        <div class="col-sm-8">
+                            <h1 class="m-0 text-dark"><img src="/img/icon/logo.jpg" style="width:60px;height:60px;"
+                                    alt=""> Survey for promotion of  Sai Swabalambi</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-4">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#"> Sai Swabalambi program</a></li>
+                                <li class="breadcrumb-item active">Skill</li>
+                                <li class="breadcrumb-item active">All list</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+           
+            <section class="content">
+                <div class="container-fluid">
+                    <div class="container-fluid">
+                        <div class="panel panel-success">
+                            <form name="bloodCamp">
+                                <div class="card card-primary">
+                                    <div class="card-header">
+                                        <h3 class="card-title">Search data</h3>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+
+                                    <form name="myForm1">
+                                       
+                                        <div class="row">
+                                            <div class="col-1" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>District:</label>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-3" >
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" name="dist"
+                                                    ng-model="dist"  disabled
+                                                     >
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="col-1" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Applied from:</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <input type="date" class="form-control" name="fromDateFilter"
+                                                        ng-model="fromDateFilter">
+                                                </div>
+                                            </div>
+                                            <div class="col-1" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Applied to:</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <input type="date" class="form-control" name="toDateFilter"
+                                                        ng-model="toDateFilter">
+                                                </div>
+                                            </div>
+
+                                            <div class="col-1" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Gender:</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <select class="form-control" name="fromGenderFilter"
+                                                        ng-model="fromGenderFilter">
+                                                        <option value="">--select--</option>
+                                                        <option value="Male">Male</option>
+                                                        <option value="Female">Female</option>
+                                                        <option value="Transgender"> Transgender</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-1" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Marital status:</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <select class="form-control" name="fromStatusFilter"
+                                                        ng-model="fromStatusFilter">
+                                                        <option value="" selected>--select--</option>
+                                                        <option value="Married"> Married</option>
+                                                        <option value="Unmarried"> Unmarried</option>
+                                                        <option value="Widow"> Widow</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-1" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Returning from:</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <select class="form-control"
+                                                        ng-options="x.statename for x in states" name="fromStateFilter"
+                                                        ng-model="fromStateFilter" >
+                                                        <option value="">--State--</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                            <div class="col-1" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Migrants?</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <select class="form-control" name="frommigrantFilter"
+                                                        ng-model="frommigrantFilter">
+                                                        <option value="" selected>--select--</option>
+                                                        <option value="Yes"> Yes</option>
+                                                        <option value="No"> No</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-1" style="text-align:right">
+                                                <div class="form-group">
+                                                    <label>Skill:</label>
+                                                </div>
+                                            </div>
+                                            <div class="col-3">
+                                                <div class="form-group">
+                                                    <select class="form-control" name="fromSkillFilter"
+                                                        ng-model="fromSkillFilter" ng-change="skillCheck()">
+                                                        <option value="" selected>--select--</option>
+                                                        <option value="Skilled"> Skilled</option>
+                                                        <option value="Semi Skilled"> Semi Skilled</option>
+                                                        <option value="UnSkilled"> Un Skilled</option>
+                                                        <option value="All">ALL</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+
+
+                                        </div>
+                                    </form>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="container-fluid">
+                    <div class="container-fluid">
+                        <div>
+                            <form name="bloodCamp">
+                                
+                                <div class="card card-primary" >
+                                    <div class="card-header">
+                                        <h3 class="card-title">Skill list</h3>
+                                    </div>
+                                    <div ng-show="alldata.length == 0" style="text-align: center; padding-bottom: 30px;">
+                                        <br>
+                                        <label for="" style="color: red;"><b>No record found</b></label>
+                                    </div>
+                                    <div class="card-body" style="padding: 0;" ng-show="alldata.length != 0">
+                                        <div class="table-responsive" style="height: auto">
+                                            <table class="table table-head-fixed" id="allListTable">
+                                               
+                                                    <thead>
+                                                        <tr ng-hide="results.length == 0">
+                                                            <th>Sl</th>
+                                                            <th>District</th>
+                                                            <th>Name</th>
+                                                            <th>Sector employed</th>
+                                                            <th>Interested in which skill</th>
+                                                            <th>View</th>
+                                                            <th>Edit</th>
+                                                            <th>Delete</th>
+    
+                                                        </tr>
+                                                    </thead>
+                                                <tbody>
+                                                        <tr ng-repeat="data in results =  (alldata | orderBy:'dist_name' | dateRangeFrom : fromDateFilter : this | dateRangeTo : toDateFilter:this | filter: { returningstate: fromStateFilter.statecode } | filter: { district: fromDistrictFilter } | filter: { migrant: frommigrantFilter }   | filter: { skill: skillFilter } | filter:(!!fromGenderFilter || undefined) && fromGenderFilter:true | filter:(!!fromStatusFilter || undefined) && fromStatusFilter:true )">
+
+                                                            <div ng-show="results.length == 0" style="text-align: center;">
+                                                                <br>
+                                                                No record found
+                                                            </div>
+                                                            <div ng-show="results.length != 0" style="text-align: center;">
+                                                                <td> {{ $index+1 }}</td>
+                                                                <td> {{ data.dist_name }} </td>
+                                                                <td> {{ data.migrant_name }}</td>
+                                                                <td> {{ data.sectoremployed }}</td>
+                                                                <td> {{ data.intrestskill }} </td>
+                                                                <td>
+                                                                    <button class="btn btn-outline-success"
+                                                                        ng-click="view(data.migrate_id);">
+                                                                        <i class="fa fa-eye" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td>
+                                                                    <button class="btn btn-outline-primary"
+                                                                        ng-click="edit(data.migrate_id);">
+                                                                        <i class="fas fa-edit" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </td>
+                                                                <td>
+                                                                    <button class="btn btn-outline-danger"
+                                                                        data-toggle="modal" data-target="#exampleModal"
+                                                                        ng-click="deleted(data);">
+                                                                        <i class="fas fa-trash" aria-hidden="true"></i>
+                                                                    </button>
+                                                                </td>
+    
+                                                            </div>
+    
+                                                            <div class="modal fade" id="exampleModal" tabindex="-1"
+                                                                role="dialog" aria-labelledby="exampleModalLabel"
+                                                                aria-hidden="true">
+                                                                <div class="modal-dialog" role="document">
+                                                                    <div class="modal-content">
+                                                                        <div class="modal-header" style="background-color: rgb(252, 62, 62);">
+                                                                            <h5 class="modal-title" id="exampleModalLabel" >
+                                                                                Confirm</h5>
+                                                                            <button type="button" class="close"
+                                                                                data-dismiss="modal" aria-label="Close">
+                                                                                <span aria-hidden="true">&times;</span>
+                                                                            </button>
+                                                                        </div>
+                                                                        <div class="modal-body">
+                                                                           Are you sure want to delete <strong>{{allDetails.migrant_name}}</strong>  ?
+                                                                        </div>
+                                                                        <div class="modal-footer">
+                                                                            <button type="button" class="btn btn-secondary"
+                                                                                data-dismiss="modal">No</button>
+                                                                            <button type="button" class="btn btn-danger"
+                                                                                data-dismiss="modal"
+                                                                                ng-click="oneDataDeleted(allDetails.migrate_id);">Yes</button>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+
+                                                        </tr>
+                                                       
+                                                </tbody>
+
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0-pre
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- Controller -->
+    <script src="/controller/user/migrantAllData.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/AdminLTE/adminlte.js"></script>
+    <script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

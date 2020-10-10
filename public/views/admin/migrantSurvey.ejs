@@ -1,0 +1,1532 @@
+<%- include('common/header.ejs') -%>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <style>
+                .form-control {
+                    max-width: 400px;
+                }
+        
+                .row {
+                    margin-bottom: 10px;
+                }
+            </style>
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-1">
+                        <div class="col-8">
+                            <h1 class="m-0 text-dark"><img src="/img/icon/logo.jpg" style="width:60px;height:60px;"
+                                    alt=""> Survey for promotion of  Sai Swabalambi</h1>
+                        </div><!-- /.col -->
+                        <div class="col-4">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#"> Sai Swabalambi Program</a></li>
+                                <li class="breadcrumb-item active">Skill</li>
+                                <li class="breadcrumb-item active">Entry</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+
+
+
+            <div class="container-fluid" ng-show="showAppForm">
+                <div class="container-fluid">
+                    <div class="panel panel-default">
+
+                        <div class="card card-primary" ng-show="part1">
+                            <div class="card-header">
+                                <h3 class="card-title">Personal Details</h3>
+                            </div>
+                            <form name="valid1" id="valid1">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Full name <span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="migrantName"
+                                                        ng-model="migrantName" placeholder="Enter full name"
+                                                        required>
+                                                    <span style="color:red"
+                                                        ng-show="valid1.migrantName.$dirty && valid1.migrantName.$invalid">
+                                                        <span ng-show="valid1.migrantName.$error.required">Name is
+                                                            Required .</span>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <label>Date of birth<span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <input type="date" class="form-control" name="dob" ng-model="dob"
+                                                    placeholder="Enter Your Date of Birth" required>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-4">
+                                            <label>Gender<span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" name="gender" ng-model="gender" required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="Male"> Male</option>
+                                                    <option value="Female"> Female</option>
+                                                    <option value="Transgender"> Transgender</option>
+                                                </select>
+                                            </div>
+
+
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Contact number <span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="mobNo"
+                                                        ng-model="mobNo" placeholder="Enter contact number"
+                                                        maxlength="10" minlength="10" ng-pattern="/^[1-9][0-9]{9}$/"
+                                                        allow-numbers-only onkeypress='numberValidate(event)' required>
+                                                    <span style="color:red"
+                                                        ng-show="valid1.mobNo.$dirty && valid1.mobNo.$invalid">
+                                                        <span ng-show="valid1.mobNo.$error.required">Mobile No is
+                                                            Required .</span>
+                                                    </span>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="Phone">Category <span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="category" name="category"
+                                                    required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="ST"> ST</option>
+                                                    <option value="SC"> SC</option>
+                                                    <option value="OBC"> OBC</option>
+                                                    <option value="Other"> Other</option>
+                                                </select>
+                                            </div>
+
+
+                                            </span>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="Phone">Marital status <span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="material" name="material"
+                                                    required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="Married"> Married</option>
+                                                    <option value="Unmarried"> Unmarried</option>
+                                                    <option value="Widow"> Widow</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Father/Guardian name<span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="fatherName"
+                                                        ng-model="fatherName"
+                                                        placeholder="Enter Father/Guardian name" required>
+
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Total family members <span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="fMember"
+                                                        ng-model="fMember" placeholder="Enter total family member "
+                                                        allow-numbers-only onkeypress='numberValidate(event)' required>
+                                                    <span style="color:red"
+                                                        ng-show="valid1.fMember.$dirty && valid1.fMember.$invalid">
+                                                        <span ng-show="valid1.fMember.$error.required">Total Family
+                                                            Member is
+                                                            Required .</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4" ng-if="district_id === ''">
+                                            <label for="Phone"> District<span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="$parent.district" name="district" ng-change="loadblockList()" required>
+                                                    <option value="" disabled>--District--</option>
+                                                    <option ng-repeat="option in districtList" value="{{option.district_id}}" >{{option.name}}</option>
+                                                </select>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Block/Municipality name <span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                        <select class="form-control" ng-model="block" name="block"
+                                                        ng-change="loadgp()" required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option ng-repeat="option in blockList" value="{{option.block_code}}" >{{option.block_name}}</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>GP/Ward name <span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                        <div class="col-md-12">
+                                                            <select class="form-control" ng-model="gp" name="gp" ng-change="loadVillages();" required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option ng-repeat="option in gpList" value="{{option.panchayat_code}}" >{{option.panchayat_name}}</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Village/Area name<span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" ng-model="village" name="village" required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option ng-repeat="option in villageList" value="{{option.villagecode}}" >{{option.villagename}}</option>
+                                                    </select>
+                                                    
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <br>
+
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="text-align: left;" ng-show="migrate_id == '' ">
+                                           
+                                        </div>
+                                        <div class="col-md-6" style="text-align: left;" ng-hide="migrate_id == '' ">
+                                            <button class="btn btn-success " ng-click="previous5();"
+                                            style="text-align: right; "><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                                        </div>
+
+                                        <div class="col-md-6" style="text-align: right;">
+                                            <button type="button" class="btn btn-success" ng-click="next1();"ng-disabled="valid1.$invalid" >
+                                                Next <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                            <!-- ng-disabled="valid1.$invalid" -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="card card-primary" ng-show="part2">
+                            <div class="card-header">
+                                <h3 class="card-title"> Present income status and qualification details </h3>
+                            </div>
+                            <form name="valid2" id="valid2">
+                                <div class="card-body">
+                                    <div class="row">
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Farmer id <span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" ng-model="farmerId" name="farmerId"
+                                                        required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Yes"> Yes</option>
+                                                        <option value="No"> No</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="Phone">Bank account<span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="acNumber" name="acNumber"
+                                                    required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="Yes"> Yes</option>
+                                                    <option value="No"> No</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-4">
+                                            <label for="Phone">Aadhaar number<span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="aadharNumber" name="aadharNumber"
+                                                    required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="Yes"> Yes</option>
+                                                    <option value="No"> No</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                        <div class="col-4">
+                                            <label for="Phone">Voter-id<span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="voterId" name="voterId" required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="Yes"> Yes</option>
+                                                    <option value="No"> No</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Total land
+                                                    area of
+                                                    family in
+                                                    acre<span class="star">*</span>
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="landArea"
+                                                        ng-model="landArea"
+                                                        placeholder="Enter Total land area" required>
+                                                    <span style="color:red"
+                                                        ng-show="valid2.landArea.$dirty && valid2.landArea.$invalid">
+                                                        <span ng-show="valid2.landArea.$error.required">Total Land
+                                                            area is
+                                                            Required .</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Present source of income<span class="star">*</span>
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="salary"
+                                                        ng-model="salary"
+                                                        placeholder="Enter present source of income" required>
+                                                    <span style="color:red"
+                                                        ng-show="valid2.salary.$dirty && valid2.salary.$invalid">
+                                                        <span ng-show="valid2.salary.$error.required">Present source
+                                                            of Income is
+                                                            Required .</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Monthly
+                                                    income at
+                                                    present<span class="star">*</span>
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="monthlyIncome"
+                                                        ng-model="monthlyIncome"
+                                                        placeholder="Monthly income in Rs" maxlength="7"
+                                                        minlength="1" onkeypress='numberValidate(event)'
+                                                        allow-numbers-only required>
+                                                    <span style="color:red"
+                                                        ng-show="valid2.monthlyIncome.$dirty && valid2.monthlyIncome.$invalid">
+                                                        <span ng-show="valid2.monthlyIncome.$error.required">Monthly
+                                                            income is
+                                                            Required .</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="Phone">Highest education qualification <span
+                                                    class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="qualification"
+                                                    name="qualification" required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="ClassI"> Class I</option>
+                                                    <option value="ClassII"> Class II</option>
+                                                    <option value="ClassIII"> Class III</option>
+                                                    <option value="ClassIV"> Class IV</option>
+                                                    <option value="ClassV"> Class V</option>
+                                                    <option value="ClassVI"> Class VI</option>
+                                                    <option value="ClassVII"> Class VII</option>
+                                                    <option value="ClassVIII"> Class VIII</option>
+                                                    <option value="ClassIX"> Class IX</option>
+                                                    <option value="ClassX"> Class X</option>
+                                                    <option value="ClassXI"> Class XI</option>
+                                                    <option value="ClassXII"> Class XII</option>
+                                                    <option value="BachelorsDegree"> Bachelors Degree</option>
+                                                    <option value="MastersDegree"> Masters Degree</option>
+                                                    <option value="Other"> Other</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Skill development certification
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control"
+                                                        name="skillDevelopmentCertification"
+                                                        ng-model="skillDevelopmentCertification"
+                                                        placeholder="Enter skill development certification name">
+                                                    <span style="color:red"
+                                                        ng-show="valid2.skillDevelopmentCertification.$dirty && valid2.skillDevelopmentCertification.$invalid">
+                                                        <span
+                                                            ng-show="valid2.skillDevelopmentCertification.$error.required">Skill
+                                                            Development Certification Name is
+                                                            Required .</span>
+                                                    </span>
+
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Are you Migrants? <span class="star">*</span></label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" ng-model="migrant" name="migrant"
+                                                        required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Yes"> Yes</option>
+                                                        <option value="No"> No</option>
+                                                    </select>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <label for="Phone">Animals present in the family<span
+                                                    class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="animals" name="animals" required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="Yes"> Yes</option>
+                                                    <option value="No"> No</option>
+                                                </select>
+                                            </div>
+                                            <br>
+
+                                        </div>
+                                        
+                                        <div class="col-4" ng-if="animals == 'Yes'">
+                                            <div class="form-group">
+                                                <label>Cow +
+                                                    Bullocks
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="noOfCows"
+                                                        ng-model="$parent.noOfCows"
+                                                        placeholder="Enter no of cows & bullocks" maxlength="2"
+                                                        minlength="1" onkeypress='numberValidate(event)'
+                                                        allow-numbers-only required>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4" ng-if="animals == 'Yes'">
+                                            <div class="form-group">
+                                                <label>Goat
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="noOfGoat"
+                                                        ng-model="$parent.noOfGoat" placeholder="Enter no of goat"
+                                                        maxlength="2" minlength="1" onkeypress='numberValidate(event)'
+                                                        allow-numbers-only required>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4" ng-if="animals == 'Yes'">
+                                            <div class="form-group">
+                                                <label>Sheep
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="noOfSheep"
+                                                        ng-model="$parent.noOfSheep" placeholder="Enter no of sheep"
+                                                        maxlength="2" minlength="1" onkeypress='numberValidate(event)'
+                                                        allow-numbers-only required>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4" ng-if="animals == 'Yes'">
+                                            <div class="form-group">
+                                                <label>Others
+                                                    if any Animals
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="noOfOtherAnimal"
+                                                        ng-model="$parent.noOfOtherAnimal"
+                                                        placeholder="Enter no of other animal" maxlength="2"
+                                                        minlength="1" onkeypress='numberValidate(event)'
+                                                        allow-numbers-only required>
+
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="text-align: left;">
+                                            <button class="btn btn-success " ng-click="previous1();"
+                                                style="text-align: right;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                                        </div>
+
+                                        <div class="col-md-6" style="text-align: right;">
+                                            <button type="button" class="btn btn-success" ng-click="next2();"ng-disabled="valid2.$invalid"  >
+                                                Next <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                            <!-- ng-disabled="valid2.$invalid" -->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="card card-primary" ng-show="part3 " ng-if="migrant === 'Yes'">
+                            <div class="card-header">
+                                <h3 class="card-title">Migration details</h3>
+                            </div>
+                            <form name="valid3" id="valid3">
+                                <div class="card-body"><br>
+                                    <div class="row">
+                                        <br>
+                                        <div class="col-4">
+                                            <label for="Phone">Coming from <span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="$parent.returningState" name="returningState" required>
+                                                    <option value="" disabled>--District--</option>
+                                                    <option ng-repeat="option in states" value="{{option.statecode}}" >{{option.statename}}</option>
+                                                </select>
+
+                                            </div>
+                                            
+
+                                        </div>
+
+                                        <div class="col-4" style="margin-top: -23px;">
+                                            <div class="col-md-12">
+                                                <label for="Phone">Do you plan to go back to previous
+                                                    work place?<span class="star">*</span>:</label>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <select class="form-control" name="planAfterLockDown"
+                                                    ng-model="$parent.planAfterLockDown" required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="Immediately after lock down"> Immediately after
+                                                        lock down</option>
+                                                    <option value="Within three months">Within three months</option>
+                                                    <option value="After 3-6 months">After 3-6 months</option>
+                                                    <option value="After 7-12 months"> After 7-12 months</option>
+                                                    <option value="Don’t Know">Don’t Know</option>
+                                                    <option value="Never">Never</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+                                        <div class="col-4" style="margin-top: -23px;">
+                                            <div class="col-md-12">
+                                                <label for="Phone">If you stay back, how do you plan for
+                                                    earning?<span class="star">*</span>:</label>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <select class="form-control" name="stayBackAfterLockDown"
+                                                    ng-model="$parent.stayBackAfterLockDown" required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="Have some savings/resources"> Have some
+                                                        savings/resources</option>
+                                                    <option value="Will look for employment locally">Will look for
+                                                        employment locally</option>
+                                                    <option value="Will become self-employed">Will become
+                                                        self-employed</option>
+                                                    <option value="Will return to agriculture"> Will return to
+                                                        agriculture</option>
+                                                    <option value="Will take loan from friends/relatives/other">
+                                                        Will take loan from friends/relatives/other</option>
+                                                    <option value="Hope government will support">Hope government
+                                                        will support</option>
+                                                    <option value="Others">Others</option>
+                                                    <option value="Don’t Know">Don’t Know</option>
+                                                </select>
+                                            </div>
+                                            <br>
+
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>What is your
+                                                    expected income?<span class="star">*</span>
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="expectedSalary"
+                                                        ng-model="$parent.expectedSalary"
+                                                        placeholder="Enter expected income per Month"
+                                                        maxlength="7" minlength="1" onkeypress='numberValidate(event)'
+                                                        allow-numbers-only required>
+                                                    <span style="color:red"
+                                                        ng-show="valid3.expectedSalary.$dirty && valid3.expectedSalary.$invalid">
+                                                        <span ng-show="valid3.expectedSalary.$error.required">Expected
+                                                            Salary
+                                                            per Month is
+                                                            Required .</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="col-md-12">
+                                                <label for="Phone">Would you work under
+                                                    MGNREGA<span class="star">*</span>:</label>
+                                            </div>
+
+                                            <div class="col-md-12">
+                                                <select class="form-control" name=" underMGNREGA"
+                                                    ng-model="$parent.underMGNREGA" required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="Yes"> Yes</option>
+                                                    <option value="No">No</option>
+                                                </select>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-6" style="text-align: left;">
+                                            <button class="btn btn-success " ng-click="previous2();"
+                                                style="text-align: right;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                                        </div>
+
+                                        <div class="col-md-6" style="text-align: right;">
+                                            <button type="button" class="btn btn-success" ng-click="next3();"ng-disabled="valid3.$invalid" >
+                                                Next <i class="fa fa-arrow-right" aria-hidden="true"></i></button>
+                                            <!-- ng-disabled="valid3.$invalid" -->
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+
+                        </div>
+                        <div class="card card-primary" ng-show="part4 ">
+                            <div class="card-header">
+                                <h3 class="card-title">Skill and employment details</h3>
+                            </div>
+                            <form name="valid4" id="valid4"  >
+                                <div class="card-body">
+                                    <style>
+                                        table,
+                                        input {
+                                            text-align: left;
+                                            font: 13px Verdana;
+                                        }
+
+                                        table,
+                                        td,
+                                        th {
+                                            margin: 10px 0;
+                                            padding: 2px 10px;
+                                        }
+
+                                        td,
+                                        th {
+                                            border: solid 1px #CCC;
+                                        }
+                                    </style>
+                                    <div class="row" >
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Level of skill <span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="skill" ng-model="skill" required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Skilled"> Skilled</option>
+                                                        <option value="Semi Skilled"> Semi Skilled</option>
+                                                        <option value="Un Skilled"> Un Skilled</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Sector employed <span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="SectorEmployed"
+                                                        ng-model="SectorEmployed" required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Agriculture">Agriculture</option>
+                                                        <option value="Animal Husbandry & Diary">
+                                                            Animal Husbandry & Diary</option>
+                                                        <option value="Apparel/Fashion/Home Furnishing">
+                                                            Apparel/Fashion/Home Furnishing</option>
+                                                        <option value="Automobile Repair">
+                                                            Automobile Repair</option>
+                                                        <option value="Banking/Insurance/Financial Services">
+                                                            Banking/Insurance/Financial Services</option>
+                                                        <option value="Beauty/Wellness">Beauty/Wellness</option>
+                                                        <option value="Brick Making">
+                                                            Brick Making</option>
+                                                        <option value="Carpenter">Carpenter</option>
+                                                        <option value="Construction, Mason">
+                                                            Construction, Mason</option>
+                                                        <option value="Domestic Work /Maid">Domestic Work /Maid
+                                                        </option>
+                                                        <option value="Driving">Driving</option>
+                                                        <option value="Electrical Repairing">Electrical Repairing
+                                                        </option>
+                                                        <option value="Electronics/H/W">Electronics/H/W</option>
+                                                        <option value="Fishery">Fishery</option>
+                                                        <option value="Food Processing">Food Processing</option>
+                                                        <option value="Gems & Jewellery">Gems & Jewellery</option>
+                                                        <option value="Handicrafts">Handicrafts</option>
+                                                        <option value="Health Care">Health Care</option>
+                                                        <option value="Horticulture">Horticulture</option>
+                                                        <option value="Hotel Management / Cooking">Hotel Management
+                                                            / Cooking</option>
+                                                        <option value="IT (S/W), Call Centre">IT (S/W), Call Centre
+                                                        </option>
+                                                        <option value="Leather">Leather</option>
+                                                        <option value="Logistics">Logistics</option>
+                                                        <option value="Media & Entertainment">Media & Entertainment
+                                                        </option>
+                                                        <option value="Mining">Mining</option>
+                                                        <option value="Paints & Coatings">Paints & Coatings</option>
+                                                        <option value="Plumbing">Plumbing</option>
+                                                        <option value="Private Coaching/ Tuition">Private Coaching/
+                                                            Tuition</option>
+                                                        <option value="Retail">Retail</option>
+                                                        <option value="Security">Security</option>
+                                                        <option value="Small Business – Grocery / Saloon etc">Small
+                                                            Business – Grocery / Saloon etc</option>
+                                                        <option value="Street Vendor">Street Vendor</option>
+                                                        <option value="Textiles, Handlooms">Textiles, Handlooms
+                                                        </option>
+                                                        <option value="Tourism/ Hospitality">Tourism/ Hospitality
+                                                        </option>
+                                                        <option value="Welding">Welding</option>
+                                                        <option value="Other">Other</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="col-4">
+                                            <label for="Phone">Working
+                                                experience: <span class="star">*</span></label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="workExperience"
+                                                    ng-model="workExperience"
+                                                    placeholder="Enter total work experience "
+                                                    onkeypress='numberValidate(event)' allow-numbers-only required >
+                                                <span style="color:red"
+                                                    ng-show="valid4.workExperience.$dirty && valid4.workExperience.$valid">
+                                                    <span ng-show="valid4.workExperience.$error.required">Total Work
+                                                        Experience
+                                                        Required .</span>
+                                                </span>
+                                            </div>
+                                            <br>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Avg income
+                                                    per month<span class="star">*</span>
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="avgIncome"
+                                                        ng-model="avgIncome"
+                                                        placeholder="Enter average income per month" maxlength="7"
+                                                        minlength="1" onkeypress='numberValidate(event)'
+                                                        allow-numbers-only required >
+                                                    <span style="color:red"
+                                                        ng-show="valid4.avgIncome.$dirty && valid4.avgIncome.$valid">
+                                                        <span ng-show="valid4.avgIncome.$error.required">Average
+                                                            Income
+                                                            per Month is
+                                                            Required .</span>
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Interested for dev
+                                                    of which skill  <span class="star">*</span> :</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="intrestSkill"
+                                                        ng-model="intrestSkill" required >
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Agriculture">Agriculture</option>
+                                                        <option value="Animal Husbandry & Diary">
+                                                            Animal Husbandry & Diary</option>
+                                                        <option value="Apparel/Fashion/Home Furnishing">
+                                                            Apparel/Fashion/Home Furnishing</option>
+                                                        <option value="Automobile Repair">
+                                                            Automobile Repair</option>
+                                                        <option value="Banking/Insurance/Financial Services">
+                                                            Banking/Insurance/Financial Services</option>
+                                                        <option value="Beauty/Wellness">Beauty/Wellness</option>
+                                                        <option value="Brick Making">
+                                                            Brick Making</option>
+                                                        <option value="Carpenter">Carpenter</option>
+                                                        <option value="Construction, Mason">
+                                                            Construction, Mason</option>
+                                                        <option value="Domestic Work /Maid">Domestic Work /Maid
+                                                        </option>
+                                                        <option value="Driving">Driving</option>
+                                                        <option value="Electrical Repairing">Electrical Repairing
+                                                        </option>
+                                                        <option value="Electronics/H/W">Electronics/H/W</option>
+                                                        <option value="Fishery">Fishery</option>
+                                                        <option value="Food Processing">Food Processing</option>
+                                                        <option value="Gems & Jewellery">Gems & Jewellery</option>
+                                                        <option value="Handicrafts">Handicrafts</option>
+                                                        <option value="Health Care">Health Care</option>
+                                                        <option value="Horticulture">Horticulture</option>
+                                                        <option value="Hotel Management / Cooking">Hotel Management
+                                                            / Cooking</option>
+                                                        <option value="IT (S/W), Call Centre">IT (S/W), Call Centre
+                                                        </option>
+                                                        <option value="Leather">Leather</option>
+                                                        <option value="Logistics">Logistics</option>
+                                                        <option value="Media & Entertainment">Media & Entertainment
+                                                        </option>
+                                                        <option value="Mining">Mining</option>
+                                                        <option value="Paints & Coatings">Paints & Coatings</option>
+                                                        <option value="Plumbing">Plumbing</option>
+                                                        <option value="Private Coaching/ Tuition">Private Coaching/
+                                                            Tuition</option>
+                                                        <option value="Retail">Retail</option>
+                                                        <option value="Security">Security</option>
+                                                        <option value="Small Business – Grocery / Saloon etc">Small
+                                                            Business – Grocery / Saloon etc</option>
+                                                        <option value="Street Vendor">Street Vendor</option>
+                                                        <option value="Textiles, Handlooms">Textiles, Handlooms
+                                                        </option>
+                                                        <option value="Tourism/ Hospitality">Tourism/ Hospitality
+                                                        </option>
+                                                        <option value="Welding">Welding</option>
+                                                        <option value="Other">Other</option>
+
+                                                    </select>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row" >
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Brief description of the job
+                                                    :</label>
+                                                <div class="col-md-12">
+                                                    <textarea class="form-control" cols="40" rows="3" name="description"
+                                                        ng-model="description" placeholder="Description of the job"
+                                                        ></textarea>
+                                                   
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="form-group">
+                                                <label>Remark:</label>
+                                                <div class="col-md-12">
+                                                    <textarea class="form-control" cols="40" rows="3" name="remarks"
+                                                        ng-model="remarks" placeholder="Remark" ></textarea>
+                                                </div>
+                                                    
+                                                   
+                                            </div>
+                                        </div>
+                                        <div class="col-4">
+                                            <br>
+                                            <button class="btn btn-success" ng-click="addRow()"
+                                                style="margin-top: 50px; margin-left: 10px;" ng-disabled="valid4.$invalid"> Add </button>
+                                        </div>
+                                        <br>
+                                    </div>
+                                  
+
+                                    <table style="width: 100%; text-align: center;" ng-show="movieArray.length != 0">
+                                        <tr>
+                                            <th>Sl.</th>
+                                            <th>Level of skill</th>
+                                            <th>Sector employed</th>
+                                            <th>Working experience</th>
+                                            <th>Avg income per month</th>
+                                            <th>Interested for dev of which skill</th>
+                                            <th>Brief description of the job</th>
+                                            <th>Remark</th>
+                                            <th>Remove</th>
+                                        </tr>
+
+                                        <tr ng-repeat="movies in movieArray">
+                                            <td><label>{{$index + 1}}</label></td>
+                                            <td><label>{{movies.skill}}</label></td>
+                                            <td><label>{{movies.sectoremployed}}</label></td>
+                                            <td><label>{{movies.workexperience || '--'}}</label></td>
+                                            <td><label>{{movies.avgincome || '--'}}</label></td>
+                                            <td><label>{{movies.intrestskill || '--'}}</label></td>
+                                            <td><label>{{movies.description || '--'}}</label></td>
+                                            <td><label>{{movies.remarks || '--'}}</label></td>
+                                            <td ng-click="removeRow($index);"> <a class="delete" title="Delete" data-toggle="tooltip"><i class="fa fa-trash" style="color: red;"></i></a></td>
+                                        </tr>
+                                    </table>
+                                   
+                                </div>
+                            </form>
+                            <form name="valid5" id="valid5">
+                                <div class="card-body">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="form-group">
+                                            <label>Remark by the surveyor of samithi / Bhajan mandali<span
+                                                    class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <textarea class="form-control" cols="140" rows="3"
+                                                    name="remarksByTheSurveyer" ng-model="remarksByTheSurveyer"
+                                                    placeholder="Remark by the Surveyor of Samithi"
+                                                    required></textarea>
+                                                <span style="color:red"
+                                                    ng-show="valid5.remarksByTheSurveyer.$dirty && valid5.remarksByTheSurveyer.$invalid">
+                                                    <span ng-show="valid5.remarksByTheSurveyer.$error.required">Remark by the surveyor of samithi / Bhajan mandali is Required .</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                </div>
+                            </form>
+                            <div class="row">
+                                <div class="col-md-6" style="text-align: left;">
+                                    <button class="btn btn-success " ng-click="previous3();"
+                                    style="text-align: right; margin-left: 12px;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                                </div>
+                              
+                                    <!-- ng-disabled="valid1.$invalid" -->
+                               
+                                <div class="col-md-6" style="text-align: right;"  ng-show="migrate_id == '' ">
+                                    <button type="button" class="btn btn-success" style="text-align: right; margin-right: 12px;" ng-click="next4();" ng-disabled="valid5.$invalid || movieArray.length == 0">
+                                        Submit</button>
+                                    <!-- ng-disabled="valid1.$invalid" -->
+                                </div>
+                                <div class="col-md-6" style="text-align: right;" ng-hide="migrate_id == '' ">
+                                    <button type="button" class="btn btn-success"style="text-align: right; margin-right: 12px;" ng-click="update();" ng-disabled="valid5.$invalid || movieArray.length == 0" >
+                                        Update</button>
+                                    <!-- ng-disabled="valid1.$invalid" -->
+                                </div>
+                            </div>
+
+
+                    </div>
+
+
+                   
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="container-fluid" ng-show="showAck">
+            <div class="container-fluid">
+                <div class="panel panel-success">
+                    <form name="bloodCamp">
+
+                        <div class="card card-primary" id="applicantDetails">
+                            <style type="text/css" media="print">
+                                @media print {
+                                    @page {
+                                        size: A4 portrait;
+                                        max-height: 100%;
+                                        max-width: 100%;
+                                        zoom: 0.1%;
+                                        margin: 0;
+                                        size: auto;
+                                    }
+                        
+                                    body {
+                                        width: 100%;
+                                        height: 100%;
+                                        transform: scale(0.9);
+                                    }
+                                }
+                            </style>
+                            <style>
+                                #rcorners2 {
+                                    border-radius: 25px;
+                                    border: 2px solid rgb(78, 88, 59);
+                                    padding: 20px;
+                                    width: 70px;
+                                    /* height: 51px; */
+                                    margin-left: 20%;
+                                }
+                            </style>
+                            <style>
+                                .table-responsive {
+                                    height: 600px;
+                                }
+                        
+                                .panel {
+                                    margin-bottom: 20px;
+                                    border-radius: 7px;
+                                }
+                            </style>
+                         <script type="text/javascript" src="/js/angular.min.js"></script>
+                         <link rel="stylesheet" href="/AdminLTE/adminlte.min.css">
+                            <div class="card-header">
+                               
+                                    <h4>Verifying details</h4>
+                              
+                            </div>
+
+                            <div class="panel-body" style="width: 100%;">
+                                <div class="col-md-12" style="height: auto; ">
+                                    <div class="card-header ">
+                                        <h5 style="margin-bottom: -10px;">Personal details</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row Container">
+
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Name :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{migrantName}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Father/Guardian name :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{fatherName}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Gender :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{gender}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Date of birth :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{dob | date:'dd-MM-yyyy'}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Marital status :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{material}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Category :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{category}}</h6>
+                                                    </div>
+                                                </div>
+                                                
+                                               
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Mobile number :
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{mobNo}}</h6>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Total family members :
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{fMember}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row " ng-show="district_id == ''">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        District :
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{districtName.name}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row " ng-hide="district_id == ''">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        District :
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{user_id}}</h6>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Block :
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{blockName.block_name}}</h6>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        GP/Ward name :
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{panchayatname.panchayat_name}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Village :
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{villageName.villagename}}</h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-md-12" style="height: auto; ">
+                                    <div class="card-header ">
+                                        <h5 style="margin-bottom: -10px;">Present income status and
+                                            qualification details</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row Container ">
+
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Farmer id :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" >
+                                                        <h6>{{farmerId}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Voter-id :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{voterId}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Bank account :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{acNumber}}</h6>
+                                                    </div>
+                                                </div>
+                                                
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Aadhaar number :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{aadharNumber}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Qualification :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{qualification}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                        Are you Migrants? :
+                                                    </div>
+                                                    <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                        <h6>{{migrant}}</h6>
+                                                    </div>
+                                                </div>
+                                               
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Skill development certification:
+                                                    </div>
+                                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                                        <h6>{{skillDevelopmentCertification}}</h6>
+                                                    </div>
+                                                </div>
+                                                 <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Total land area :
+                                                    </div>
+                                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                                        <h6>{{landArea}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Monthly income :
+                                                    </div>
+                                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                                        <h6>{{monthlyIncome}}</h6>
+                                                    </div>
+                                                </div>
+                                               
+
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Present source of income :
+                                                    </div>
+                                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{salary}}</h6>
+                                                    </div>
+                                                </div>
+                                              
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Animals present in the family :
+                                                    </div>
+                                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{animals}}</h6>
+                                                    </div>
+                                                </div><br>
+                                            </div>
+                                            <table class="table table-bordered" ng-show="animals == 'Yes'">
+                                                <br>
+                                                <thead>
+                                                    <tr>
+                                                        <th>Sl.</th>
+                                                        <th>Animals name</th>
+                                                        <th>No. Of animals</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr>
+                                                        <td>1</td>
+                                                        <td>Cow + Bullocks </td>
+                                                        <td><h6>{{noOfCows}}</h6></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>2</td>
+                                                        <td>Goat </td>
+                                                        <td><h6>{{noOfGoat}}</h6></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>3</td>
+                                                        <td>Sheep </td>
+                                                        <td><h6>{{noOfSheep}}</h6></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>4</td>
+                                                        <td>Others </td>
+                                                        <td><h6>{{noOfOtherAnimal}}</h6></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="panel-body" ng-show="migrant == 'Yes'">
+                                <div class="col-md-12" style="height: auto; ">
+                                    <div class="card-header ">
+                                        <h5 style="margin-bottom: -10px;">Migration details </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row Container">
+
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Coming from :
+                                                    </div>
+                                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6"style="margin-left: -30px;">
+                                                        <h6>{{returningStateName.statename}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        How do you plan for earning?
+                                                    </div>
+                                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-left: -30px;">
+                                                        <h6>{{planAfterLockDown}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        work under MGNREGA :
+                                                    </div>
+                                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-left: -30px;">
+                                                        <h6>{{underMGNREGA}}</h6>
+                                                    </div>
+                                                </div>
+
+
+
+
+                                            </div>
+                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        Go back to previous work place?
+                                                    </div>
+                                                    <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{stayBackAfterLockDown}}</h6>
+                                                    </div>
+                                                </div>
+                                                <div class="row ">
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                        What is your expected income?
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <h6>{{expectedSalary}}</h6>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <div class="panel-body">
+                                <div class="col-md-12" style="height: auto; ">
+                                    <div class="card-header ">
+                                        <h5 style="margin-bottom: -10px;">Skill and employment details </h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="row Container">
+                                            <div class="card-body" style="padding: 0;">
+                                                <div class="table-responsive" style="height: auto">
+                                                   
+                                                    <table class="table table-bordered" style="width: 100%;">
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sl.</th>
+                                                                <th>Sector employed</th>
+                                                                <th>Skill</th>
+                                                                <th>Working experience</th>
+                                                                <th>Avg income per month</th>
+                                                                <th>Interested of which skill</th>
+                                                                <th>Brief description of the job</th>
+                                                                <th>Remark</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="movies in movieArray" >
+                                                                
+                                                                <div style="text-align: center;">
+                                                                    <td><label>{{$index + 1}}</label></td>
+                                                                    <td><label>{{movies.sectoremployed}}</label></td>
+                                                                    <td><label>{{movies.skill}}</label></td>
+                                                                    <td><label>{{movies.workexperience}}</label></td>
+                                                                    <td><label>{{movies.avgincome}}</label></td>
+                                                                    <td><label>{{movies.intrestskill}}</label></td>
+                                                                    <td><label>{{movies.description}}</label></td>
+                                                                    <td><label>{{movies.remarks}}</label></td>
+                                                                </div>
+
+                                                              
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+
+                                          
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="text-align: left;">
+                        <button class="btn btn-success" ng-click="previous4();"
+                            style="text-align: right;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                    </div>
+                    <div class="col-md-6" style="text-align: right;">
+                        <button class="btn btn-success" onclick="this.disabled= true" ng-click="Submit();"
+                            style="text-align: right;"><i  aria-hidden="true"></i>Proceed</button>
+                    </div>
+
+
+                </div>
+                <br>
+
+
+            </div>
+        </div>
+        
+    </div>
+    </div>
+
+    </section>
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+
+        <div class="float-right d-none d-sm-inline-block">
+            <b>Version</b> 1.0.0-pre
+        </div>
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Control sidebar content goes here -->
+    </aside>
+    <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- Controller -->
+    <script>
+        function nameNumber(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            // var regex = /[0-9]|\./;
+            var regex = /^[A-Za-z0-9 ]+$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+
+        function nameFilter(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            // var regex = /[0-9]|\./;
+            var regex = /^[A-Za-z ]+$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#userPhoto").change(function () {
+            readURL(this);
+        });
+        function pincode(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            // var regex = /^[A-Za-z0-9 ]+$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        function numberValidate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        var migrate_id = "<%= migrate_id %>";
+    </script>
+    <script src="/controller/admin/migrantSurvey.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/AdminLTE/adminlte.js"></script>
+    <script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

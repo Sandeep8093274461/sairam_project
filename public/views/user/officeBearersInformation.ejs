@@ -1,0 +1,520 @@
+<%- include('common/header.ejs') -%>
+<div class="content-wrapper">
+
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css" />
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-1">
+                <div class="col-7">
+                    <h3 class="m-1 text-dark" style="width:100%;"><img src="/img/icon/logo.jpg"
+                            style="width:60px;height:60px;" alt=""> Office Bearers Information</h3>
+                </div><!-- /.col -->
+                <div class="col-5" style="width:100%;">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Office Bearers</li>
+                        <li class="breadcrumb-item active">Entry</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+
+
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="panel panel-default">
+
+                    <div class="card card-primary">
+                        <div class="card-header">
+                            <h3 class="card-title">Enter Office Bearers Information details </h3>
+                        </div>
+                        <form name="valid1" id="valid1">
+                            <div class="card-body">
+                                <div class="row">
+
+
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Level <span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" name="level" ng-model="level"
+                                                    ng-change="loadDesignationList();loadDistricts();" required>
+                                                    <option value="" selected disabled>--Level--</option>
+                                                    <option ng-repeat="option in levelList" value="{{option.lavel_id}}">
+                                                        {{option.lavel_name}}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <!-- ng-model="$parent.distict" -->
+                                    <div class="col-4" ng-if="level != undefined && level != '01' ">
+                                        <div class="form-group">
+                                            <label>District<span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" ng-model="$parent.district"
+                                                    ng-change="loadSamithiList()" name="district" required>
+                                                    <option value="" disabled>--District--</option>
+                                                    <option ng-repeat="option in districtList"
+                                                        value="{{option.district_id}}">{{option.name}}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4"
+                                        ng-if="(level != undefined && level == '03')||(level != undefined && level == '04' )">
+                                        <label for="Phone">Samiti <span class="star">*</span>:</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" name="samiti" ng-model="$parent.samiti"
+                                                ng-change="bhajanMandaliList()" required>
+                                                <option value="" disabled>--Samiti--</option>
+                                                <option ng-repeat="option in samithiList" value="{{option.samithi_id}}">
+                                                    {{option.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="col-4" ng-if=" level != undefined && level == '04' ">
+                                        <label>Bhajan Mandali :</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" name="bhajanMandali"
+                                                ng-model="$parent.bhajanMandali">
+                                                <option value="" disabled>--Bhajan Mandali--</option>
+                                                <option ng-repeat="option in bhajanMandaliListshow"
+                                                    value="{{option.bhajanmandali_id}}">{{option.bhajanmandali_name}}
+                                                </option>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-4">
+                                        <label for="Phone">Designation <span class="star">*</span>:</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" name="designation" ng-model="designation"
+                                                required>
+                                                <option value="" disabled>--Designation--</option>
+                                                <option ng-repeat="option in designationList"
+                                                    value="{{option.designation_id}}">{{option.designation_name}}
+                                                </option>
+                                            </select>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Name<span class="star">*</span>
+                                                :</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="nameOfBearers"
+                                                    ng-model="nameOfBearers" placeholder="Enter Name" required>
+                                                <span style="color:red"
+                                                    ng-show="valid1.nameOfBearers.$dirty && valid1.nameOfBearers.$invalid">
+                                                    <span ng-show="valid1.nameOfBearers.$error.required">Name is
+                                                        Required .</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Age<span class="star">*</span>
+                                                :</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="age" ng-model="age"
+                                                    placeholder="Enter Age" maxlength="3" minlength="1"
+                                                    onkeypress='numberValidate(event)' allow-numbers-only required>
+                                                <span style="color:red"
+                                                    ng-show="valid1.age.$dirty && valid1.age.$invalid">
+                                                    <span ng-show="valid1.age.$error.required">Age is required .</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="Phone">Qualification <span class="star">*</span>:</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" ng-model="qualification" name="qualification"
+                                                required>
+                                                <option value="" disabled selected>--select--</option>
+                                                <option value="ClassI"> Class I</option>
+                                                <option value="ClassII"> Class II</option>
+                                                <option value="ClassIII"> Class III</option>
+                                                <option value="ClassIV"> Class IV</option>
+                                                <option value="ClassV"> Class V</option>
+                                                <option value="ClassVI"> Class VI</option>
+                                                <option value="ClassVII"> Class VII</option>
+                                                <option value="ClassVIII"> Class VIII</option>
+                                                <option value="ClassIX"> Class IX</option>
+                                                <option value="ClassX"> Class X</option>
+                                                <option value="ClassXI"> Class XI</option>
+                                                <option value="ClassXII"> Class XII</option>
+                                                <option value="BachelorsDegree"> Bachelors Degree</option>
+                                                <option value="MastersDegree"> Masters Degree</option>
+                                                <option value="Other"> Other</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <label for="Phone">Profession<span class="star">*</span>:</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" ng-model="profession" name="profession"
+                                                required>
+                                                <option value="" disabled selected>--select--</option>
+                                                <option value="Entrepreneur"> Entrepreneur</option>
+                                                <option value="Administrator"> Administrator</option>
+                                                <option value="Agriculture"> Agriculture</option>
+                                                <option value="Banker"> Banker</option>
+                                                <option value="Councillor"> Councillor</option>
+                                                <option value="Industry"> Industry</option>
+                                                <option value="MLA"> MLA</option>
+                                                <option value="Sarpanch"> Sarpanch</option>
+                                                <option value="Veterinary"> Veterinary</option>
+                                                <option value="Officer bearer">Officer bearer</option>
+                                                <option value="Others">Others</option>
+                                            </select>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Mobile number <span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="mobNo" ng-model="mobNo"
+                                                    placeholder="Enter contact number" maxlength="10" minlength="10"
+                                                    ng-pattern="/^[1-9][0-9]{9}$/" allow-numbers-only
+                                                    onkeypress='numberValidate(event)' required>
+                                                <span style="color:red"
+                                                    ng-show="valid1.mobNo.$dirty && valid1.mobNo.$invalid">
+                                                    <span ng-show="valid1.mobNo.$error.required">Mobile No is
+                                                        Required .</span>
+                                                </span>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Whatsapp number :</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="wpNo" ng-model="wpNo"
+                                                    placeholder="Enter Whatsapp number" maxlength="10" minlength="10"
+                                                    ng-pattern="/^[1-9][0-9]{9}$/" allow-numbers-only
+                                                    onkeypress='numberValidate(event)'>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Email<span class="star">*</span>
+                                                :</label>
+                                            <div class="col-md-12">
+                                                <input type="email" class="form-control" name="email" ng-model="email"
+                                                    placeholder="Enter Email" required>
+                                                <span style="color:red"
+                                                    ng-show="valid1.email.$dirty && valid1.email.$invalid">
+                                                    <span ng-show="valid1.email.$error.required">Mail is
+                                                        Required.</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Sai One ID :</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="saiId" ng-model="saiId"
+                                                    placeholder="Enter Sai One ID">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Year of joining organisation<span class="star">*</span>
+                                                :</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="yearOfJoining"
+                                                    ng-model="yearOfJoining" placeholder="Enter Year of joining"
+                                                    maxlength="7" minlength="1" onkeypress='numberValidate(event)'
+                                                    allow-numbers-only required>
+                                                <span style="color:red"
+                                                    ng-show="valid1.yearOfJoining.$dirty && valid1.yearOfJoining.$invalid">
+                                                    <span ng-show="valid1.yearOfJoining.$error.required"> Year of
+                                                        joining is required .</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label style="margin-left: -5px;">How many year you have been in this
+                                                post<span class="star">*</span>:</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="howManyYearOfJoin"
+                                                    ng-model="howManyYearOfJoin"
+                                                    placeholder="How many year you join in this post" maxlength="7"
+                                                    minlength="1" onkeypress='numberValidate(event)' allow-numbers-only
+                                                    required>
+                                                <span style="color:red"
+                                                    ng-show="valid1.howManyYearOfJoin.$dirty && valid1.howManyYearOfJoin.$invalid">
+                                                    <span ng-show="valid1.howManyYearOfJoin.$error.required">Number of
+                                                        Participants is required .</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Previous responsibility
+                                                :</label>
+                                            <div class="col-md-12">
+                                                <input type="text" class="form-control" name="responsibility"
+                                                    ng-model="responsibility"
+                                                    placeholder="Enter Previous responsibility">
+                                                <span style="color:red"
+                                                    ng-show="valid1.responsibility.$dirty && valid1.responsibility.$invalid">
+                                                    <span ng-show="valid1.responsibility.$error.required">Previous
+                                                        responsibility is
+                                                        Required .</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <label>Are you Bv Alumni <span class="star">*</span>:</label>
+                                        <div class="col-md-12">
+                                            <select class="form-control" ng-model="alumni" name="alumni" required>
+                                                <option value="" disabled selected>--select--</option>
+                                                <option value="Yes">Yes</option>
+                                                <option value="No">No</option>
+                                            </select>
+                                        </div>
+
+
+                                    </div>
+                                    <div class="col-4">
+                                        <label>When can u join Prasanthi Seva<span class="star">*</span>:</label>
+
+                                        <div class="col-12">
+                                            <div class="input-group">
+                                                <select class="form-control " ng-model="joinPrasanthiSeva"
+                                                    name="joinPrasanthiSeva">
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="February">February</option>
+                                                    <option value="March">March</option>
+                                                    <option value="May">May</option>
+                                                    <option value="August">August</option>
+                                                </select>
+                                                <div class="input-group-prepend">
+                                                    <!-- <i class="fas fa-plus" aria-hidden="true" ng-click="addRow()" ng-disabled="!joinPrasanthiSeva"></i> -->
+                                                    <button class="btn btn-success" ng-click="addRow()"
+                                                        ng-disabled="!joinPrasanthiSeva"> <i class="fas fa-plus"
+                                                            aria-hidden="true" ng-disabled="!joinPrasanthiSeva"></i>
+                                                    </button>
+
+                                                </div>
+                                            </div>
+
+                                        </div>
+
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <label>Passport photo
+                                                <span class="star">*</span> :</label>
+                                            <div class="col-md-12">
+                                                <input type="file" class="form-control" name="passportPhoto"
+                                                    id="passportPhoto" ng-model="passportPhoto" accept="image/*"
+                                                    onchange="angular.element(this).scope().photoCheck()" />
+                                                    <label for="" style="font-size: 10px;color:red">&nbsp;&nbsp; **File size should be less than 1MB</label><br>
+                                                <span style="color:red" ng-show="showPassportPhotoError">
+                                                    <span style="color: red;">{{PassportphotoFileGood}}</span>
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <br>
+                                        <table style="width: 100%; text-align: center;"
+                                            ng-show="movieArray.length != 0">
+                                            <tr>
+                                                <th>Sl.</th>
+                                                <th>join Prasanthi Seva</th>
+                                                <th>Remove</th>
+                                            </tr>
+
+                                            <tr ng-repeat="movies in movieArray">
+                                                <td><label>{{$index + 1}}</label></td>
+                                                <td><label>{{movies.joinprasanthiseva}}</label></td>
+                                                <td ng-click="removeRow($index);"> <a class="delete" title="Delete"
+                                                        data-toggle="tooltip"><i class="fa fa-trash"
+                                                            style="color: red;"></i></a></td>
+                                            </tr>
+                                        </table><br>
+                                    </div>
+                                </div>
+
+
+
+                                <div class="row">
+                                    <div class="col-md-6" style="text-align: left;">
+
+                                    </div>
+
+                                    <div class="col-md-6" style="text-align: right; "
+                                        ng-show="officebearersinformationid == '' ">
+                                        <button type="button" class="btn btn-success" ng-click="Submit();"onclick="this.disabled= true"
+                                            ng-disabled="valid1.$invalid || movieArray.length == 0">
+                                            &nbsp;Submit</button>
+                                        <!-- ng-disabled="valid1.$invalid" -->
+                                    </div>
+                                    <div class="col-md-6" style="text-align: right;"
+                                        ng-hide="officebearersinformationid == '' ">
+                                        <button type="button" class="btn btn-success" ng-click="update(); "
+                                            ng-disabled="valid1.$invalid || movieArray.length == 0">
+                                            &nbsp;Update</button>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+        </div>
+</div>
+
+</section>
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0-pre
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- Controller -->
+<script>
+    function nameNumber(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        // var regex = /[0-9]|\./;
+        var regex = /^[A-Za-z0-9 ]+$/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+
+    function nameFilter(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        // var regex = /[0-9]|\./;
+        var regex = /^[A-Za-z ]+$/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#blah').attr('src', e.target.result);
+            }
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    $("#userPhoto").change(function () {
+        readURL(this);
+    });
+    function pincode(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        // var regex = /^[A-Za-z0-9 ]+$/;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+    function numberValidate(evt) {
+        var theEvent = evt || window.event;
+
+        // Handle paste
+        if (theEvent.type === 'paste') {
+            key = event.clipboardData.getData('text/plain');
+        } else {
+            // Handle key press
+            var key = theEvent.keyCode || theEvent.which;
+            key = String.fromCharCode(key);
+        }
+        var regex = /[0-9]|\./;
+        if (!regex.test(key)) {
+            theEvent.returnValue = false;
+            if (theEvent.preventDefault) theEvent.preventDefault();
+        }
+    }
+    var officebearersinformationid = "<%= officebearersinformationid %>";
+
+</script>
+<script src="/controller/user/officeBearersInformation.js"></script>
+<!-- AdminLTE App -->
+<script src="/AdminLTE/adminlte.js"></script>
+<script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,812 @@
+<%- include('common/header.ejs') -%>
+<!-- Content Wrapper. Contains page content -->
+<div class="content-wrapper">
+    <style>
+        .table-responsive {
+            height: 600px;
+        }
+        .heading{
+            display: none;
+           
+        }
+        .panel {
+            border: solid 1px #1579f6;
+            margin-bottom: 20px;
+            border-radius: 7px;
+        }
+    </style>
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-1">
+                <div class="col-7">
+                    
+                    <h3 class="m-1 text-dark" style="width:100%;"><img src="/img/icon/logo.jpg"
+                            style="width:60px;height:60px;" alt=""> Sai Swabalambi Beneficiaries Report</h3>
+                </div><!-- /.col -->
+                <div class="col-5">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Sai Swabalambi Program</a></li>
+                        <li class="breadcrumb-item active">Beneficiaries Report</li>
+                        <li class="breadcrumb-item active">All list</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+
+    <section class="content">
+        <div class="container-fluid" ng-show="showSearchList">
+            <div class="container-fluid">
+                <div class="panel panel-success">
+                    <form name="bloodCamp">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Search data</h3>
+                            </div>
+                        </div>
+                        <div class="card-body">
+
+                            <form name="myForm1">
+                                <div class="row">
+                                    <!-- <div class="col-4" ng-show="user_id == 'ADMIN'">
+                                        <div class="form-group">
+                                            <label>District :</label>
+                                            <div class="col-md-12">
+                                                <select class="form-control" name="fromDistrictFilter"
+                                                    ng-model="fromDistrictFilter" ng-change="loadSamithiList()">
+                                                    <option value="">--District--</option>
+                                                    <option ng-repeat="option in districtList"
+                                                        value="{{option.district_id}}">{{option.name}}</option>
+                                                </select>
+
+                                            </div>
+                                        </div>
+                                    </div> -->
+
+                                    <div class="col-1" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>District<span class="star">*</span>:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <select ng-model="dist" class="form-control" ng-required="true" required>
+                                                <option value="">--Select District--</option>
+                                                <option ng-repeat="option in districtList"
+                                                    value="{{option.district_id}}">{{option.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-1" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>From<span class="star">*</span>:</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <input type="date" ng-model="fromDate" max="{{toDate | date: 'y-MM-dd' }}"
+                                                class="form-control" ng-required="true" required>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-1" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>To<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+                                            <input type="date" ng-model="toDate" min="{{fromDate | date: 'y-MM-dd' }}"
+                                                class="form-control" ng-required="true" required>
+                                        </div>
+                                    </div>
+
+                                </div>
+                                <div style="text-align: right;">
+                                    <button class="btn btn-primary" ng-disabled="false" ng-click="getFilteredData();"><i
+                                            class="fas fa-search" aria-hidden="true"></i> Search</button>
+                                          
+                                </div>
+                                <br>
+                            </form>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" ng-show="showAllList">
+
+            <div class="container-fluid">
+                <div>
+                    <form name="bloodCamp">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title"> Sai Swabalambi Beneficiaries Report</h3>
+                            </div>
+                            <div ng-show="alldata.length == 0" style="text-align: center; padding-bottom: 30px;">
+                                <br>
+                                <label for="" style="color: red;"><b>No record found</b></label>
+                            </div>
+                            <div class="card-body" style="padding: 0;" ng-show="alldata.length != 0">
+                                <div class="table-responsive" style="height: auto">
+                                    <table class="table table-head-fixed" >
+
+                                        <thead>
+                                            <tr ng-hide="results.length == 0">
+                                                <th>Sl</th>
+                                                <th>Date of Report</th>
+                                                <th>Name of beneficiary</th>
+                                                <th>District</th>
+                                                <th>Samiti</th>
+                                                <th>Area</th>
+                                                <th>View</th>
+                                                <th>Edit</th>
+                                                <th>Delete</th>
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                ng-repeat="data in results =  (alldata | orderBy:['dist_name' ,'-samithi_name']) ">
+                                                <div ng-show="results.length == 0" style="text-align: center;">
+                                                    <br>
+                                                    <label for="" style="color: red;"><b>No record found</b></label>
+                                                </div>
+                                                <div ng-show="results.length != 0" style="text-align: center;">
+                                                    <td> {{ $index+1 }}</td>
+                                                    <td> {{ data.dor| date:'dd-MM-yyyy' }}</td>
+                                                    <td> {{ data.nameofbeneficiary}}</td>
+                                                    <td> {{ data.dist_name }}</td>
+                                                    <td> {{ data.samithi_name}}</td>
+                                                    <td> {{ data.area }}</td>
+                                                    
+                                                    <td>
+                                                        <button class="btn btn-outline-success"
+                                                            ng-click="view(data.beneficiariesreportid);">
+                                                            <i class="fa fa-eye" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-primary"
+                                                            ng-click="edit(data.beneficiariesreportid);">
+                                                            <i class="fas fa-edit" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+                                                    <td>
+                                                        <button class="btn btn-outline-danger" data-toggle="modal"
+                                                            data-target="#exampleModal" ng-click="deleted(data);">
+                                                            <i class="fas fa-trash" aria-hidden="true"></i>
+                                                        </button>
+                                                    </td>
+
+                                                </div>
+
+
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                                <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+                                    aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog" role="document">
+                                        <div class="modal-content">
+                                            <div class="modal-header" style="background-color: rgb(252, 61, 61);">
+                                                <h5 class="modal-title" id="exampleModalLabel">
+                                                    Conformation</h5>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <div class="modal-body">
+                                                Are you sure you want to remove ?
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary"
+                                                    data-dismiss="modal">No</button>
+                                                <button type="button" class="btn btn-danger" data-dismiss="modal"
+                                                    ng-click="oneDataDeleted(allDetails.beneficiariesreportid);">Yes</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+                        </div>
+                        <div style="text-align: right;margin: 10px;">
+                            <button type="button" class="btn btn-primary" ng-click="getFilteredData1()"> View all</button>
+                            <button type="button" class="btn btn-primary"  ng-click="exportToExcel('#allListTable')" ng-show="results.length != 0"> <i class="fas fa-download" aria-hidden="true"></i> Download</button>
+
+                        </div>
+                    </form>
+                    <br>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" ng-show="showAllData">
+            <div class="container-fluid">
+                <div>
+                    <form name="bloodCamp">
+                        <div class="card card-primary" id="applicantDetails" ng-show="alldata1.length != 0">
+
+                            <style type="text/css" media="print">
+                                @media print {
+                                    @page {
+                                        size: A4 portrait;
+                                        max-height: 100%;
+                                        max-width: 100%;
+                                        zoom: 0.1%;
+                                        margin: 0;
+                                        size: auto;
+                                    }
+
+                                    body {
+                                        width: 100%;
+                                        height: 100%;
+                                        transform: scale(0.9);
+                                    }
+                                }
+                            </style>
+                            <style>
+                                #rcorners2 {
+                                    border-radius: 25px;
+                                    border: 2px solid rgb(78, 88, 59);
+                                    padding: 20px;
+                                    width: 70px;
+                                    /* height: 51px; */
+                                    margin-left: 20%;
+                                }
+                            </style>
+                            <style>
+                                .table-responsive {
+                                    height: 600px;
+                                }
+
+                                .panel {
+                                    margin-bottom: 20px;
+                                    border-radius: 7px;
+                                }
+                            </style>
+                            <script type="text/javascript" src="/js/angular.min.js"></script>
+                            <link rel="stylesheet" href="/AdminLTE/adminlte.min.css">
+                            <div class="card-header">
+                                <h4>Beneficiaries report details</h4>
+                            </div>
+
+                            <div class="card-body" style="padding: 0;">
+                                <div style="height: auto;padding-bottom: 25px; width: auto; "><br>
+
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                            <div class="row">
+                                                <div class=" col-md-3 col-xs-3">
+                                                    &nbsp; Name of beneficiary:
+                                                </div>
+                                                <div class="col-md-8 col-xs-8">
+                                                    <h6>{{alldata1.nameofbeneficiary}}</h6>
+                                                </div>
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Date of Report:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{alldata1.dor| date:'dd-MM-yyyy'}}
+                                                    </h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-4">
+                                                    Initiative taken under which sector:
+                                                </div>
+                                                <div class="col-md-2 col-xs-4">
+                                                    <h6>{{alldata1.sector}}</h6>
+                                                </div>
+
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; District:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{alldata1.dist_name}}</h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-5">
+                                                    Approx expenditure incurred by organisation:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{alldata1.approxexpenditureorganisation}}</h6>
+                                                </div>
+
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Samiti:
+                                                </div>
+                                                <div class="col-md-2 col-xs-3">
+                                                    <h6>{{alldata1.samithi_name}}</h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-5">
+                                                    Approx expenditure incurred by beneficiary:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{alldata1.approxexpenditurebeneficiary}}</h6>
+                                                </div>
+
+
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Area :
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{alldata1.area}}</h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-5">
+                                                    Average Monthly income after Swabalambi:
+                                                </div>
+
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>
+                                                        {{alldata1.monthlyincomeafterswabalambi }}
+                                                    </h6>
+                                                </div>
+
+
+                                                <div class=" col-md-3 col-xs-3">
+                                                    &nbsp; Type of beneficiary :
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{alldata1.type}}</h6>
+                                                </div>
+
+
+
+
+                                                <div class="col-md-5 col-xs-5">
+                                                    If Bank Loan facilitated, then amount:
+                                                </div>
+
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{alldata1.bankloan}}</h6>
+                                                </div>
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Specific Scheme:
+                                                </div>
+
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>
+                                                        {{alldata1.specificscheme }}
+                                                    </h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-5">
+                                                    No. of Family members benefitted:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{alldata1.nooffamilybenifited}}</h6>
+                                                </div>
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Action taken details:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{alldata1.actiondetails}}</h6>
+                                                </div>
+                                                <div class="col-md-7 col-xs-7">
+
+                                                </div>
+
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp Remark:
+                                                </div>
+                                                <div class="col-md-8 col-xs-8">
+                                                    <h6>{{alldata1.remarks}}</h6>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                            <div class="row">
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <label for="">Photo1</label>
+                                                    <img style=" height: 150px;width: 150px; "
+                                                        ng-src="{{alldata1.photo1url}}" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <label for="">Photo2</label>
+                                                    <img style=" height: 150px;width: 150px; "
+                                                        ng-src="{{alldata1.photo2url}}" />
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+
+                                    <!-- <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                           
+                                        <img style="margin-left: 320px;margin-top: 50px; height: 140px;width: 140px; "
+                                            ng-src="{{alldata1.photo}}" />
+                                    </div> -->
+
+
+
+
+                                </div>
+                            </div>
+
+
+                        </div>
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="text-align: left; padding-bottom: 100px;">
+                        <button class="btn btn-success" ng-click="back(alldata1.register);" style="text-align: right;"><i
+                                class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                    </div>
+                    <div class="col-md-6" style="text-align: right;">
+                        <button class="btn btn-success" onclick="printElem()" style="text-align: right;"><i
+                                class="fa fa-print" aria-hidden="true"></i> Print</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" ng-show="showAllData1">
+            <div class="container-fluid">
+                <div id="applicantDetails1">
+
+                    <style type="text/css" media="print">
+                        @media print {
+                            @page {
+                                size: A4 portrait;
+                                max-height: 100%;
+                                max-width: 100%;
+                                zoom: 0.1%;
+                                margin: 0;
+                                size: auto; 
+                                
+                               
+                            }
+                            
+                            body {
+                                
+                                width: 100%;
+                                height: 100%;
+                                transform: scale(0.9);
+                                -webkit-print-color-adjust: exact;
+                               
+                                
+                            }
+                            h3{
+                                margin-top: 0px;
+                                display: visible;
+                            }
+                           
+                        }
+                    </style>
+                    <style>
+                        #rcorners2 {
+                            border-radius: 25px;
+                            border: 2px solid rgb(78, 88, 59);
+                            padding: 20px;
+                            width: 70px;
+                            /* height: 51px; */
+                            margin-left: 20%;
+                        }
+                    </style>
+                    <style>
+                        .table-responsive {
+                            height: 600px;
+                        }
+
+                        .panel {
+                            margin-bottom: 20px;
+                            border-radius: 7px;
+                        }
+                    </style>
+
+                    <form name="bloodCamp" >
+                        <div class="card-header">
+
+                            <h3 style="margin-left: -30px;" class="heading" ><img src="/img/icon/logo.jpg" style="width:60px;height:60px;"
+                                    alt=""> Sai Swabalambi Beneficiaries Report</h3>
+
+                        </div>
+                        <div class="card-header" style="background-color: #007bff;">
+                            <h4 style="color: white;">Beneficiaries Report details</h4>
+                        </div>
+                        <div class="card card-primary" ng-repeat="dataList in alldatalist"
+                            style="border: thin solid #69b1fd;height: 30%;margin-bottom: 450px;margin-top: auto; ">
+
+                            <script type="text/javascript" src="/js/angular.min.js"></script>
+                            <link rel="stylesheet" href="/AdminLTE/adminlte.min.css">
+                            <link rel="stylesheet" media="screen" href="">
+
+
+                            <div class="card-body" style="padding: 0; ">
+                                <div style="height: auto;padding-bottom: 25px; width: auto; "><br>
+                                    <div class="row">
+
+                                        <div class="col-lg-10 col-md-10 col-sm-10 col-xs-10">
+                                            <div class="row">
+                                                <div class=" col-md-3 col-xs-3">
+                                                    &nbsp; Name of beneficiary:
+                                                </div>
+                                                <div class="col-md-8 col-xs-8">
+                                                    <h6>{{dataList.nameofbeneficiary}}</h6>
+                                                </div>
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Date of Report:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{dataList.dor| date:'dd-MM-yyyy'}}
+                                                    </h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-4">
+                                                    Initiative taken under which sector:
+                                                </div>
+                                                <div class="col-md-2 col-xs-4">
+                                                    <h6>{{dataList.sector}}</h6>
+                                                </div>
+
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; District:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{dataList.dist_name}}</h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-5">
+                                                    Approx expenditure incurred by organisation:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{dataList.approxexpenditureorganisation}}</h6>
+                                                </div>
+
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Samiti:
+                                                </div>
+                                                <div class="col-md-2 col-xs-3">
+                                                    <h6>{{dataList.samithi_name}}</h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-5">
+                                                    Approx expenditure incurred by beneficiary:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{dataList.approxexpenditurebeneficiary}}</h6>
+                                                </div>
+
+
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Area :
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{dataList.area}}</h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-5">
+                                                    Average Monthly income after Swabalambi:
+                                                </div>
+
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>
+                                                        {{dataList.monthlyincomeafterswabalambi }}
+                                                    </h6>
+                                                </div>
+
+
+                                                <div class=" col-md-3 col-xs-3">
+                                                    &nbsp; Type of beneficiary :
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{dataList.type}}</h6>
+                                                </div>
+
+
+
+
+                                                <div class="col-md-5 col-xs-5">
+                                                    If Bank Loan facilitated, then amount:
+                                                </div>
+
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{dataList.bankloan}}</h6>
+                                                </div>
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Specific Scheme:
+                                                </div>
+
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>
+                                                        {{dataList.specificscheme }}
+                                                    </h6>
+                                                </div>
+                                                <div class="col-md-5 col-xs-5">
+                                                    No. of Family members benefitted:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{dataList.nooffamilybenifited}}</h6>
+                                                </div>
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp; Action taken details:
+                                                </div>
+                                                <div class="col-md-2 col-xs-2">
+                                                    <h6>{{dataList.actiondetails}}</h6>
+                                                </div>
+                                                <div class="col-md-7 col-xs-7">
+
+                                                </div>
+
+                                                <div class="col-md-3 col-xs-3">
+                                                    &nbsp Remark:
+                                                </div>
+                                                <div class="col-md-8 col-xs-8">
+                                                    <h6>{{dataList.remarks}}</h6>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-1 col-md-1 col-sm-1 col-xs-1">
+                                            <div class="row">
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <label for="">Photo1</label>
+                                                    <img style=" height: 150px;width: 150px; "
+                                                        ng-src="{{dataList.photo1url}}" />
+                                                </div>
+                                            </div>
+                                            <div class="row">
+
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+                                                    <label for="">Photo2</label>
+                                                    <img style=" height: 150px;width: 150px; "
+                                                        ng-src="{{dataList.photo2url}}" />
+                                                </div>
+
+
+
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                  
+                                   
+                                </div>
+                            </div>
+
+
+
+
+                        </div>
+
+                    </form>
+                </div>
+                <div class="row">
+                    <div class="col-md-6" style="text-align: left; padding-bottom: 100px;">
+                        <button class="btn btn-success" ng-click="back();" style="text-align: right;"><i
+                                class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                    </div>
+                    <div class="col-md-6" style="text-align: right;">
+                        <button class="btn btn-success" onclick="printElemall()" style="text-align: right;"><i
+                                class="fa fa-print" aria-hidden="true"></i> Print</button>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid" ng-show="exporttoexceldiv">
+
+            <div class="container-fluid">
+                <div>
+                  
+                        <div class="card card-primary">
+                           
+                            <div ng-show="alldata.length == 0" style="text-align: center; padding-bottom: 30px;">
+                                <br>
+                                <label for="" style="color: red;"><b>No record found</b></label>
+                            </div>
+                            <div class="card-body" style="padding: 0;" ng-show="alldata.length != 0">
+                                <div class="table-responsive" style="height: auto">
+                                    <table class="table table-head-fixed" id="allListTable">
+
+                                        <thead>
+                                            <tr ng-hide="results.length == 0">
+                                                <th>Sl</th>
+                                                <th>Name of beneficiary</th>
+                                                <th>Date of Report</th>
+                                                <th>District</th>
+                                                <th>Samiti</th>
+                                                <th>Type of beneficiary</th>
+                                                <th>Area</th>
+
+                                                <th>sector</th>
+                                                <th>Specific Scheme</th>
+                                                <th>Action taken details</th>
+                                                <th>Approx expenditure incurred by organisation</th>
+                                                <th>Approx expenditure incurred by beneficiary</th>
+                                                <th>Average Monthly income after Swabalambi initiative</th>
+                                                <th>If Bank Loan facilitated, then amount</th>
+                                                <th>No of Family members benefitted</th>
+                                                <th>Remark</th>
+                                               
+
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr
+                                                ng-repeat="data in results =  (alldata | orderBy:['dist_name' ,'-samithi_name']) ">
+                                                <div ng-show="results.length == 0" style="text-align: center;">
+                                                    <br>
+                                                    <label for="" style="color: red;"><b>No record found</b></label>
+                                                </div>
+                                                <div ng-show="results.length != 0" style="text-align: center;">
+                                                    <td> {{ $index+1 }}</td>
+                                                    <td> {{ data.nameofbeneficiary}}</td>
+                                                    <td> {{ data.dor| date:'dd-MM-yyyy' }}</td>
+                                                    <td> {{ data.dist_name }}</td>
+                                                    <td> {{ data.samithi_name}}</td>
+                                                    <td> {{ data.type }}</td>
+                                                    <td> {{ data.area }}</td>
+
+                                                    <td> {{ data.sector}}</td>
+                                                    <td> {{ data.specificscheme || '--' }}</td>
+                                                    <td> {{ data.actiondetails || '--'  }}</td>
+                                                    <td> {{ data.approxexpenditureorganisation}}</td>
+
+                                                    <td> {{ data.approxexpenditurebeneficiary}}</td>
+                                                    <td> {{ data.monthlyincomeafterswabalambi }}</td>
+                                                    <td> {{ data.bankloan || '--' }}</td>
+                                                    <td> {{ data.nooffamilybenifited}}</td>
+                                                    <td> {{ data.remarks|| '--'  }}</td>
+                                                </div>
+
+
+
+                                            </tr>
+
+                                        </tbody>
+
+                                    </table>
+                                </div>
+
+                               
+                            </div>
+
+
+                        </div>
+                      
+                    <br>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!-- /.content -->
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0-pre
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- Controller -->
+<script src="/controller/admin/beneficiariesReportAllData.js"></script>
+<!-- AdminLTE App -->
+<script src="/AdminLTE/adminlte.js"></script>
+<script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

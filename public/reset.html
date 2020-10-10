@@ -1,0 +1,110 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Blood Donation | Log in</title>
+    <link rel="icon" href="img/icon/blood.png">
+    <!-- Tell the browser to be responsive to screen width -->
+    <title>Blood Donation | Log in</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="AdminLTE/fontawesome/css/all.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- icheck bootstrap -->
+    <!-- <link rel="stylesheet" href="../../plugins/icheck-bootstrap/icheck-bootstrap.min.css"> -->
+    <!-- Theme style -->
+    <link rel="stylesheet" href="AdminLTE/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <script src="AdminLTE/jquery.min.js"></script>
+    <script type="text/javascript" src="js/angular.min.js"></script>
+</head>
+<body class="hold-transition login-page" style="background-image: url(images/backimg1.jpg);background-repeat: no-repeat;background-size: cover;" ng-app="myApp" ng-controller="rstpwd">
+    <form name="bloodCamp" id="bloodCamp">
+        <div class="login-box">
+            <div class="login-logo">
+                <a href="/" style="color: white;"><b>Blood Donation</b>Home</a>
+            </div>
+            <!-- /.login-logo -->
+            <div class="card">
+                <div class="card-body login-card-body">
+                    <p class="login-box-msg">Reset your district log-in</p>
+
+                    <!-- <form > -->
+                    <div id="details">
+                        <div class="input-group mb-3">
+                            <input type="text" class="form-control" placeholder="Please enter email id" id="email" ng-model="email">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-envelope"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <select class="form-control" ng-model="squestion" ng-required="true" id="squestion">
+                                <option value="" disabled selected>--select--</option>
+                                <option value="Who_is_your_favourite_friend">Who is your favourite friend?</option>
+                                <option value="Who_is_your_favourite_person">Who is your favourite person?</option>
+                                <option value="Who_is_your_favourite_god">Who is your favourite god?</option>
+                            </select>
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-question-circle"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" ng-model="sanswer" id="sanswer" class="form-control" placeholder="Answer" maxlength="200">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-user"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="input-group mb-3">
+                            <input type="text" ng-model="password" id="password" class="form-control" placeholder="PASSWORD" maxlength="200">
+                            <div class="input-group-append">
+                                <div class="input-group-text">
+                                    <span class="fas fa-asterisk fa-xs"></span> <span class="fas fa-asterisk fa-xs"></span> <span class="fas fa-asterisk fa-xs"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-4">
+
+                            </div>
+                            <!-- /.col -->
+                            <div class="col-8">
+                                <button type="submit" class="btn btn-primary btn-block" ng-model="rstpwd" ng-click="updateData()">Reset Password</button>
+                            </div>
+                            <!-- /.col -->
+                        </div>
+                    </div>
+                    
+                    <!-- </form> -->
+                    <!-- /.social-auth-links -->
+
+
+                </div>
+                <!-- /.login-card-body -->
+            </div>
+        </div>
+
+    </form>
+        <!-- /.login-box -->
+        <script>
+            
+        </script>
+        <!-- jQuery -->
+        <script src="controller/admin/user.js"></script>
+        <script src="AdminLTE/jquery.min.js"></script>
+        <!-- Bootstrap 4 -->
+        <script src="AdminLTE/bootstrap.bundle.min.js"></script>
+        <!-- AdminLTE App -->
+        <script src="AdminLTE/adminlte.js"></script>
+
+</body>
+</html>

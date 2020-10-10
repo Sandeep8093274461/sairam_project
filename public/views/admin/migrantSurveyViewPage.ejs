@@ -1,0 +1,541 @@
+<%- include('common/header.ejs') -%>
+
+        <div class="content-wrapper">
+
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-1">
+                        <div class="col-sm-8">
+                            <h1 class="m-0 text-dark"><img src="/img/icon/logo.jpg" style="width:60px;height:60px;"
+                                    alt=""> Survey for promotion of  Sai Swabalambi </h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-4">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#"> Sai Swabalambi program</a></li>
+                                <li class="breadcrumb-item active">Skill</li>
+                                <li class="breadcrumb-item active">Details</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+
+
+                <div class="container-fluid">
+                    <div class="container-fluid">
+                        <div class="panel panel-success">
+                            <form name="bloodCamp">
+
+                                <div class="card card-primary" id="applicantDetails">
+                                    <style type="text/css" media="print">
+                                        @media print {
+                                            @page {
+                                                size: A4 portrait;
+                                                max-height: 100%;
+                                                max-width: 100%;
+                                                zoom: 0.1%;
+                                                margin: 0;
+                                                size: auto;
+                                            }
+                                
+                                            body {
+                                                width: 100%;
+                                                height: 100%;
+                                                transform: scale(0.9);
+                                            }
+                                        }
+                                    </style>
+                                    <style>
+                                        #rcorners2 {
+                                            border-radius: 25px;
+                                            border: 2px solid rgb(78, 88, 59);
+                                            padding: 20px;
+                                            width: 70px;
+                                            /* height: 51px; */
+                                            margin-left: 20%;
+                                        }
+                                    </style>
+                                    <style>
+                                        .table-responsive {
+                                            height: 600px;
+                                        }
+                                
+                                        .panel {
+                                            margin-bottom: 20px;
+                                            border-radius: 7px;
+                                        }
+                                    </style>
+                                 <script type="text/javascript" src="/js/angular.min.js"></script>
+                                 <link rel="stylesheet" href="/AdminLTE/adminlte.min.css">
+                                    <div class="card-header">
+                                       
+                                            <h4>Skill details</h4>
+                                      
+                                    </div>
+
+                                    <div class="panel-body" >
+                                        <div class="col-md-12" style="height: auto; ">
+                                            <div class="card-header ">
+                                                <h5 style="margin-bottom: -10px;">Personal details</h4>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row Container">
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Name :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.migrant_name}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Father/Guardian name :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.fathername}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Gender :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.gender}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Date of birth :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.dob | date:'dd-MM-yyyy'}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Marital status :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.material}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Category :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.category}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                       
+
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Mobile number :
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.mobno}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Total family members :
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.fmember}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                District :
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.district_name}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Block :
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.block_name}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                GP/Ward name :
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.panchayat_name}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Village :
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.villagename}}</h6>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="panel-body">
+                                        <div class="col-md-12" style="height: auto; ">
+                                            <div class="card-header ">
+                                                <h5 style="margin-bottom: -10px;">Present income status and
+                                                    qualification details</h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row Container ">
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Farmer id :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7" >
+                                                                <h6>{{alldata.farmerid}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Voter-id :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.voterid}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Bank account :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.acnumber}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Aadhaar number :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.aadharnumber}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Are you Migrants? :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.migrant}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5" style="text-align:left">
+                                                                Qualification :
+                                                            </div>
+                                                            <div class="col-lg-7 col-md-7 col-sm-7 col-xs-7">
+                                                                <h6>{{alldata.qualification}}</h6>
+                                                            </div>
+                                                        </div>
+                                                       
+
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Skill development certification:
+                                                            </div>
+                                                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                                                <h6>{{alldata.skilldevelopmentcertification}}</h6>
+                                                            </div>
+                                                        </div>
+                                                         <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Total land area :
+                                                            </div>
+                                                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                                                <h6>{{alldata.landarea}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Monthly income :
+                                                            </div>
+                                                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" >
+                                                                <h6>{{alldata.monthlyincome}}</h6>
+                                                            </div>
+                                                        </div>
+                                                       
+
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Present source of income :
+                                                            </div>
+                                                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.salary}}</h6>
+                                                            </div>
+                                                        </div>
+                                                      
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Animals present in the family :
+                                                            </div>
+                                                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.animals}}</h6>
+                                                            </div>
+                                                        </div><br>
+                                                    </div>
+                                                    <table class="table table-bordered" ng-show="alldata.animals == 'Yes'">
+                                                        <br>
+                                                        <thead>
+                                                            <tr>
+                                                                <th>Sl.</th>
+                                                                <th>Animals name</th>
+                                                                <th>No. Of animals</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                                <td>1</td>
+                                                                <td>Cow + Bullocks </td>
+                                                                <td><h6>{{alldata.noofcows}}</h6></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>2</td>
+                                                                <td>Goat </td>
+                                                                <td><h6>{{alldata.noofgoat}}</h6></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>3</td>
+                                                                <td>Sheep </td>
+                                                                <td><h6>{{alldata.noofsheep}}</h6></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td>4</td>
+                                                                <td>Others </td>
+                                                                <td><h6>{{alldata.noofotheranimal}}</h6></td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="panel-body" ng-show="alldata.migrant =='Yes'">
+                                        <div class="col-md-12" style="height: auto; ">
+                                            <div class="card-header ">
+                                                <h5 style="margin-bottom: -10px;">Migration details </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row Container">
+
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Coming from :
+                                                            </div>
+                                                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6"style="margin-left: -30px;">
+                                                                <h6>{{alldata.statename}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                How do you plan for earning?
+                                                            </div>
+                                                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-left: -30px;">
+                                                                <h6>{{alldata.staybackafterlockdown}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                work under MGNREGA :
+                                                            </div>
+                                                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6" style="margin-left: -30px;">
+                                                                <h6>{{alldata.undermgnrega}}</h6>
+                                                            </div>
+                                                        </div>
+
+
+
+
+                                                    </div>
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                Go back to previous work place?
+                                                            </div>
+                                                            <div class=" col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.planafterlockdown}}</h6>
+                                                            </div>
+                                                        </div>
+                                                        <div class="row ">
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6" style="text-align:left">
+                                                                What is your expected income?
+                                                            </div>
+                                                            <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                                <h6>{{alldata.expectedsalary}}</h6>
+                                                            </div>
+                                                        </div>
+
+                                                    </div>
+
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+                                    <div class="panel-body" ng-show="allskillData.length !=0">
+                                        <div class="col-md-12" style="height: auto; margin-bottom: 20px;">
+                                            <div class="card-header ">
+                                                <h5 style="margin-bottom: -10px;">Skill and employment details </h5>
+                                            </div>
+                                            <div class="card-body">
+                                                <div class="row Container">
+                                                    <div class="card-body" style="padding: 0;">
+                                                        <div class="table-responsive" style="height: auto">
+                                                           
+                                                            <table class="table table-bordered" style="width: 100%;">
+                                                                <thead>
+                                                                    <tr>
+                                                                        <th>Sl.</th>
+                                                                        <th>Sector employed</th>
+                                                                        <th>Skill</th>
+                                                                        <th>Working experience</th>
+                                                                        <th>Avg income per month</th>
+                                                                        <th>Interested of which skill</th>
+                                                                        <th>Brief description of the job</th>
+                                                                        <th>Remark</th>
+                                                                    </tr>
+                                                                </thead>
+                                                                <tbody>
+                                                                    <tr ng-repeat="data in allskillData ">
+                                                                        
+                                                                        <div style="text-align: center;">
+                                                                            <td> {{ $index+1 }}</td>
+                                                                            <td> {{ data.sectoremployed }}</td>
+                                                                            <td> {{ data.skill }}</td>
+                                                                            <td> {{ data.workexperience }} </td>
+                                                                            <td> {{ data.avgincome || '--' }} </td>
+                                                                            <td> {{ data.intrestskill || '--' }} </td>
+                                                                            <td> {{ data.description || '--' }} </td>
+                                                                            <td> {{ data.remarks}} </td>
+                                                                          
+                                                                        </div>
+
+                                                                      
+                                                                    </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+                                                    </div>
+
+                                                  
+                                                </div>
+                                                <div class="row Container">
+
+                                                    <div class="col-lg-5 col-md-5 col-sm-5 col-xs-5">
+                                                        <div class="row ">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:left">
+                                                                <label>Remark by the surveyor of samithi / Bhajan mandali :</label>
+                                                            </div>
+                                                          
+                                                        </div>
+                                                       
+                                                    </div>
+                                                  
+                                                    <div class="col-lg-6 col-md-6 col-sm-6 col-xs-6">
+                                                        <div class="row ">
+                                                            <div class="col-lg-12 col-md-12 col-sm-12 col-xs-12" style="text-align:left">
+                                                                <h6>{{alldata.remarksbythesurveyer}}</h6>
+                                                            </div>
+                                                        </div>
+
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </form>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6" style="text-align: left;">
+                                <button class="btn btn-success" ng-click="back(alldata.register);"
+                                    style="text-align: right;"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</button>
+                            </div>
+                            <div class="col-md-6" style="text-align: right;">
+                                <button class="btn btn-success" onclick="printElem()"
+                                    style="text-align: right;"><i class="fa fa-print" aria-hidden="true"></i> Print</button>
+                            </div>
+
+
+                        </div>
+                        <br>
+
+
+                    </div>
+                </div>
+
+            </section>
+            <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0-pre
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- Controller -->
+    <script>
+          var migrate_id = "<%= migrate_id %>";
+    </script>
+    <script src="/controller/admin/migrantSurveyViewPage.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/AdminLTE/adminlte.js"></script>
+    <script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>

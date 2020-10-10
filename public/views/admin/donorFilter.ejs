@@ -1,0 +1,282 @@
+<%- include('common/header.ejs') -%>
+<div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+        <div class="container-fluid">
+            <div class="row mb-2">
+                <div class="col-sm-6">
+                    <h1 class="m-0 text-dark"><img src="/img/icon/blood.png" style="width:60px;height:60px;" alt=""> Blood donation details</h1>
+                </div><!-- /.col -->
+                <div class="col-sm-6">
+                    <ol class="breadcrumb float-sm-right">
+                        <li class="breadcrumb-item"><a href="#">Home</a></li>
+                        <li class="breadcrumb-item active">Blood Group</li>
+                        <li class="breadcrumb-item active">Donation Update</li>
+                    </ol>
+                </div><!-- /.col -->
+            </div><!-- /.row -->
+        </div><!-- /.container-fluid -->
+    </div>
+    <!-- /.content-header -->
+    <!-- Main content -->
+    <section class="content">
+
+
+        <div class="container-fluid">
+            <div class="container-fluid">
+                <div class="panel panel-default">
+                    <form name="bloodCamp" id="bloodCamp">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                                <h3 class="card-title">Select Donor</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-3">
+                                    </div>
+                                    <div class="col-2">
+                                        <div class="form-group">
+                                            <label>Select Donor ID<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+
+                                            <select name="donorSelect" ng-model="donorSelect" class="form-control" ng-change="retriveDonorDetails()">
+                                                <option value="" disabled>--Select Donor--</option>
+                                                <option ng-repeat="option in donorList" value="{{option.donerid}}">{{option.donerid}}</option>
+                                            </select>
+                                            <span style="color: red;" ng-show="showDonorError">{{showDonorErrorMsg}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="col-2">
+
+                                    </div>
+                                    <div class="col-2">
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card card-danger">
+                            <div class="card-header">
+                                <h3 class="card-title">Donor details</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="row">
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Name<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" id="name" ng-model="name" class="form-control" placeholder="Enter full name." maxlength="200" readonly required>
+                                        </div>
+                                    </div>
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Gender<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <select class="form-control" ng-model="gender" required readonly id="gender" ng-disabled="true">
+                                                <option value="" disabled selected>--select--</option>
+                                                <option value="Male">Male</option>
+                                                <option value="Female">Female</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Date of Birth<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" placeholder="Enter full name." maxlength="200" id="dob" ng-model="dob" readonly required>
+                                        </div>
+                                    </div>
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Blood Group<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <select class="form-control" ng-model="bg" required readonly id="bloodGroup" ng-disabled="true">
+                                                <option value="" disabled selected>--select--</option>
+                                                <option value="O−">O−</option>
+                                                <option value="O+">O+</option>
+                                                <option value="A−">A−</option>
+                                                <option value="A+">A+</option>
+                                                <option value="B−">B−</option>
+                                                <option value="B+">B+</option>
+                                                <option value="AB−">AB−</option>
+                                                <option value="AB+">AB+</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label style="margin-left: -7px;">Last Donation Date<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" placeholder="Enter full name." maxlength="200" id="lastDonationDate" ng-model="lastDonationDate" readonly required>
+                                        </div>
+                                    </div>
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>District<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <select name="dist" ng-model="dist" class="form-control" ng-disabled="true">
+                                                <option value="">--Select District--</option>
+                                                <option ng-repeat="option in districtList" value="{{option.name}}">{{option.name}}</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                               
+                                
+                            </div>
+                            <!-- Modal -->
+
+                        </div>
+                        <div class="card card-danger">
+                            <div class="card-header">
+                                <h3 class="card-title">Donation details</h3>
+                            </div>
+                            <div class="card-body">
+                            
+
+                                <div class="row">
+
+
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Donation Date<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="date" class="form-control" placeholder="Enter full name." maxlength="200" ng-model="donationDate" id="donationDate" required>
+                                            <span style="color: red;" ng-show="showdonationDateError">{{showdonationDateErrorMsg}}</span>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label>Place of donation<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" placeholder="Enter Place of donation" maxlength="200" id="cPlace" ng-model="placeOfDonation" required>
+                                            <span style="color: red;" ng-show="showplaceOfDonationError">{{showplaceOfDonationErrorMsg}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label style="margin-left: -7px;">Donated through<span class="star">*</span> :</label> 
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <select name="donatedBy" ng-model="donatedBy" class="form-control">
+                                                <option value="">--Select--</option>
+                                                <option value="Individually">Individually</option>
+                                                <option value="Camp">Camp</option>
+                                            </select>
+                                            <span style="color: red;" ng-show="showdonatedByError">{{showdonatedByErrorMsg}}</span>
+                                        </div>
+                                    </div>
+                                   
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <label style="margin-left: -7px;">District of donation<span class="star">*</span> :</label>
+                                        </div>
+                                    </div>
+                                    <div class="col-4">
+                                        <div class="form-group">
+                                            <select name="district" ng-model="district" class="form-control">
+                                                <option value="">--Select District--</option>
+                                                <option ng-repeat="option in districtList" value="{{option.name}}">{{option.name}}</option>
+                                            </select>
+                                            <span style="color: red;" ng-show="showdistrictError">{{showdistrictErrorMsg}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-3">
+                                        <div class="form-group">
+
+                                        </div>
+                                    </div>
+                                    <div class="col-2" style="text-align:right">
+                                        <div class="form-group">
+                                            <button type="button" class="btn btn-success" data-dismiss="modal" ng-model="addDonor" ng-click="donationDetails()" id="addDonor">SUBMIT</button>
+                                            <input type="text" id="donorid" ng-hide="true" class="form-control" placeholder="donorid" maxlength="200" ng-model="donorid">
+                                            
+                                        </div>
+                                    </div>
+                                    <div class="col-5">
+
+                                    </div>
+
+                                </div>
+                            </div>
+                            <!-- Modal -->
+
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+        </div>
+
+    </section>
+    <!-- /.content -->
+    
+</div>
+<!-- /.content-wrapper -->
+<footer class="main-footer">
+   
+    <div class="float-right d-none d-sm-inline-block">
+        <b>Version</b> 1.0.0-pre
+    </div>
+</footer>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
+</div>
+<!-- ./wrapper -->
+<!-- Controller -->
+<script src="/controller/admin/donorFilter.js"></script>
+<!-- AdminLTE App -->
+<script src="/AdminLTE/adminlte.js"></script>
+<script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

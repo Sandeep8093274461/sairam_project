@@ -1,0 +1,14 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\models",
+    "\\public",
+    "\\public\\adminPages",
+    "\\public\\uploads",
+    "\\routes",
+    "\\routes\\upload",
+    "\\uploads"
+  ],
+  "SelectedNode": "\\app.js",
+  "PreviewInSolutionExplorer": false
+}

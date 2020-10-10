@@ -1,0 +1,2091 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Sri Sathya Sai Trust, Odisha</title>
+    <link rel="icon" href="/img/icon/logo.jpg">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="/AdminLTE/fontawesome/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="/AdminLTE/adminlte.min.css">
+    <!-- overlayScrollbars -->
+    <link rel="stylesheet" href="/AdminLTE/OverlayScrollbars.min.css">
+    <link rel="stylesheet" href="/css/myStyle.css">
+    <link rel="stylesheet" href="/css/map.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+        integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+        crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+        integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+        crossorigin=""></script>
+    <!-- jQuery -->
+    <script src="/AdminLTE/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/angular.min.js"></script>
+    <meta name="district_id" content="<%= district_id %>">
+    <meta name="user_id" content="<%= user_id %>">
+    <style>
+        .form-control {
+            max-width: 400px;
+        }
+
+        .row {
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<!--<body class="hold-transition sidebar-mini layout-fixed" ng-app="myApp" ng-controller="myCtrl" onload="bindCampList()">-->
+
+<body class="hold-transition sidebar-mini layout-fixed" ng-app="myApp" ng-controller="migrateCtrl">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+            <!-- Left navbar links -->
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"
+                            aria-hidden="true"></i></a>
+                </li>
+            </ul>
+
+            <!-- Right navbar links -->
+            <ul class="navbar-nav ml-auto">
+                <!-- <li class="nav-item dropdown">
+                    <a class="nav-link" data-toggle="dropdown" href="#">
+                        <i class="far fa-comments" aria-hidden="true"></i>
+                        <span class="badge badge-danger navbar-badge">3</span>
+                    </a>
+                </li> -->
+                <li class="nav-item">
+                    <a href="/bloodDonation/admin/changePassword">
+                        <button onclick="changePassword()" class="btn btn-secondary" data-toggle="tooltip"
+                            title="Change password">
+                            <i class="fas fa-lock" aria-hidden="true"></i>
+                        </button>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <button onclick="logout()" class="btn btn-danger" data-toggle="tooltip" title="Sign out"
+                        style="margin-left: 5px;"><i class="fa fa-power-off" aria-hidden="true"></i></button>
+                </li>
+
+            </ul>
+        </nav>
+        <!-- /.navbar -->
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4">
+            <!-- Brand Logo -->
+            <a href="#" class="brand-link">
+                <img src="/img/icon/logo.jpg" alt="AdminLTE Logo" style="width:60px;height:60px;padding-left:8px"
+                    class="actLogo elevation-3">
+                <!-- <span class="brand-text font-weight-light text-white"><strong>Covid19 - Surakshya</strong></span> -->
+                <br>
+            </a>
+
+            <!-- Sidebar -->
+            <div class="sidebar">
+                <!-- Sidebar user panel (optional) -->
+                <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+                    <div class="image">
+                        <img src="/images/adminLogo.png" class="img-circle elevation-2" alt="User Image">
+                    </div>
+                    <div class="info">
+                        <a href="#" class="d-block text-white">ADMIN</a>
+                    </div>
+                </div>
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+                        data-accordion="false">
+                        <li class="nav-item has-treeview menu-open">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-tachometer-alt" aria-hidden="true"></i>
+                                <p>
+                                    Dashboard
+                                </p>
+                            </a>
+                        </li>
+
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-th" aria-hidden="true"></i>
+                                <p>
+                                    Blood Bank
+                                    <i class="right fas fa-angle-left" aria-hidden="true"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="addDonation.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donor Camp</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="detailsCamp.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Camp Details</p>
+                                    </a>
+                                </li>
+
+                                <li class="nav-item">
+                                    <a href="detailsDonor.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donor Details</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="donorReport.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donor Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="campUpdate.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Add Camp</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="donorFilter.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Donation Details</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="detailsDonation.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>List of Donor</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="password.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>User Credential</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="addDistrict.html" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Add User</p>
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+                        <li class="nav-item has-treeview">
+                            <a href="#" class="nav-link">
+                                <i class="nav-icon fas fa-th" aria-hidden="true"></i>
+                                <p>
+                                    Relief Service
+                                    <i class="right fas fa-angle-left" aria-hidden="true"></i>
+                                </p>
+                            </a>
+                            <ul class="nav nav-treeview">
+                                <li class="nav-item">
+                                    <a href="convenorDetails" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Activity</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a href="convernorData" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>Report</p>
+                                    </a>
+                                </li>
+                                <li class="nav-item has-treeview">
+                                    <a href="#" class="nav-link">
+                                        <i class="far fa-circle nav-icon" aria-hidden="true"></i>
+                                        <p>
+                                            Skill
+                                            <i class="right fas fa-angle-left" aria-hidden="true"></i>
+                                        </p>
+                                    </a>
+                                    <ul class="nav nav-treeview">
+                                        <li class="nav-item">
+                                            <a href="migrantSurvey" class="nav-link">
+                                                <i class="fa fa-share" aria-hidden="true"></i>
+                                                <p>Apply</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="migrantAllData" class="nav-link">
+                                                <i class="fa fa-share" aria-hidden="true"></i>
+                                                <p>All Data</p>
+                                            </a>
+                                        </li>
+                                        <li class="nav-item">
+                                            <a href="convernorData" class="nav-link">
+                                                <i class="fa fa-share" aria-hidden="true"></i>
+                                                <p>Delete</p>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
+
+        <!-- Content Wrapper. Contains page content -->
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-2">
+                        <div class="col-sm-6">
+                            <h1 class="m-0 text-dark"><img src="/img/icon/logo.jpg" style="width:60px;height:60px;"
+                                    alt=""> Covid-19 Migrant Survey</h1>
+                        </div><!-- /.col -->
+                        <div class="col-sm-6">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                                <li class="breadcrumb-item active">Skill</li>
+                                <li class="breadcrumb-item active">Register</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+
+
+                <div class="container-fluid">
+                    <div class="container-fluid">
+                        <div class="panel panel-default">
+
+                            <div class="card card-primary" ng-show="part1">
+                                <div class="card-header">
+                                    <h3 class="card-title">Personal Details</h3>
+                                </div>
+                                <form name="valid1" id="valid1">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Migrant's Full Name <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="migrantName"
+                                                            ng-model="migrantName" placeholder="Enter Your Full Name"
+                                                            required>
+                                                        <span style="color:red"
+                                                            ng-show="valid1.migrantName.$dirty && valid1.migrantName.$invalid">
+                                                            <span ng-show="valid1.migrantName.$error.required">Name is
+                                                                Required .</span>
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Aadhar Number <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="aadharNumber"
+                                                            ng-model="aadharNumber"
+                                                            placeholder="Enter Your Aadhar Number" maxlength="12"
+                                                            minlength="12" onkeypress='numberValidate(event)'
+                                                            ng-pattern="/^[1-9][0-9]{11}$/" allow-numbers-only required>
+                                                        <span style="color:red"
+                                                            ng-show="valid1.aadharNumber.$dirty && valid1.aadharNumber.$invalid">
+                                                            <span ng-show="valid1.aadharNumber.$error.required">Aadhar
+                                                                is
+                                                                Required .</span>
+                                                        </span>
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Mobile Number <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="mobNo"
+                                                            ng-model="mobNo" placeholder="Enter Your Mobile Number"
+                                                            maxlength="10" minlength="10" ng-pattern="/^[1-9][0-9]{9}$/"
+                                                            allow-numbers-only onkeypress='numberValidate(event)'
+                                                            required>
+                                                        <span style="color:red"
+                                                            ng-show="valid1.mobNo.$dirty && valid1.mobNo.$invalid">
+                                                            <span ng-show="valid1.mobNo.$error.required">Mobile No is
+                                                                Required .</span>
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Age <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="age"
+                                                            ng-model="age" placeholder="Enter Your Age" maxlength="2"
+                                                            minlength="2" ng-pattern="/^[1-9][0-9]{1}$/"
+                                                            allow-numbers-only onkeypress='numberValidate(event)'
+                                                            required>
+                                                        <span style="color:red"
+                                                            ng-show="valid1.age.$dirty && valid1.age.$invalid">
+                                                            <span ng-show="valid1.age.$error.required">Age is
+                                                                Required .</span>
+                                                        </span>
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Gender<span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="gender" ng-model="gender"
+                                                        required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Male"> Male</option>
+                                                        <option value="Female"> Female</option>
+                                                        <option value="Other"> Other</option>
+                                                    </select>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="Phone">Category <span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" ng-model="category" name="category"
+                                                        required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="ST"> ST</option>
+                                                        <option value="SC"> SC</option>
+                                                        <option value="OBC"> OBC</option>
+                                                        <option value="Other"> Other</option>
+                                                    </select>
+                                                </div>
+
+
+                                                </span>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="Phone">Marital Status <span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" ng-model="material" name="material"
+                                                        required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Married"> Married</option>
+                                                        <option value="Unmarried"> Unmarried</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="Phone">Highest Education Qualification <span
+                                                        class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" ng-model="qualification"
+                                                        name="qualification" required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="ClassI"> Class I</option>
+                                                        <option value="ClassII"> Class II</option>
+                                                        <option value="ClassIII"> Class III</option>
+                                                        <option value="ClassIV"> Class IV</option>
+                                                        <option value="ClassV"> Class V</option>
+                                                        <option value="ClassVI"> Class VI</option>
+                                                        <option value="ClassVII"> Class VII</option>
+                                                        <option value="ClassVIII"> Class VIII</option>
+                                                        <option value="ClassIX"> Class IX</option>
+                                                        <option value="ClassX"> Class X</option>
+                                                        <option value="ClassXI"> Class XI</option>
+                                                        <option value="ClassXII"> Class XII</option>
+                                                        <option value="BachelorsDegree"> Bachelors Degree</option>
+                                                        <option value="MastersDegree"> Masters Degree</option>
+                                                        <option value="Other"> Other</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4" ng-show="qualification == 'Other'">
+                                                <div class="form-group">
+                                                    <label>If other, Please specify
+                                                        :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control"
+                                                            name="otherQualification" ng-model="otherQualification"
+                                                            placeholder="Enter Your Other Qualification Name">
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Skill Development Certification <span class="star">*</span>
+                                                        :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control"
+                                                            name="skillDevelopmentCertification"
+                                                            ng-model="skillDevelopmentCertification"
+                                                            placeholder="Enter Your Skill Development Certification Name"
+                                                            required>
+                                                        <span style="color:red"
+                                                            ng-show="valid1.skillDevelopmentCertification.$dirty && valid1.skillDevelopmentCertification.$invalid">
+                                                            <span
+                                                                ng-show="valid1.skillDevelopmentCertification.$error.required">Skill
+                                                                Development Certification Name is
+                                                                Required .</span>
+                                                        </span>
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div><br>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left;">
+
+                                            </div>
+
+                                            <div class="col-md-6" style="text-align: right;">
+                                                <button type="button" class="btn btn-success" ng-click="next1();">
+                                                    &nbsp;Next</button>
+                                                <!-- ng-disabled="valid1.$invalid" -->
+                                            </div>
+                                        </div>
+                                        <!-- <center>
+                                                <button type="button" class="btn btn-success" style="text-align: right;"
+                                                    ng-click="next1();">Next</button>
+                                            </center> -->
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="card card-primary" ng-show="part2">
+                                <div class="card-header">
+                                    <h3 class="card-title">Address Details</h3>
+                                </div>
+                                <form name="valid2" id="valid2">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Block/Municipality Name <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="block" ng-model="block"
+                                                            required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="Sadar"> Sadar</option>
+                                                            <option value="Ghatagaon"> Ghatagaon</option>
+                                                            <option value="Harichandanpur"> Harichandanpur</option>
+                                                        </select>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>GP/Ward Name <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="gp" ng-model="gp"
+                                                            placeholder="Enter Your GP/Ward Name" required>
+                                                        <span style="color:red"
+                                                            ng-show="valid2.gp.$dirty && valid2.gp.$invalid">
+                                                            <span ng-show="valid2.gp.$error.required">Gp/Ward Name is
+                                                                Required .</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Village/Area Name<span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="village"
+                                                            ng-model="village"
+                                                            placeholder="Enter Your Village/Area Name" required>
+                                                        <span style="color:red"
+                                                            ng-show="valid2.village.$dirty && valid2.village.$invalid">
+                                                            <span ng-show="valid2.village.$error.required">Village/Area
+                                                                Name is
+                                                                Required .</span>
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>PIN Code :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="pin"
+                                                            ng-model="pin" placeholder="Enter Your PIN Code"
+                                                            maxlength="6" ng-pattern="/^[1-9][0-9]{5}$/"
+                                                            allow-numbers-only onkeypress='pincode(event)' required>
+                                                        <span style="color:red"
+                                                            ng-show="valid2.pin.$dirty && valid2.pin.$invalid">
+                                                            <span ng-show="valid2.pin.$error.required">PinCode is
+                                                                Required .</span>
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Date of reaching Keonjhar<span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <input type="date" class="form-control" name="DoReachingKeonjhar"
+                                                        ng-model="DoReachingKeonjhar"
+                                                        placeholder="Enter Your Date of reaching Keonjhar" required>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="Phone">Returning State/Union Territory <span
+                                                        class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control"
+                                                        ng-options="x.statename for x in states" name="returningState"
+                                                        ng-model="returningState"  required>
+                                                        <option value="" disabled>--State--</option>
+                                                    </select>
+                                                   
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="Phone">Returning City <span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="returningCity"
+                                                        ng-model="returningCity" placeholder="Enter Returning City Name"
+                                                        required>
+                                                    <span style="color:red"
+                                                        ng-show="valid2.gp.$dirty && valid2.gp.$invalid">
+                                                        <span ng-show="valid2.gp.$error.required">Mobile No is
+                                                            Required .</span>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-4">
+                                                <label for="Phone">Purpose to visit the state?<span
+                                                        class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" ng-model="purpose" name="purpose"
+                                                        required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Employment"> Employment</option>
+                                                        <option value="Studies"> Studies</option>
+                                                        <option value="Tourism"> Tourism</option>
+                                                        <option value="Other"> Other</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4" ng-show="purpose == 'Other'">
+                                                <div class="form-group">
+                                                    <label>If other, Please specify :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="otherpurpose"
+                                                            ng-model="otherpurpose"
+                                                            placeholder="Enter You Other Purpose To visit">
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Own Smartphone<span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" ng-model="smartphone"
+                                                            name="smartphone" required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="Yes"> Yes</option>
+                                                            <option value="No"> No</option>
+                                                        </select>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Father/Guardian Name<span class="star"></span> :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="fatherName"
+                                                            ng-model="fatherName"
+                                                            placeholder="Enter Your Father/Guardian Name">
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Father/Guardian's Phone Number
+                                                        :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="fatherPhno"
+                                                            ng-model="fatherPhno"
+                                                            placeholder="Enter Your Guardian's Phone Number"
+                                                            maxlength="10" minlength="10" ng-pattern="/^[1-9][0-9]{9}$/"
+                                                            allow-numbers-only onkeypress='numberValidate(event)'>
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left;">
+                                                <button class="btn btn-success " ng-click="previous1();"
+                                                    style="text-align: right;">Back</button>
+                                            </div>
+
+                                            <div class="col-md-6" style="text-align: right;">
+                                                <button type="button" class="btn btn-success" ng-click="next2();">
+                                                    &nbsp;Next</button>
+                                                <!-- ng-disabled="valid2.$invalid" -->
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="card card-primary" ng-show="part3">
+                                <div class="card-header">
+                                    <h3 class="card-title">Employment Details</h3>
+                                </div>
+                                <form name="valid3" id="valid3">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Nature of Employment <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="natureOfEmployment"
+                                                            ng-model="natureOfEmployment" required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="Formal"> Formal (Appointment Letter/Salary
+                                                                Slip/PF etc.)</option>
+                                                            <option value="Informal"> Informal</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Nature of Migration <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="natureOfMigration"
+                                                            ng-model="natureOfMigration" required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="Seasonal">Seasonal</option>
+                                                            <option value="Fulltime"> Full Time</option>
+                                                        </select>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="Phone">Total Work Experience till date (in Years)<span
+                                                        class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="workExperience"
+                                                        ng-model="workExperience"
+                                                        placeholder="Enter Your Total Work Experience " maxlength="2"
+                                                        minlength="1" onkeypress='numberValidate(event)'
+                                                        ng-pattern="/^[1-9][0-9]{1}$/" allow-numbers-only required>
+                                                    <span style="color:red"
+                                                        ng-show="valid3.workExperience.$dirty && valid3.workExperience.$invalid">
+                                                        <span ng-show="valid3.workExperience.$error.required">Total Work
+                                                            Experience
+                                                            Required .</span>
+                                                    </span>
+                                                </div>
+                                                <br>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Sector Employed :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="SectorEmployed"
+                                                            ng-model="SectorEmployed" required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="Agriculture">Agriculture</option>
+                                                            <option value="Banking/Insurance/Financial Services">
+                                                                Banking/Insurance/Financial Services</option>
+                                                            <option value="Other">
+                                                                Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4" ng-show="SectorEmployed == 'Other'">
+                                                <label for="Phone">If other, please mention name of sector:</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="otherSector"
+                                                        ng-model="otherSector"
+                                                        placeholder="Enter Your Other Sector Name">
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Experience:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="experience" ng-model="experience"
+                                                        required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="0">No Experience</option>
+                                                        <option value="1"> 1 Year</option>
+                                                        <option value="5"> 5 Year</option>
+                                                        <option value="5_10"> 5-10 Year</option>
+                                                        <option value="10"> 10 Year</option>
+                                                    </select>
+                                                </div>
+                                            </div>
+
+
+                                            <div class="col-4">
+                                                <label for="Phone">Last/Most Recent Job Designation/Role<span
+                                                        class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="designation"
+                                                        ng-model="designation"
+                                                        placeholder="Enter Your Recent Job Designation" required>
+                                                    <span style="color:red"
+                                                        ng-show="valid3.designation.$dirty && valid3.designation.$invalid">
+                                                        <span ng-show="valid3.designation.$error.required">Recent Job
+                                                            Designation/Role is
+                                                            Required .</span>
+                                                    </span>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4"><br>
+                                                <div class="form-group">
+                                                    <label>Name and Address of Firm/Employer<span class="star">*</span>
+                                                        :</label>
+                                                    <div class="col-md-12">
+                                                        <textarea class="form-control" cols="40" rows="3"
+                                                            name="adressOfEmployer" ng-model="adressOfEmployer"
+                                                            placeholder="Enter Your Name and Address of Firm/Employer"
+                                                            required></textarea>
+
+                                                        <span style="color:red"
+                                                            ng-show="valid3.designation.$dirty && valid3.designation.$invalid">
+                                                            <span ng-show="valid3.designation.$error.required">Name and
+                                                                Address of Firm/Employer is
+                                                                Required .</span>
+                                                        </span>
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Brief description of last/most recent day-to-day job<span
+                                                            class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <textarea class="form-control" cols="40" rows="3"
+                                                            name="description" ng-model="description"
+                                                            placeholder="Enter Your Name and Address of Firm/Employer"
+                                                            required></textarea>
+                                                        <span style="color:red"
+                                                            ng-show="valid3.description.$dirty && valid3.description.$invalid">
+                                                            <span ng-show="valid3.description.$error.required">Name and
+                                                                Address of Firm/Employer is
+                                                                Required .</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left;">
+                                                <button class="btn btn-success " ng-click="previous2();"
+                                                    style="text-align: right;">Back</button>
+                                            </div>
+
+                                            <div class="col-md-6" style="text-align: right;">
+                                                <button type="button" class="btn btn-success" ng-click="next3();">
+                                                    &nbsp;Next</button>
+                                                <!-- ng-disabled="valid3.$invalid" -->
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="card card-primary" ng-show="part4">
+                                <div class="card-header">
+                                    <h3 class="card-title">Skill Details</h3>
+                                </div>
+                                <form name="valid4" id="valid4">
+                                    <div class="card-body">
+
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Level of Skill <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="skill" ng-model="skill"
+                                                            required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="Skilled"> Skilled</option>
+                                                            <option value="Semi_Skilled"> Semi Skilled</option>
+                                                            <option value="Un_Skilled"> Un Skilled</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Average working hours per day<span class="star">*</span>
+                                                        :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="workingHours"
+                                                            ng-model="workingHours" required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="8"> upto 8 hours</option>
+                                                            <option value="8_12"> 8-12 hours</option>
+                                                            <option value="12"> More than 12 hours</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Average Salary per Month (in Rs)<span class="star">*</span>
+                                                        :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="salary"
+                                                            ng-model="salary"
+                                                            placeholder="Enter Your Average Salary/Income per Month"
+                                                            maxlength="7" minlength="4"
+                                                            onkeypress='numberValidate(event)' allow-numbers-only
+                                                            required>
+                                                        <span style="color:red"
+                                                            ng-show="valid4.salary.$dirty && valid4.salary.$invalid">
+                                                            <span ng-show="valid4.salary.$error.required">Average Salary
+                                                                per Month is
+                                                                Required .</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <br>
+                                                    <label>Salary Schedule <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="salarySchedule"
+                                                            ng-model="salarySchedule" required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="Daily"> Daily</option>
+                                                            <option value="Weekly"> Weekly</option>
+                                                            <option value="Fortnightly"> Fortnightly</option>
+                                                            <option value="Monthly"> Monthly</option>
+                                                            <option value="No fixed schedule"> No fixed schedule
+                                                            </option>
+                                                        </select>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Average Household Expenses per Month (in Rs)<span
+                                                        class="star">*</span>:</label>
+                                                <input type="text" class="form-control" name="householdExpenses"
+                                                    ng-model="householdExpenses"
+                                                    placeholder="Enter Your Household Expenses" maxlength="7"
+                                                    minlength="4" onkeypress='numberValidate(event)' allow-numbers-only
+                                                    required>
+                                                <span style="color:red"
+                                                    ng-show="valid4.householdExpenses.$dirty && valid4.householdExpenses.$invalid">
+                                                    <span ng-show="valid4.householdExpenses.$error.required">Average
+                                                        Household Expenses per Month (in Rs) is
+                                                        Required .</span>
+                                                </span>
+                                            </div>
+                                            <div class="col-4">
+                                                <label for="Phone">Average Amount (Remittance) sent back to Home per
+                                                    Month (in Rs)<span class="star">*</span>:</label>
+                                                <input type="text" class="form-control" name="remittance"
+                                                    ng-model="remittance" placeholder="Enter Your Remittance"
+                                                    maxlength="7" minlength="4" onkeypress='numberValidate(event)'
+                                                    allow-numbers-only required>
+                                                <span style="color:red"
+                                                    ng-show="valid4.remittance.$dirty && valid4.remittance.$invalid">
+                                                    <span ng-show="valid4.remittance.$error.required">Average Amount
+                                                        (Remittance) sent back to Home per
+                                                        Month (in Rs) is
+                                                        Required .</span>
+                                                </span>
+                                            </div>
+                                            <!-- checkbok -->
+                                            <div class="col-4">
+                                                <label for="Phone">Any other Facility provided by Employer <span
+                                                        class="star">*</span>:</label>
+
+                                                <input type="checkbox" ng-model="accomodation" name="accomodation"
+                                                    value="accomodation">
+                                                <label for="Phone">Accomodation </label><br>
+                                                <input type="checkbox" ng-model="food" name="food" value="food">
+                                                <label for="Phone">Food </label><br>
+                                                <input type="checkbox" ng-model="travel" name="travel" value="travel">
+                                                <label for="Phone">Travel from/to Workplace </label><br>
+                                                <input type="checkbox" ng-model="healthFacility" name="healthFacility"
+                                                    value="healthFacility">
+                                                <label for="Phone">Health Facility </label><br>
+                                                <input type="checkbox" ng-model="crecheforkids" name="crecheforkids"
+                                                    value="crecheforkids">
+                                                <label for="Phone">Creche for kids </label><br>
+                                                <input type="checkbox" ng-model="schoolforkids" name="schoolforkids"
+                                                    value="schoolforkids">
+                                                <label for="Phone">School for kids </label><br>
+                                                <input type="checkbox" ng-model="insurance" name="insurance"
+                                                    value="insurance">
+                                                <label for="Phone">Insurance </label><br>
+                                                <input type="checkbox" ng-model="othersFacility" name="othersFacility"
+                                                    value="othersFacility">
+                                                <label for="Phone">Other </label><br>
+                                            </div>
+
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left;">
+                                                <button class="btn btn-success " ng-click="previous3();"
+                                                    style="text-align: right;">Back</button>
+                                            </div>
+
+                                            <div class="col-md-6" style="text-align: right;">
+                                                <button type="button" class="btn btn-success" ng-click="next4();">
+                                                    &nbsp;Next</button>
+                                                <!-- ng-disabled="valid4.$invalid" -->
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </form>
+
+                            </div>
+                            <div class="card card-primary" ng-show="part5">
+                                <div class="card-header">
+                                    <h3 class="card-title">Other Details</h3>
+                                </div>
+                                <form name="valid5" id="valid5">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Why did you migrate to another state/city <span
+                                                                class="star">*</span> :</label>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="whyMigrateToAnotherState"
+                                                            ng-model="whyMigrateToAnotherState" required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="localEmployment"> Lack of suitable local
+                                                                employment</option>
+                                                            <option value="higherRemuneration"> For higher remuneration
+                                                                (despite availability of local employment)</option>
+                                                            <option value="ForBetterQualityOfLife">For better quality of
+                                                                life</option>
+                                                            <option value="Other">Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>How many years ago did you first migrate ? <span
+                                                                class="star">*</span> :</label>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="firstMigrate"
+                                                            ng-model="firstMigrate" placeholder=" ex:05" maxlength="2"
+                                                            minlength="1" onkeypress='numberValidate(event)'
+                                                            ng-pattern="/^[0-9][0-9]{0}$/" allow-numbers-only required>
+                                                        <span style="color:red"
+                                                            ng-show="valid5.firstMigrate.$dirty && valid5.firstMigrate.$invalid">
+                                                            <span ng-show="valid5.firstMigrate.$error.required">How many
+                                                                years ago did you first migrate ?
+                                                                is
+                                                                Required .</span>
+                                                        </span>
+
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+
+                                                <div class="form-group">
+                                                    <div class="col-md-12">
+                                                        <label>Who helped you migrate the first time?<span
+                                                                class="star">*</span> :</label>
+                                                    </div>
+
+                                                    <div class="col-md-12">
+                                                        <br>
+                                                        <select class="form-control" name="helpedYouMigrate"
+                                                            ng-model="helpedYouMigrate" required>
+                                                            <option value="" disabled selected>--select--</option>
+                                                            <option value="friends">Friends</option>
+                                                            <option value="relatives"> Relatives</option>
+                                                            <option value="Middleman">
+                                                                Middleman/Sardar/Consultancy/Service Provider</option>
+                                                            <option value="Other"> Other</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- checkbok -->
+                                            <div class="col-12">
+                                                <br>
+                                                <div class="col-md-12">
+                                                    <label for="Phone">Who else from your family migrate with you ?
+                                                        <span class="star">*</span>:</label><br>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <input type="checkbox" ng-model="familyMigrateWithWife"
+                                                        name="familyMigrateWithWife" value="Wife">
+                                                    <label for="Phone">Wife </label><br>
+                                                    <input type="checkbox" ng-model="familyMigrateWithChildren"
+                                                        name="familyMigrateWithChildren"
+                                                        value="familyMigrateWithChildren">
+                                                    <label for="Phone">Children </label><br>
+                                                    <input type="checkbox" ng-model="familyMigrateWithParents"
+                                                        name="familyMigrateWithParents"
+                                                        value="familyMigrateWithParents">
+                                                    <label for="Phone">Parents</label><br>
+                                                    <input type="checkbox" ng-model="familyMigrateWithSiblings"
+                                                        name="familyMigrateWithSiblings" value="healthFacility">
+                                                    <label for="Phone">Siblings </label><br>
+                                                </div>
+
+
+                                            </div>
+
+                                            <div class="col-12">
+                                                <br>
+                                                <div class="col-md-12">
+                                                    <label for="Phone">Where did you stay during lock down
+                                                        ?:</label><br><br>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <input type="checkbox" ng-model="duringLockDownAtRegularPlaceOfStay"
+                                                        name="duringLockDownAtRegularPlaceOfStay"
+                                                        value="duringLockDownAtRegularPlaceOfStay">
+                                                    <label for="Phone">At regular place of stay </label><br>
+                                                    <input type="checkbox" ng-model="duringLockDownAtWorkplace"
+                                                        name="duringLockDownAtWorkplace"
+                                                        value="duringLockDownAtWorkplace">
+                                                    <label for="Phone">At workplace </label><br>
+                                                    <input type="checkbox"
+                                                        ng-model="duringLockDownAtfriendOrRelativeplace"
+                                                        name="duringLockDownAtFfriendOrRelativeplace"
+                                                        value="duringLockDownAtFfriendOrRelativeplace">
+                                                    <label for="Phone">At friend's/relative's place</label><br>
+                                                    <input type="checkbox" ng-model="duringLockDownAtReliefCamp"
+                                                        name="duringLockDownAtReliefCamp"
+                                                        value="duringLockDownAtReliefCamp">
+                                                    <label for="Phone">At relief camp/transit camp </label><br>
+                                                    <input type="checkbox" ng-model="duringLockDownAtOtherPlace"
+                                                        name="duringLockDownAtOtherPlace"
+                                                        value="duringLockDownAtOtherPlace">
+                                                    <label for="Phone">Other </label><br>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-4">
+                                                <br>
+                                                <div class="col-md-12">
+                                                    <label for="Phone">Have you lost your job due to lock down?:</label>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="lostYourJob"
+                                                        ng-model="lostYourJob">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Yes"> Yes</option>
+                                                        <option value="No">No</option>
+                                                        <option value="Not_sure">Not sure</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                            <div class="col-4">
+                                                <br>
+                                                <div class="col-md-12">
+                                                    <label for="Phone">Did you have at least 2 meals a day every-day
+                                                        during lock down?:</label>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="mealsDuringLockDown"
+                                                        ng-model="mealsDuringLockDown">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Yes"> Yes</option>
+                                                        <option value="No">No</option>
+                                                        <option value="Not_sure">Not sure</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="col-md-12">
+                                                    <label for="Phone">Did you register in the Government of Odisha
+                                                        portal for workers stranded
+                                                        elsewhere in the country?<span class="star">*</span>:</label>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="GovernmentOfOdishaPortal"
+                                                        ng-model="GovernmentOfOdishaPortal" required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Yes"> Yes</option>
+                                                        <option value="No">No</option>
+                                                        <option value="Did_not_know">Didn't know about the portal
+                                                        </option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <!-- checked requiredField -->
+                                            <div class="col-12"><br>
+                                                <div class="col-md-12">
+                                                    <label for="Phone">How did you return back to Keonjhar?<span
+                                                            class="star">*</span>:</label><br><br>
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <input type="checkbox" ng-model="returnBackInTrain"
+                                                        name="returnBackInTrain" value="Train">
+                                                    <label for="Phone">Train </label><br>
+                                                    <input type="checkbox" ng-model="returnBackInGovBus"
+                                                        name="returnBackInGovBus" value="Gov_Bus">
+                                                    <label for="Phone">Bus (Government) </label><br>
+                                                    <input type="checkbox" ng-model="returnBackInPersonalVehicle"
+                                                        name="returnBackInPersonalVehicle" value="PersonalVehicle">
+                                                    <label for="Phone">Private Personal Vehicle (eg. Bike/Car,
+                                                        etc.)</label><br>
+                                                    <input type="checkbox" ng-model="returnBackInPrvtVehicle"
+                                                        name="returnBackInPrvtVehicle" value="privateVehicle">
+                                                    <label for="Phone">Private Shared Vehicle (eg. Bus/Tempo/Truck/Car,
+                                                        etc.)</label><br>
+                                                    <input type="checkbox" ng-model="returnBackInCycle"
+                                                        name="returnBackInCycle" value="Cycle">
+                                                    <label for="Phone">Cycle </label><br>
+                                                    <input type="checkbox" ng-model="returnBackInWalk"
+                                                        name="returnBackInWalk" value="Walk">
+                                                    <label for="Phone">Walk </label><br><br>
+                                                </div>
+
+
+
+                                            </div>
+
+                                            <div class="col-4">
+                                                <br><br>
+                                                <div class="col-md-12">
+                                                    <label for="Phone">What is you plan after lock down?<span
+                                                            class="star">*</span>:</label>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="planAfterLockDown"
+                                                        ng-model="planAfterLockDown" required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Migrate_back_to_place_of_work"> Migrate back to
+                                                            place of work</option>
+                                                        <option value="Stay_Back_in_village">Stay back in village
+                                                        </option>
+                                                        <option value="Not_yet_decided">Not yet decided</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="col-md-12">
+                                                    <label for="Phone">If you plan to migrate back to place of work
+                                                        after lock down (Option 1), by when
+                                                        do you expect to leave?:</label>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="backToPlaceAfterLockDown1"
+                                                        ng-model="backToPlaceAfterLockDown1">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Immediately_after_lockdown"> Immediately after
+                                                            lockdown</option>
+                                                        <option value="Within_3_months">Within 3 months</option>
+                                                        <option value="After_3_To_6_months">After 3-6 months</option>
+                                                        <option value="After_7_To_12_months"> After 7-12 month</option>
+                                                        <option value="Next_year">Next year</option>
+                                                        <option value="Dont_know">Don't know</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="col-md-12">
+                                                    <label for="Phone">If you plan to stay back in village after lock
+                                                        down (option 2), how do you expect
+                                                        to manage your household expenses?:</label>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="backToPlaceAfterLockDown2"
+                                                        ng-model="backToPlaceAfterLockDown2">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Have_some-savings_or_resources"> Have some
+                                                            savings/resources</option>
+                                                        <option value="Will_look_for_employment_locally">Will look for
+                                                            employment locally</option>
+                                                        <option value="Will_become_self_employed">Will become
+                                                            self-employed</option>
+                                                        <option value="Will_return_to_agriculture"> Will return to
+                                                            agriculture</option>
+                                                        <option
+                                                            value="Will_take_loan_from_friends_or_relatives_or_other">
+                                                            Will take loan from friends/relatives/other</option>
+                                                        <option value="Hope_government_will_support">Hope government
+                                                            will support</option>
+                                                        <option value="other">other</option>
+                                                        <option value="Don't_know">Don't know</option>
+                                                    </select>
+                                                </div>
+                                                <br><br>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="col-md-12">
+                                                    <label for="Phone">What is the average monthly income that if
+                                                        available locally, will prevent you
+                                                        from migrating?:</label>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="averageMonthlyIncome"
+                                                        ng-model="averageMonthlyIncome">
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="5000_Below"> Rs. 5,000 or below</option>
+                                                        <option value="5000_to_10000">Rs. 5,000 to 10,000</option>
+                                                        <option value="10000_to_15000">Rs.10,000 to Rs. 15,000</option>
+                                                        <option value="15000_to_20000"> Rs. 15,000 to Rs. 20,000
+                                                        </option>
+                                                        <option value="moreThan_20000">More than Rs. 20,000</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4"><br><br>
+                                                <div class="col-md-12">
+                                                    <label for="Phone">Would you work under MGNREGA?<span
+                                                            class="star">*</span>:</label>
+                                                </div>
+
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name=" underMGNREGA"
+                                                        ng-model="underMGNREGA" required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Yes"> Yes</option>
+                                                        <option value="No">No</option>
+                                                        <option value="Maybe">May Be</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left;">
+                                                <button class="btn btn-success " ng-click="previous4();"
+                                                    style="text-align: right;">Back</button>
+                                            </div>
+
+                                            <div class="col-md-6" style="text-align: right; "
+                                                ng-show="migrate_id == '' ">
+                                                <button type="button" class="btn btn-success" ng-click="Submit(); ">
+                                                    &nbsp;Submit</button>
+                                            </div>
+                                            <div class="col-md-6" style="text-align: right;"
+                                                ng-hide="migrate_id == '' ">
+                                                <button type="button" class="btn btn-success" ng-click="update(); ">
+                                                    &nbsp;Update</button>
+                                            </div>
+                                        </div>
+                                        <!-- ng-disabled="valid5.$invalid" -->
+                                        <!-- <center>
+                                                <button type="button" class="btn btn-success" style="text-align: right;"
+                                                    ng-click="previous4();">Previous</button>
+                                                <button type="button" class="btn btn-success" style="text-align: right;"
+                                                    ng-click="Submit();">Submit</button>
+                                            </center> -->
+
+                                    </div>
+                                </form>
+
+                            </div>
+
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0-pre
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- Controller -->
+    <script>
+        function nameNumber(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            // var regex = /[0-9]|\./;
+            var regex = /^[A-Za-z0-9 ]+$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+
+        function nameFilter(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            // var regex = /[0-9]|\./;
+            var regex = /^[A-Za-z ]+$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#userPhoto").change(function () {
+            readURL(this);
+        });
+        function pincode(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            // var regex = /^[A-Za-z0-9 ]+$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        function numberValidate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        var migrate_id = "<%= migrate_id %>";
+    </script>
+    <script src="/controller/admin/addConv.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/AdminLTE/adminlte.js"></script>
+    <script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<script>
+
+app.controller("migrateCtrl", async ($scope, $http) => {
+    $scope.part1 = true;
+    $scope.part2 = false;
+    $scope.part3 = false;
+    $scope.part4 = false;
+    $scope.part5 = false;
+    $scope.migrate_id = migrate_id;
+    var district_id = document.querySelector('meta[name="district_id"]').getAttribute('content');
+    $scope.district_id = district_id;
+    var user_id = document.querySelector('meta[name="user_id"]').getAttribute('content');
+    $scope.user_id = user_id;
+
+    $scope.loadStates = function () {
+        $http.get("http://localhost:7900/bloodDonation/state")
+            .then(function (response) {
+                $scope.states = response.data;
+            });
+    }
+
+    $scope.previous1 = () => {
+        $scope.part1 = true;
+        $scope.part2 = false;
+        $scope.part3 = false;
+        $scope.part4 = false;
+        $scope.part5 = false;
+    }
+    $scope.previous2 = () => {
+        $scope.part1 = false;
+        $scope.part2 = true;
+        $scope.part3 = false;
+        $scope.part4 = false;
+        $scope.part5 = false;
+    }
+    $scope.previous3 = () => {
+        $scope.part1 = false;
+        $scope.part2 = false;
+        $scope.part3 = true;
+        $scope.part4 = false;
+        $scope.part5 = false;
+    }
+    $scope.previous4 = () => {
+        $scope.part1 = false;
+        $scope.part2 = false;
+        $scope.part3 = false;
+        $scope.part4 = true;
+        $scope.part5 = false;
+    }
+    $scope.next1 = () => {
+        $scope.part1 = false;
+        $scope.part2 = true;
+        $scope.part3 = false;
+        $scope.part4 = false;
+        $scope.part5 = false;
+    }
+    $scope.next2 = () => {
+        $scope.part1 = false;
+        $scope.part2 = false;
+        $scope.part3 = true;
+        $scope.part4 = false;
+        $scope.part5 = false;
+    }
+    $scope.next3 = () => {
+        $scope.part1 = false;
+        $scope.part2 = false;
+        $scope.part3 = false;
+        $scope.part4 = true;
+        $scope.part5 = false;
+
+    }
+    $scope.next4 = () => {
+        $scope.part1 = false;
+        $scope.part2 = false;
+        $scope.part3 = false;
+        $scope.part4 = false;
+        $scope.part5 = true;
+    }
+    $scope.Submit = async () => {
+        $scope.data1 = [];
+        $scope.data = {};
+        $scope.data.user_id = user_id;
+
+        $scope.data.dist_id = district_id;
+        $scope.data.migrantName = $scope.migrantName;
+        $scope.data.aadharNumber = $scope.aadharNumber;
+        $scope.data.mobNo = $scope.mobNo;
+        $scope.data.age = $scope.age;
+        $scope.data.gender = $scope.gender;
+        $scope.data.category = $scope.category;
+        $scope.data.material = $scope.material;
+        $scope.data.qualification = $scope.qualification;
+        $scope.data.otherQualification = $scope.otherQualification;
+        $scope.data.skillDevelopmentCertification = $scope.skillDevelopmentCertification;
+
+
+        $scope.data.block = $scope.block;
+        $scope.data.gp = $scope.gp;
+        $scope.data.village = $scope.village;
+        $scope.data.pin = $scope.pin;
+        $scope.data.DoReachingKeonjhar = $scope.DoReachingKeonjhar;
+        $scope.data.returningState = $scope.returningState;
+        $scope.data.returningCity = $scope.returningCity;
+        $scope.data.purpose = $scope.purpose;
+        $scope.data.otherpurpose = $scope.otherpurpose;
+        $scope.data.smartphone = $scope.smartphone;
+        $scope.data.fatherName = $scope.fatherName;
+        $scope.data.fatherPhno = $scope.fatherPhno;
+
+        $scope.data.natureOfEmployment = $scope.natureOfEmployment;
+        $scope.data.natureOfMigration = $scope.natureOfMigration;
+        $scope.data.SectorEmployed = $scope.SectorEmployed;
+        $scope.data.experience = $scope.experience;
+        $scope.data.otherSector = $scope.otherSector;
+        $scope.data.workExperience = $scope.workExperience;
+        $scope.data.designation = $scope.designation;
+        $scope.data.adressOfEmployer = $scope.adressOfEmployer;
+        $scope.data.description = $scope.description;
+
+
+        $scope.data.skill = $scope.skill;
+        $scope.data.workingHours = $scope.workingHours;
+        $scope.data.salary = $scope.salary;
+        $scope.data.salarySchedule = $scope.salarySchedule;
+        $scope.data.householdExpenses = $scope.householdExpenses;
+        $scope.data.remittance = $scope.remittance;
+
+
+
+        $scope.data.whyMigrateToAnotherState = $scope.whyMigrateToAnotherState;
+        $scope.data.firstMigrate = $scope.firstMigrate;
+        $scope.data.helpedYouMigrate = $scope.helpedYouMigrate;
+        $scope.data.lostYourJob = $scope.lostYourJob;
+        $scope.data.mealsDuringLockDown = $scope.mealsDuringLockDown;
+        $scope.data.GovernmentOfOdishaPortal = $scope.GovernmentOfOdishaPortal;
+        $scope.data.planAfterLockDown = $scope.planAfterLockDown;
+        $scope.data.backToPlaceAfterLockDown1 = $scope.backToPlaceAfterLockDown1;
+        $scope.data.backToPlaceAfterLockDown2 = $scope.backToPlaceAfterLockDown2;
+        $scope.data.averageMonthlyIncome = $scope.averageMonthlyIncome;
+        $scope.data.underMGNREGA = $scope.underMGNREGA;
+        //checkbox
+        $scope.data.accomodation = $scope.accomodation;
+        $scope.data.food = $scope.food;
+        $scope.data.travel = $scope.travel;
+        $scope.data.healthFacility = $scope.healthFacility;
+        $scope.data.crecheforkids = $scope.crecheforkids;
+        $scope.data.schoolforkids = $scope.schoolforkids;
+        $scope.data.insurance = $scope.insurance;
+        $scope.data.othersFacility = $scope.othersFacility;
+
+        $scope.data.familyMigrateWithWife = $scope.familyMigrateWithWife;
+        $scope.data.familyMigrateWithChildren = $scope.familyMigrateWithChildren;
+        $scope.data.familyMigrateWithParents = $scope.familyMigrateWithParents;
+        $scope.data.familyMigrateWithSiblings = $scope.familyMigrateWithSiblings;
+
+        $scope.data.duringLockDownAtRegularPlaceOfStay = $scope.duringLockDownAtRegularPlaceOfStay;
+        $scope.data.duringLockDownAtWorkplace = $scope.duringLockDownAtWorkplace;
+        $scope.data.duringLockDownAtfriendOrRelativeplace = $scope.duringLockDownAtfriendOrRelativeplace;
+        $scope.data.duringLockDownAtReliefCamp = $scope.duringLockDownAtReliefCamp;
+        $scope.data.duringLockDownAtOtherPlace = $scope.duringLockDownAtOtherPlace;
+
+
+        $scope.data.returnBackInTrain = $scope.returnBackInTrain;
+        $scope.data.returnBackInGovBus = $scope.returnBackInGovBus;
+        $scope.data.returnBackInPersonalVehicle = $scope.returnBackInPersonalVehicle;
+        $scope.data.returnBackInPrvtVehicle = $scope.returnBackInPrvtVehicle;
+        $scope.data.returnBackInCycle = $scope.returnBackInCycle;
+        $scope.data.returnBackInWalk = $scope.returnBackInWalk;
+
+
+
+
+        // fd.append('data', JSON.stringify(data));
+        try {
+            await $http.post('http://localhost:7900/bloodDonation/addMigrateData', $scope.data);
+            window.alert(`Your Request Submitted Sucessfully`);
+            window.location.href = "http://localhost:7900/bloodDonation/user/migrantSurvey";
+        } catch (e) {
+            window.alert('Problem to add Try Again.')
+        }
+
+
+
+    }
+    $scope.edit = function () {
+        if ($scope.migrate_id != '') {
+            $http.get("http://localhost:7900/bloodDonation/getApplicationDetails?migrate_id=" + $scope.migrate_id)
+                .then(function (response) {
+                    $scope.details = response.data[0];
+                    $scope.migrantName = $scope.details.migrant_name;
+                    $scope.aadharNumber = $scope.details.aadhar_no;
+                    $scope.mobNo = $scope.details.mobno;
+                    $scope.age = $scope.details.age;
+                    $scope.gender = $scope.details.gender;
+                    $scope.category = $scope.details.category;
+                    $scope.material = $scope.details.material;
+                    $scope.qualification = $scope.details.qualification;
+                    $scope.otherQualification = $scope.details.other_qualification;
+                    $scope.skillDevelopmentCertification = $scope.details.skill_development_certification;
+
+
+                    $scope.block = $scope.details.block;
+                    $scope.gp = $scope.details.gp;
+                    $scope.village = $scope.details.village;
+                    $scope.pin = $scope.details.pin;
+                    $scope.DoReachingKeonjhar = new Date($scope.details.do_reaching_keonjhar);
+                    $scope.returningState = $scope.details.returning_state;
+                    $scope.returningCity = $scope.details.returning_city;
+                    $scope.purpose = $scope.details.purpose;
+                    $scope.otherpurpose = $scope.details.otherpurpose;
+                    $scope.smartphone = $scope.details.smartphone;
+                    $scope.fatherName = $scope.details.father_name;
+                    $scope.fatherPhno = $scope.details.fatherphno;
+
+                    $scope.natureOfEmployment = $scope.details.nature_of_employment;
+                    $scope.natureOfMigration = $scope.details.nature_of_migration;
+                    $scope.SectorEmployed = $scope.details.sector_employed;
+                    $scope.experience = $scope.details.experience;
+                    $scope.otherSector = $scope.details.other_sector;
+                    $scope.workExperience = $scope.details.work_experience;
+                    $scope.designation = $scope.details.designation;
+                    $scope.adressOfEmployer = $scope.details.adress_of_employer;
+                    $scope.description = $scope.details.description;
+
+
+                    $scope.skill = $scope.details.skill;
+                    $scope.workingHours = $scope.details.working_hours;
+                    $scope.salary = $scope.details.salary;
+                    $scope.salarySchedule = $scope.details.salary_schedule;
+                    $scope.householdExpenses = $scope.details.household_expenses;
+                    $scope.remittance = $scope.details.remittance;
+
+
+
+                    $scope.whyMigrateToAnotherState = $scope.details.why_migrate_to_another_state;
+                    $scope.firstMigrate = $scope.details.first_migrate;
+                    $scope.helpedYouMigrate = $scope.details.helped_you_migrate;
+                    $scope.lostYourJob = $scope.details.lost_your_job;
+                    $scope.mealsDuringLockDown = $scope.details.mealsduringlockdown;
+                    $scope.GovernmentOfOdishaPortal = $scope.details.government_of_odisha_portal;
+                    $scope.planAfterLockDown = $scope.details.plan_after_lockdown;
+                    $scope.backToPlaceAfterLockDown1 = $scope.details.back_to_place_after_lockdown1;
+                    $scope.backToPlaceAfterLockDown2 = $scope.details.back_to_place_after_lockdown2;
+                    $scope.averageMonthlyIncome = $scope.details.average_monthly_income;
+                    $scope.underMGNREGA = $scope.details.under_mgnrega;
+                    if ($scope.details.accomodation == true) {
+                        $scope.accomodation = true;
+                    }
+                    if ($scope.details.food == true) {
+                        $scope.food = true;
+                    }
+                    if ($scope.details.healthfacility == true) {
+                        $scope.healthFacility = true;
+                    }
+                    if ($scope.details.travel == true) {
+                        $scope.travel = true;
+                    }
+                    if ($scope.details.crecheforkids == true) {
+                        $scope.crecheforkids = true;
+                    }
+                    if ($scope.details.schoolforkids == true) {
+                        $scope.schoolforkids = true;
+                    }
+                    if ($scope.details.insurance == true) {
+                        $scope.insurance = true;
+                    }
+                    if ($scope.details.othersfacility == true) {
+                        $scope.othersFacility = true;
+                    }
+                    if ($scope.details.familymigratewithwife == true) {
+                        $scope.familyMigrateWithWife = true;
+                    }
+                    if ($scope.details.familymigratewithchildren == true) {
+                        $scope.familyMigrateWithChildren = true;
+                    }
+                    if ($scope.details.familymigratewithparents == true) {
+                        $scope.familyMigrateWithParents = true;
+                    }
+                    if ($scope.details.familymigratewithsiblings == true) {
+                        $scope.familyMigrateWithSiblings = true;
+                    }
+                    if ($scope.details.duringlockdownatregularplaceofstay == true) {
+                        $scope.duringLockDownAtRegularPlaceOfStay = true;
+                    }
+                    if ($scope.details.duringlockdownatworkplace == true) {
+                        $scope.duringLockDownAtWorkplace = true;
+                    }
+                    if ($scope.details.duringlockdownatfriendorrelativeplace == true) {
+                        $scope.duringLockDownAtfriendOrRelativeplace = true;
+                    }
+                    if ($scope.details.duringlockdownatreliefcamp == true) {
+                        $scope.duringLockDownAtReliefCamp = true;
+                    }
+                    if ($scope.details.duringlockdownatotherplace == true) {
+                        $scope.duringLockDownAtOtherPlace = true;
+                    }
+                    if ($scope.details.returnbackintrain == true) {
+                        $scope.returnBackInTrain = true;
+                    }
+                    if ($scope.details.returnbackingovbus == true) {
+                        $scope.returnBackInGovBus = true;
+                    }
+                    if ($scope.details.returnbackinpersonalvehicle == true) {
+                        $scope.returnBackInPersonalVehicle = true;
+                    }
+                    if ($scope.details.returnbackinprvtvehicle == true) {
+                        $scope.returnBackInPrvtVehicle = true;
+                    }
+                    if ($scope.details.returnbackincycle == true) {
+                        $scope.returnBackInCycle = true;
+                    }
+                    if ($scope.details.returnbackinwalk == true) {
+                        $scope.returnBackInWalk = true;
+                    }
+                    $http.get("http://localhost:7900/bloodDonation/state")
+                    .then(function (response) {
+                        $scope.states = response.data;
+                        $scope.returningState = $scope.states[$scope.states.findIndex(x => x.statecode == $scope.details.returning_state)];
+                        console.log($scope.details.returning_state+"$scope.details.returning_state")
+
+                    });
+
+
+                });
+        } else {
+
+            $scope.loadStates();
+
+        }
+    }
+    $scope.edit();
+    $scope.update = async () => {
+        $scope.data1 = [];
+        $scope.data = {};
+
+        $scope.data.migrantName = $scope.migrantName;
+        $scope.data.aadharNumber = $scope.aadharNumber;
+        $scope.data.mobNo = $scope.mobNo;
+        $scope.data.age = $scope.age;
+        $scope.data.gender = $scope.gender;
+        $scope.data.category = $scope.category;
+        $scope.data.material = $scope.material;
+        $scope.data.qualification = $scope.qualification;
+        $scope.data.otherQualification = $scope.otherQualification;
+        $scope.data.skillDevelopmentCertification = $scope.skillDevelopmentCertification;
+
+
+        $scope.data.block = $scope.block;
+        $scope.data.gp = $scope.gp;
+        $scope.data.village = $scope.village;
+        $scope.data.pin = $scope.pin;
+        $scope.data.DoReachingKeonjhar = $scope.DoReachingKeonjhar;
+        $scope.data.returningState = $scope.returningState;
+        $scope.data.returningCity = $scope.returningCity;
+        $scope.data.purpose = $scope.purpose;
+        $scope.data.otherpurpose = $scope.otherpurpose;
+        $scope.data.smartphone = $scope.smartphone;
+        $scope.data.fatherName = $scope.fatherName;
+        $scope.data.fatherPhno = $scope.fatherPhno;
+
+        $scope.data.natureOfEmployment = $scope.natureOfEmployment;
+        $scope.data.natureOfMigration = $scope.natureOfMigration;
+        $scope.data.SectorEmployed = $scope.SectorEmployed;
+        $scope.data.experience = $scope.experience;
+        $scope.data.otherSector = $scope.otherSector;
+        $scope.data.workExperience = $scope.workExperience;
+        $scope.data.designation = $scope.designation;
+        $scope.data.adressOfEmployer = $scope.adressOfEmployer;
+        $scope.data.description = $scope.description;
+
+
+        $scope.data.skill = $scope.skill;
+        $scope.data.workingHours = $scope.workingHours;
+        $scope.data.salary = $scope.salary;
+        $scope.data.salarySchedule = $scope.salarySchedule;
+        $scope.data.householdExpenses = $scope.householdExpenses;
+        $scope.data.remittance = $scope.remittance;
+
+
+
+        $scope.data.whyMigrateToAnotherState = $scope.whyMigrateToAnotherState;
+        $scope.data.firstMigrate = $scope.firstMigrate;
+        $scope.data.helpedYouMigrate = $scope.helpedYouMigrate;
+        $scope.data.lostYourJob = $scope.lostYourJob;
+        $scope.data.mealsDuringLockDown = $scope.mealsDuringLockDown;
+        $scope.data.GovernmentOfOdishaPortal = $scope.GovernmentOfOdishaPortal;
+        $scope.data.planAfterLockDown = $scope.planAfterLockDown;
+        $scope.data.backToPlaceAfterLockDown1 = $scope.backToPlaceAfterLockDown1;
+        $scope.data.backToPlaceAfterLockDown2 = $scope.backToPlaceAfterLockDown2;
+        $scope.data.averageMonthlyIncome = $scope.averageMonthlyIncome;
+        $scope.data.underMGNREGA = $scope.underMGNREGA;
+        //checkbox
+        $scope.data.accomodation = $scope.accomodation;
+        $scope.data.food = $scope.food;
+        $scope.data.travel = $scope.travel;
+        $scope.data.healthFacility = $scope.healthFacility;
+        $scope.data.crecheforkids = $scope.crecheforkids;
+        $scope.data.schoolforkids = $scope.schoolforkids;
+        $scope.data.insurance = $scope.insurance;
+        $scope.data.othersFacility = $scope.othersFacility;
+
+        $scope.data.familyMigrateWithWife = $scope.familyMigrateWithWife;
+        $scope.data.familyMigrateWithChildren = $scope.familyMigrateWithChildren;
+        $scope.data.familyMigrateWithParents = $scope.familyMigrateWithParents;
+        $scope.data.familyMigrateWithSiblings = $scope.familyMigrateWithSiblings;
+
+        $scope.data.duringLockDownAtRegularPlaceOfStay = $scope.duringLockDownAtRegularPlaceOfStay;
+        $scope.data.duringLockDownAtWorkplace = $scope.duringLockDownAtWorkplace;
+        $scope.data.duringLockDownAtfriendOrRelativeplace = $scope.duringLockDownAtfriendOrRelativeplace;
+        $scope.data.duringLockDownAtReliefCamp = $scope.duringLockDownAtReliefCamp;
+        $scope.data.duringLockDownAtOtherPlace = $scope.duringLockDownAtOtherPlace;
+
+
+        $scope.data.returnBackInTrain = $scope.returnBackInTrain;
+        $scope.data.returnBackInGovBus = $scope.returnBackInGovBus;
+        $scope.data.returnBackInPersonalVehicle = $scope.returnBackInPersonalVehicle;
+        $scope.data.returnBackInPrvtVehicle = $scope.returnBackInPrvtVehicle;
+        $scope.data.returnBackInCycle = $scope.returnBackInCycle;
+        $scope.data.returnBackInWalk = $scope.returnBackInWalk;
+
+        try {
+            await $http.post('http://localhost:7900/bloodDonation/updateMigrateData', { updateData: $scope.data, migrate_id: $scope.migrate_id });
+            window.alert(`Your Data is Updated`);
+            window.location.href = "http://localhost:7900/bloodDonation/user/migrantSurvey";
+        } catch (e) {
+            window.alert('Problem to add Try Again.')
+        }
+
+
+    }
+
+});
+
+
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+exports.addMigrateData = (data) => {
+    return new Promise(async (resolve, reject) => {
+
+        const client = await pool.connect().catch(e => { resolve("Database Connection Error!!!!!") });
+        try {
+            let findMaxQuery = '';
+            let preMCode = '';
+            if (data.user_id === 'ADMIN') {
+                findMaxQuery = `select max(cast(substr(migrate_id, 7, length(migrate_id)) as int )) from migrate_data 
+                where substr(migrate_id, 1, 5) = 'ADMIN'`
+                preMCode = 'ADMIN';
+            } else {
+                findMaxQuery = `select max(cast(substr(migrate_id, 4, length(migrate_id)) as int )) from migrate_data 
+                where substr(migrate_id, 1, 2) = '${data.dist_id}'`;
+                preMCode = `${data.dist_id}`
+            }
+            let maxResponse = await client.query(findMaxQuery);
+            let migrate_id = maxResponse.rows[0].max == null ? `${preMCode}-1` : `${preMCode}-${maxResponse.rows[0].max + 1}`
+           
+         
+            let queryText = `INSERT INTO migrate_data(migrate_id,user_id, migrant_name, aadhar_no, mobno, age, gender, category, material, qualification, other_qualification,skill_development_certification,
+                 block, gp, village, pin,do_reaching_keonjhar, returning_state, returning_city,purpose, otherpurpose, smartphone, father_name, fatherphno,
+                 nature_of_employment, nature_of_migration, sector_employed, experience,other_sector, work_experience, designation, adress_of_employer, description,
+                 skill, working_hours,salary,salary_schedule,household_expenses,remittance,accomodation,food,travel,healthfacility,crecheforkids,schoolforkids,insurance,othersfacility,
+                 why_migrate_to_another_state,first_migrate,helped_you_migrate,lost_your_job,mealsduringlockdown,government_of_odisha_portal,plan_after_lockdown,
+                 back_to_place_after_lockdown1,back_to_place_after_lockdown2,average_monthly_income,under_mgnrega,familymigratewithwife,familymigratewithchildren,familymigratewithparents,
+                 familymigratewithsiblings,duringlockdownatregularplaceofstay,duringlockdownatworkplace,duringlockdownatfriendorrelativeplace,duringlockdownatreliefcamp, 
+                 duringlockdownatotherplace,returnbackintrain,returnbackingovbus,returnbackinpersonalvehicle,returnbackinprvtvehicle,returnbackincycle,returnbackinwalk,dataapplied)
+                 VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9,$10,$11,$12,$13,$14, $15, $16, $17, $18, $19, $20, $21, $22, $23, $24, $25, $26,$27, $28, $29, $30, $31, $32, $33,$34, $35,$36, $37, $38,
+                     $39,$40, $41, $42, $43,$44, $45, $46, $47, $48, $49, $50, $51, $52, $53,$54, $55, $56, $57,$58,$59, $60, $61, $62, $63, $64, $65, $66,$67, $68, $69, $70, $71,$72,$73,$74)`;
+            let values = [migrate_id, data.user_id, data.migrantName, data.aadharNumber, data.mobNo, data.age, data.gender, data.category, data.material,
+                data.qualification, data.otherQualification, data.skillDevelopmentCertification, data.block, data.gp, data.village, data.pin, data.DoReachingKeonjhar,
+                data.returningState.statecode, data.returningCity, data.purpose, data.otherpurpose, data.smartphone, data.fatherName, data.fatherPhno, data.natureOfEmployment,
+                data.natureOfMigration, data.SectorEmployed, data.experience, data.otherSector, data.workExperience, data.designation, data.adressOfEmployer,
+                data.description, data.skill, data.workingHours, data.salary, data.salarySchedule, data.householdExpenses, data.remittance, data.accomodation, data.food, data.travel, data.healthFacility,
+                data.crecheforkids, data.schoolforkids, data.insurance, data.othersFacility, data.whyMigrateToAnotherState,
+                data.firstMigrate, data.helpedYouMigrate, data.lostYourJob,data.mealsDuringLockDown, data.GovernmentOfOdishaPortal, data.planAfterLockDown, data.backToPlaceAfterLockDown1,
+                data.backToPlaceAfterLockDown2, data.averageMonthlyIncome, data.underMGNREGA,data.familyMigrateWithWife, data.familyMigrateWithChildren, 
+                data.familyMigrateWithParents, data.familyMigrateWithSiblings, data.duringLockDownAtRegularPlaceOfStay, data.duringLockDownAtWorkplace, 
+                data.duringLockDownAtfriendOrRelativeplace, data.duringLockDownAtReliefCamp, data.duringLockDownAtOtherPlace, data.returnBackInTrain, 
+                data.returnBackInGovBus, data.returnBackInPersonalVehicle, data.returnBackInPrvtVehicle, data.returnBackInCycle, data.returnBackInWalk, 'Now()'];
+
+
+            let response = await client.query(queryText, values);
+            resolve(true);
+        } catch (e) {
+            reject(e);
+            throw e;
+        } finally {
+            client.release();
+        }
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+exports.updateMigrateData = (migrate_id,data) => {
+    return new Promise(async (resolve, reject) => {
+        const client = await pool.connect().catch(e => { resolve("Database Connection Error!!!!!") });
+        try {
+            let response = await client.query(`UPDATE migrate_data set migrant_name = '${data.migrantName}',aadhar_no = '${data.aadharNumber}', mobno = '${data.mobNo}', age = '${data.age}', gender = '${data.gender}', category = '${data.category}', material = '${data.material}', qualification = '${data.qualification}', other_qualification = '${data.otherQualification}',skill_development_certification = '${data.skillDevelopmentCertification}', 
+            block = '${data.block}', gp = '${data.gp}', village = '${data.village}', pin = '${data.pin}',do_reaching_keonjhar = '${data.DoReachingKeonjhar}', returning_state = '${data.returningState.statecode}', returning_city = '${data.returningCity}',purpose = '${data.purpose}', otherpurpose = '${data.otherpurpose}', smartphone = '${data.smartphone}', father_name = '${data.fatherName}', fatherphno = '${data.fatherPhno}',
+            nature_of_employment = '${data.natureOfEmployment}', nature_of_migration = '${data.natureOfMigration}', sector_employed = '${data.SectorEmployed}', experience = '${data.experience}',other_sector = '${data.otherSector}', work_experience = '${data.workExperience}', designation = '${data.designation}', adress_of_employer = '${data.adressOfEmployer}', description = '${data.description}',
+            skill = '${data.skill}', working_hours = '${data.workingHours}',salary = '${data.salary}',salary_schedule = '${data.salarySchedule}',household_expenses = '${data.householdExpenses}',remittance = '${data.remittance}',accomodation = '${data.accomodation}',food = '${data.food}',travel = '${data.travel}',healthfacility = '${data.healthFacility}',crecheforkids = '${data.crecheforkids}',schoolforkids = '${data.schoolforkids}',insurance = '${data.insurance}',othersfacility = '${data.othersFacility}',
+            why_migrate_to_another_state = '${data.whyMigrateToAnotherState}',first_migrate = '${data.firstMigrate}',helped_you_migrate = '${data.helpedYouMigrate}',lost_your_job = '${data.lostYourJob}',mealsduringlockdown = '${data.mealsDuringLockDown}',government_of_odisha_portal = '${data.GovernmentOfOdishaPortal}',plan_after_lockdown = '${data.planAfterLockDown}',
+            back_to_place_after_lockdown1 = '${data.backToPlaceAfterLockDown1}',back_to_place_after_lockdown2 = '${data.backToPlaceAfterLockDown2}',average_monthly_income = '${data.averageMonthlyIncome}',under_mgnrega = '${data.underMGNREGA}',familymigratewithwife = '${data.familyMigrateWithWife}',familymigratewithchildren = '${data.familyMigrateWithChildren}',familymigratewithparents = '${data.familyMigrateWithParents}',
+            familymigratewithsiblings = '${data.familyMigrateWithSiblings}',duringlockdownatregularplaceofstay = '${data.duringLockDownAtRegularPlaceOfStay}',duringlockdownatworkplace = '${data.duringLockDownAtWorkplace}',duringlockdownatfriendorrelativeplace = '${data.duringLockDownAtfriendOrRelativeplace}',duringlockdownatreliefcamp = '${data.duringLockDownAtReliefCamp}', 
+            duringlockdownatotherplace = '${data.duringLockDownAtOtherPlace}',returnbackintrain = '${data.returnBackInTrain}',returnbackingovbus = '${data.returnBackInGovBus}',returnbackinpersonalvehicle = '${data.returnBackInPersonalVehicle}',returnbackinprvtvehicle = '${data.returnBackInPrvtVehicle}',returnbackincycle = '${data.returnBackInCycle}',returnbackinwalk = '${data.returnBackInWalk}',dataupdatedon = 'NOW()'
+
+            
+            where migrate_id = '${migrate_id}' `);
+           
+            resolve(true);
+        } catch (e) {
+            reject(e);
+            throw e;
+        } finally {
+            client.release();
+        }
+    });
+}

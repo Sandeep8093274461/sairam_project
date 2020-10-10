@@ -1,0 +1,381 @@
+<%- include('common/header.ejs') -%>
+        <div class="content-wrapper">
+            <!-- Content Header (Page header) -->
+            <div class="content-header">
+                <div class="container-fluid">
+                    <div class="row mb-1">
+                        <div class="col-8">
+                            <h3 class="m-1 text-dark"style="width:100%;" ><img src="/img/icon/logo.jpg" style="width:60px;height:60px;"
+                                    alt="">Resource persons / Committee members</h3>
+                        </div><!-- /.col -->
+                        <div class="col-4" style="width:100%;">
+                            <ol class="breadcrumb float-sm-right">
+                                <li class="breadcrumb-item"><a href="#"> Sai Swabalambi Program</a></li>
+                                <li class="breadcrumb-item active">Resource</li>
+                                <li class="breadcrumb-item active">Entry</li>
+                            </ol>
+                        </div><!-- /.col -->
+                    </div><!-- /.row -->
+                </div><!-- /.container-fluid -->
+            </div>
+            <!-- /.content-header -->
+            <!-- Main content -->
+            <section class="content">
+
+
+                <div class="container-fluid">
+                    <div class="container-fluid">
+                        <div class="panel panel-default">
+
+                            <div class="card card-primary" >
+                                <div class="card-header">
+                                    <h3 class="card-title"> Enter person/member detail </h3>
+                                </div>
+                                <form name="valid1" id="valid1">
+                                    <div class="card-body">
+                                        <div class="row">
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>District <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control"
+                                                            name="dist"
+                                                            ng-model="dist"  ng-change="loadSamithiList()" required>
+                                                            <option value="" disabled>--District--</option>
+                                                             <option ng-repeat="option in districtList" value="{{option.district_id}}" >{{option.name}}</option>
+                                                        </select>
+    
+                                                    </div>
+                                                </div>
+                                            </div>
+                                          
+                                            <div class="col-4">
+                                                <label>Resource type <span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" name="resourceType" ng-model="resourceType"
+                                                    required>
+                                                    <option value="" disabled selected>--select--</option>
+                                                    <option value="District Committee Member">District Committee Member</option>
+                                                    <option value="District In-Charge">District In-Charge</option>
+                                                    <option value="District Resource Person">District Resource Person</option>
+                                                    <option value="State Committee Member">State Committee Member</option>
+                                                    <option value="State In-Charge">State In-Charge</option>
+                                                    <option value="State Resource Person">State Resource Person</option>
+                                                </select>
+                                                </div>
+
+                                            </div>
+                                            <div class="col-4">
+                                                <label>Name<span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <input type="text" class="form-control" name="name"
+                                                            ng-model="name"
+                                                            placeholder="Enter person name">
+                                                            <span style="color:red"
+                                                            ng-show="valid1.name.$dirty && valid1.name.$invalid">
+                                                            <span ng-show="valid1.name.$error.required">Person name is
+                                                                Required .</span>
+                                                        </span>
+                                                </div>
+
+
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Contact number <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="mobNo"
+                                                            ng-model="mobNo" placeholder="Enter person Mobile Number"
+                                                            maxlength="10" minlength="10" ng-pattern="/^[1-9][0-9]{9}$/"
+                                                            allow-numbers-only onkeypress='numberValidate(event)'
+                                                            required>
+                                                        <span style="color:red"
+                                                            ng-show="valid1.mobNo.$dirty && valid1.mobNo.$invalid">
+                                                            <span ng-show="valid1.mobNo.$error.required">Mobile No is
+                                                                Required .</span>
+                                                        </span>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4" >
+                                                <label for="Phone">Samiti <span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control"
+                                                    name="samiti"
+                                                    ng-model="samiti"  required>
+                                                    <option value="" disabled>--Samiti--</option>
+                                                    <option ng-repeat="option in samithiList" value="{{option.name}}" >{{option.name}}</option>
+                                                </select>
+                                                </div>
+
+
+                                                </span>
+                                            </div>
+                                          
+                                            <div class="col-4">
+                                                <label for="Phone">Profession is related to  <span class="star">*</span>:</label>
+                                                <div class="col-md-12">
+                                                    <select class="form-control" ng-model="profession" name="profession"
+                                                        required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Entrepreneur"> Entrepreneur</option>
+                                                        <option value="Administrator"> Administrator</option>
+                                                        <option value="Agriculture"> Agriculture</option>
+                                                        <option value="Banker"> Banker</option>
+                                                        <option value="Councillor"> Councillor</option>
+                                                        <option value="Industry"> Industry</option>
+                                                        <option value="MLA"> MLA</option>
+                                                        <option value="Sarpanch"> Sarpanch</option>
+                                                        <option value="Veterinary"> Veterinary</option>
+                                                        <option value="Officer bearer">Officer bearer</option>
+                                                        <option value="Others">Others</option>
+                                                    </select>
+                                                </div>
+
+                                            </div>
+                                           
+                                            <div class="col-4"  >
+                                                <div class="form-group">
+                                                    <label>Place of service / Workshop <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <input type="text" class="form-control" name="workshop"
+                                                            ng-model="workshop"
+                                                            placeholder="Place of Service / Workshop"
+                                                            required>
+                                                        <span style="color:red"
+                                                            ng-show="valid1.workshop.$dirty && valid1.workshop.$invalid">
+                                                            <span ng-show="valid1.workshop.$error.required">Enter Your Place of Service / Workshop .</span>
+                                                        </span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-4" ng-if="profession == 'Entrepreneur'">
+                                                <div class="form-group">
+                                                    <label>Area of expertise <span class="star">*</span> :</label>
+                                                    <div class="col-md-12">
+                                                        <select class="form-control" name="areaofExpertise"
+                                                        ng-model="$parent.areaofExpertise" required>
+                                                        <option value="" disabled selected>--select--</option>
+                                                        <option value="Agriculture">Agriculture</option>
+                                                        <option value="Animal Husbandry & Diary">
+                                                            Animal Husbandry & Diary</option>
+                                                        <option value="Apparel/Fashion/Home Furnishing">
+                                                            Apparel/Fashion/Home Furnishing</option>
+                                                        <option value="Automobile Repair">
+                                                            Automobile Repair</option>
+                                                        <option value="Banking/Insurance/Financial Services">
+                                                            Banking/Insurance/Financial Services</option>
+                                                        <option value="Beauty/Wellness">Beauty/Wellness</option>
+                                                        <option value="Brick Making">
+                                                            Brick Making</option>
+                                                        <option value="Carpenter">Carpenter</option>
+                                                        <option value="Construction, Mason">
+                                                            Construction, Mason</option>
+                                                        <option value="Domestic Work /Maid">Domestic Work /Maid
+                                                        </option>
+                                                        <option value="Driving">Driving</option>
+                                                        <option value="Electrical Repairing">Electrical Repairing
+                                                        </option>
+                                                        <option value="Electronics/H/W">Electronics/H/W</option>
+                                                        <option value="Fishery">Fishery</option>
+                                                        <option value="Food Processing">Food Processing</option>
+                                                        <option value="Gems & Jewellery">Gems & Jewellery</option>
+                                                        <option value="Handicrafts">Handicrafts</option>
+                                                        <option value="Health Care">Health Care</option>
+                                                        <option value="Horticulture">Horticulture</option>
+                                                        <option value="Hotel Management / Cooking">Hotel Management
+                                                            / Cooking</option>
+                                                        <option value="IT (S/W), Call Centre">IT (S/W), Call Centre
+                                                        </option>
+                                                        <option value="Leather">Leather</option>
+                                                        <option value="Logistics">Logistics</option>
+                                                        <option value="Media & Entertainment">Media & Entertainment
+                                                        </option>
+                                                        <option value="Mining">Mining</option>
+                                                        <option value="Paints & Coatings">Paints & Coatings</option>
+                                                        <option value="Plumbing">Plumbing</option>
+                                                        <option value="Private Coaching/ Tuition">Private Coaching/
+                                                            Tuition</option>
+                                                        <option value="Retail">Retail</option>
+                                                        <option value="Security">Security</option>
+                                                        <option value="Small Business – Grocery / Saloon etc">Small
+                                                            Business – Grocery / Saloon etc</option>
+                                                        <option value="Street Vendor">Street Vendor</option>
+                                                        <option value="Textiles, Handlooms">Textiles, Handlooms
+                                                        </option>
+                                                        <option value="Tourism/ Hospitality">Tourism/ Hospitality
+                                                        </option>
+                                                        <option value="Welding">Welding</option>
+                                                        <option value="Other">Other</option>
+
+                                                    </select>
+                                                    </div>
+                                                   
+                                                </div>
+                                            </div>
+                                            <div class="col-4">
+                                                <div class="form-group">
+                                                    <label>Remark:</label>
+                                                    <div class="col-md-12">
+                                                        <div class="col-md-12">
+                                                            <textarea class="form-control" cols="40" rows="2"
+                                                                name="remarks" ng-model="remarks"
+                                                                placeholder="Remark" style="margin-left: -8px;"></textarea>
+                                                            <span style="color:red"
+                                                                ng-show="valid1.remarks.$dirty && valid1.remarks.$invalid">
+                                                                <span ng-show="valid1.remarks.$error.required">Enter Your Remarks</span>
+                                                            </span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                         <br>
+
+
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-md-6" style="text-align: left;">
+
+                                            </div>
+
+                                            <div class="col-md-6" style="text-align: right; " ng-show="id == '' ">
+                                                <button type="button" class="btn btn-success" ng-click="Submit(); " onclick="this.disabled= true" ng-disabled="valid1.$invalid">
+                                                    &nbsp;Submit</button>
+                                                <!-- ng-disabled="valid1.$invalid" -->
+                                            </div>
+                                            <div class="col-md-6" style="text-align: right;"
+                                            ng-hide="id == '' ">
+                                            <button type="button" class="btn btn-success" ng-click="update(); " ng-disabled="valid1.$invalid">
+                                                &nbsp;Update</button>
+                                        </div>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+                        
+                                </form>
+                            </div>
+                           
+
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+        </div>
+        <!-- /.content-wrapper -->
+        <footer class="main-footer">
+
+            <div class="float-right d-none d-sm-inline-block">
+                <b>Version</b> 1.0.0-pre
+            </div>
+        </footer>
+
+        <!-- Control Sidebar -->
+        <aside class="control-sidebar control-sidebar-dark">
+            <!-- Control sidebar content goes here -->
+        </aside>
+        <!-- /.control-sidebar -->
+    </div>
+    <!-- ./wrapper -->
+    <!-- Controller -->
+    <script>
+        function nameNumber(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            // var regex = /[0-9]|\./;
+            var regex = /^[A-Za-z0-9 ]+$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+
+        function nameFilter(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            // var regex = /[0-9]|\./;
+            var regex = /^[A-Za-z ]+$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        function readURL(input) {
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#blah').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#userPhoto").change(function () {
+            readURL(this);
+        });
+        function pincode(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            // var regex = /^[A-Za-z0-9 ]+$/;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        function numberValidate(evt) {
+            var theEvent = evt || window.event;
+
+            // Handle paste
+            if (theEvent.type === 'paste') {
+                key = event.clipboardData.getData('text/plain');
+            } else {
+                // Handle key press
+                var key = theEvent.keyCode || theEvent.which;
+                key = String.fromCharCode(key);
+            }
+            var regex = /[0-9]|\./;
+            if (!regex.test(key)) {
+                theEvent.returnValue = false;
+                if (theEvent.preventDefault) theEvent.preventDefault();
+            }
+        }
+        var id = "<%= id %>";
+    </script>
+    <script src="/controller/admin/resourcePersons.js"></script>
+    <!-- AdminLTE App -->
+    <script src="/AdminLTE/adminlte.js"></script>
+    <script type="text/javascript" src="/AdminLTE/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
